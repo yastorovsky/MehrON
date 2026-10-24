@@ -215,6 +215,7 @@ public class ProfileItem
     public string Cert { get; set; }
     public string CertSha { get; set; }
     public string EchConfigList { get; set; }
+    public string EchOutbound { get; set; }
     public string VerifyPeerCertByName { get; set; }
     public string Finalmask { get; set; }
 

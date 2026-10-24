@@ -256,7 +256,7 @@ public partial class CoreConfigContextBuilder
         var node = nodeContext.Node;
         var coreType = AppManager.Instance.GetCoreType(node, node.ConfigType);
 
-        var preSocksItem = ConfigHandler.GetPreSocksItem(config, node, coreType);
+        var preSocksItem = await ConfigHandler.GetPreSocksItem(config, node, coreType);
         if (preSocksItem != null)
         {
             // PattN: in front of a core of PattN's own configuration, which routes the same rules with their whole chains;
