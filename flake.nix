@@ -1,5 +1,5 @@
 {
-  description = "MehrON - FM Edition: Fast and modern cross-platform GUI proxy client for NixOS";
+  description = "MehrON: Fast and modern cross-platform GUI proxy client for NixOS";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";

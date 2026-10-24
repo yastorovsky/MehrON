@@ -86,8 +86,8 @@ stdenv.mkDerivation rec {
     # Install desktop launcher
     cat <<EOF > $out/share/applications/MehrON.desktop
 [Desktop Entry]
-Name=MehrON (FM Edition)
-Comment=MehrON Proxy Client - FM Edition
+Name=MehrON
+Comment=MehrON Proxy Client
 Exec=$out/bin/MehrON %u
 Icon=MehrON
 Terminal=false
@@ -116,7 +116,7 @@ EOF
   '';
 
   meta = with lib; {
-    description = "MehrON - FM Edition: High-performance cross-platform GUI proxy client for NixOS";
+    description = "MehrON: High-performance cross-platform GUI proxy client for NixOS";
     homepage = "https://github.com/yastorovsky/MehrON";
     license = licenses.gpl3Plus;
     platforms = [ "x86_64-linux" ];

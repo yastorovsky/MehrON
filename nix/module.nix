@@ -8,7 +8,7 @@ let
 in
 {
   options.programs.mehron = {
-    enable = mkEnableOption "MehrON - FM Edition GUI proxy client";
+    enable = mkEnableOption "MehrON GUI proxy client";
 
     package = mkOption {
       type = types.package;
