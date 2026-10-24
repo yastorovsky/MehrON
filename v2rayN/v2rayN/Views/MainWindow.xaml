@@ -76,6 +76,10 @@
                                     Height="{StaticResource MenuItemHeight}"
                                     Header="{x:Static resx:ResUI.menuAddAetherServer}" />
                                 <MenuItem
+                                    x:Name="menuAetherKeys"
+                                    Height="{StaticResource MenuItemHeight}"
+                                    Header="{x:Static resx:ResUI.TbAetherRenewKey}" />
+                                <MenuItem
                                     x:Name="menuAddPsiphonServer"
                                     Height="{StaticResource MenuItemHeight}"
                                     Header="{x:Static resx:ResUI.menuAddPsiphonServer}" />

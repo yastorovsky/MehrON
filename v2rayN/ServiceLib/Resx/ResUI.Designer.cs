@@ -5825,5 +5825,2186 @@ namespace ServiceLib.Resx {
                 return ResourceManager.GetString("PsiphonDisconnected", resourceCulture);
             }
         }
+    
+
+        
+        /// <summary>
+        ///   查找类似 Use a port from 1024 to 65532 for the Aether listen port 的本地化字符串。
+        /// </summary>
+        public static string FillAetherListenPort {
+            get {
+                return ResourceManager.GetString("FillAetherListenPort", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Add [MASQUE] 的本地化字符串。
+        /// </summary>
+        public static string menuAddMasqueServer {
+            get {
+                return ResourceManager.GetString("menuAddMasqueServer", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Aether core licenses 的本地化字符串。
+        /// </summary>
+        public static string menuAetherLicenses {
+            get {
+                return ResourceManager.GetString("menuAetherLicenses", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Check and Update 的本地化字符串。
+        /// </summary>
+        public static string menuCheckAndUpdate {
+            get {
+                return ResourceManager.GetString("menuCheckAndUpdate", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 The proxy chain &quot;{0}&quot; holds an Aether profile and is built whole or not at all: &quot;{1}&quot; could not be used, and without it the chain would carry the traffic a shorter way than it names 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherChainHopDropped {
+            get {
+                return ResourceManager.GetString("MsgAetherChainHopDropped", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 The Aether profile of the proxy chain &quot;{0}&quot; would dial out through a policy group or a proxy chain; put a single profile on its entry side 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherChainHopGroup {
+            get {
+                return ResourceManager.GetString("MsgAetherChainHopGroup", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 The hop the Aether profile of this proxy chain dials out through could not be built, and the Aether core would reach the internet without it 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherChainHopMissing {
+            get {
+                return ResourceManager.GetString("MsgAetherChainHopMissing", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 A proxy chain can have only one Aether profile 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherChainOneProfile {
+            get {
+                return ResourceManager.GetString("MsgAetherChainOneProfile", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 A configuration can use only one Aether profile 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherConfigSingleProfile {
+            get {
+                return ResourceManager.GetString("MsgAetherConfigSingleProfile", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 One Aether core would have to dial out two ways here: the same tunnel is used on its own and behind a proxy chain's hop, behind two different hops, or with two different exit-node settings 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherConfigTwoExits {
+            get {
+                return ResourceManager.GetString("MsgAetherConfigTwoExits", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 The Aether core is connected 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherConnected {
+            get {
+                return ResourceManager.GetString("MsgAetherConnected", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 The Aether core is still connecting 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherConnecting {
+            get {
+                return ResourceManager.GetString("MsgAetherConnecting", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 The Aether core could not start. On Windows, an aether-core older than 2.3.2 needs the Microsoft Visual C++ 2015-2022 Redistributable (x64); update aether-core under Check Update 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherCoreCannotStart {
+            get {
+                return ResourceManager.GetString("MsgAetherCoreCannotStart", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 The Aether core stopped running 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherCoreStopped {
+            get {
+                return ResourceManager.GetString("MsgAetherCoreStopped", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Tor or Psiphon inside the Aether tunnel ended, so the connection was stopped: {0} 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherCoreStoppedChainEnded {
+            get {
+                return ResourceManager.GetString("MsgAetherCoreStoppedChainEnded", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 The Aether core stopped: ECH is on, but no usable ECH key was found. Without one, the server name would have gone out in the clear. 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherCoreStoppedNoEchKey {
+            get {
+                return ResourceManager.GetString("MsgAetherCoreStoppedNoEchKey", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 The Aether core stopped running: {0} 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherCoreStoppedWithError {
+            get {
+                return ResourceManager.GetString("MsgAetherCoreStoppedWithError", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 The Aether core is not installed; get aether-core under Check Update 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherCoreUnavailable {
+            get {
+                return ResourceManager.GetString("MsgAetherCoreUnavailable", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Two profiles named &quot;{0}&quot; were found; please rename one 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherExitNodeDuplicate {
+            get {
+                return ResourceManager.GetString("MsgAetherExitNodeDuplicate", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 The echOutbound of the exit-node profile &quot;{0}&quot; cannot be used; fix it in that profile, or choose another one, or freedom 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherExitNodeEchUnusable {
+            get {
+                return ResourceManager.GetString("MsgAetherExitNodeEchUnusable", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 No profile named &quot;{0}&quot; was found 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherExitNodeNotFound {
+            get {
+                return ResourceManager.GetString("MsgAetherExitNodeNotFound", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 The exit-node profile &quot;{0}&quot; gives no outbound; choose another one, or freedom 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherExitNodeUnusable {
+            get {
+                return ResourceManager.GetString("MsgAetherExitNodeUnusable", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Policy group &quot;{0}&quot; leaves out &quot;{1}&quot;: a second Aether profile with other settings, and one core serves one profile 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherGroupLeavesOut {
+            get {
+                return ResourceManager.GetString("MsgAetherGroupLeavesOut", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 The Aether profile &quot;{1}&quot; is inside &quot;{0}&quot;, which a proxy chain dials through; put the Aether profile in the chain itself 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherInGroupHop {
+            get {
+                return ResourceManager.GetString("MsgAetherInGroupHop", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 The command has to name arguments for the Aether core, with the port it listens on after --bind 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherInvalidCommand {
+            get {
+                return ResourceManager.GetString("MsgAetherInvalidCommand", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Write resolver addresses such as 1.1.1.1 or 10.0.0.1:5353, separated by commas 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherInvalidDns {
+            get {
+                return ResourceManager.GetString("MsgAetherInvalidDns", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 The ECH DNS must be udp://IP, tcp://IP or the https:// address of a DNS-over-HTTPS server 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherInvalidEchDns {
+            get {
+                return ResourceManager.GetString("MsgAetherInvalidEchDns", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 The ECH domain must be a domain name, such as cloudflare-ech.com 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherInvalidEchDomain {
+            get {
+                return ResourceManager.GetString("MsgAetherInvalidEchDomain", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Use an IP address and a port, or leave the address empty to scan 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherInvalidEndpoint {
+            get {
+                return ResourceManager.GetString("MsgAetherInvalidEndpoint", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Write two-letter country codes separated by commas, with a leading ! to refuse them 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherInvalidExitLoc {
+            get {
+                return ResourceManager.GetString("MsgAetherInvalidExitLoc", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Use a number or a range such as 16-32: size 1–4096 bytes, delay 0–1000 ms 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherInvalidFragment {
+            get {
+                return ResourceManager.GetString("MsgAetherInvalidFragment", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Write an address and a port, such as 162.159.192.1:2408 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherInvalidHop {
+            get {
+                return ResourceManager.GetString("MsgAetherInvalidHop", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 The MASQUE SNI must be a domain name, such as www.cloudflare.com 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherInvalidMasqueSni {
+            get {
+                return ResourceManager.GetString("MsgAetherInvalidMasqueSni", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 WireGuard over MASQUE key: none yet; one is registered on the first scan or connection 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherKeyGoolMissing {
+            get {
+                return ResourceManager.GetString("MsgAetherKeyGoolMissing", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 WireGuard over MASQUE key: device {0}, IPv4 {1}, IPv6 {2} 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherKeyGoolReady {
+            get {
+                return ResourceManager.GetString("MsgAetherKeyGoolReady", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Inner hop key: none yet; one is registered on the first scan or connection 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherKeyInnerMissing {
+            get {
+                return ResourceManager.GetString("MsgAetherKeyInnerMissing", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Inner hop key: device {0}, IPv4 {1}, IPv6 {2} 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherKeyInnerReady {
+            get {
+                return ResourceManager.GetString("MsgAetherKeyInnerReady", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 MASQUE inner hop key: none yet; one is registered on the first scan or connection 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherKeyMasqueInnerMissing {
+            get {
+                return ResourceManager.GetString("MsgAetherKeyMasqueInnerMissing", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 MASQUE inner hop key: device {0}, IPv4 {1}, IPv6 {2} 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherKeyMasqueInnerReady {
+            get {
+                return ResourceManager.GetString("MsgAetherKeyMasqueInnerReady", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 MASQUE key: none yet; one is registered on the first scan or connection 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherKeyMasqueMissing {
+            get {
+                return ResourceManager.GetString("MsgAetherKeyMasqueMissing", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 MASQUE key: device {0}, IPv4 {1}, IPv6 {2} 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherKeyMasqueReady {
+            get {
+                return ResourceManager.GetString("MsgAetherKeyMasqueReady", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Outer hop key: none yet; one is registered on the first scan or connection 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherKeyOuterMissing {
+            get {
+                return ResourceManager.GetString("MsgAetherKeyOuterMissing", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Outer hop key: device {0}, IPv4 {1}, IPv6 {2} 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherKeyOuterReady {
+            get {
+                return ResourceManager.GetString("MsgAetherKeyOuterReady", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Getting new WARP keys cancelled 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherKeyRenewCancelled {
+            get {
+                return ResourceManager.GetString("MsgAetherKeyRenewCancelled", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 The new WARP keys are in place and are used from the next connection 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherKeyRenewed {
+            get {
+                return ResourceManager.GetString("MsgAetherKeyRenewed", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Registering the new WARP keys failed; the current keys were kept 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherKeyRenewFailed {
+            get {
+                return ResourceManager.GetString("MsgAetherKeyRenewFailed", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Registering new WARP keys; the keys in use stay in place until all the new ones are ready… 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherKeyRenewing {
+            get {
+                return ResourceManager.GetString("MsgAetherKeyRenewing", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 The API address must be an IP address or a domain name, with or without a port, such as 188.114.97.6:443 or [2606:4700::1]:8443 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherKeysInvalidApiAddress {
+            get {
+                return ResourceManager.GetString("MsgAetherKeysInvalidApiAddress", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 The API host must be a domain name, such as api.devices.cloudflare.com 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherKeysInvalidApiHost {
+            get {
+                return ResourceManager.GetString("MsgAetherKeysInvalidApiHost", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 The API server name must be a domain name, such as api.devices.cloudflare.com 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherKeysInvalidApiSni {
+            get {
+                return ResourceManager.GetString("MsgAetherKeysInvalidApiSni", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 The command has to register keys: --register followed by all, wg, masque, mim, gool-classic (WARP-in-WARP) or gool (WireGuard over MASQUE) 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherKeysInvalidCommand {
+            get {
+                return ResourceManager.GetString("MsgAetherKeysInvalidCommand", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 You don&apos;t have the required WARP key; please get it first 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherKeysMissing {
+            get {
+                return ResourceManager.GetString("MsgAetherKeysMissing", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 WireGuard inner hop key: none yet; one is registered on the first scan or connection 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherKeyWireguardInnerMissing {
+            get {
+                return ResourceManager.GetString("MsgAetherKeyWireguardInnerMissing", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 WireGuard inner hop key: device {0}, IPv4 {1}, IPv6 {2} 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherKeyWireguardInnerReady {
+            get {
+                return ResourceManager.GetString("MsgAetherKeyWireguardInnerReady", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 WireGuard key: none yet; one is registered on the first scan or connection 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherKeyWireguardMissing {
+            get {
+                return ResourceManager.GetString("MsgAetherKeyWireguardMissing", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 WireGuard key: device {0}, IPv4 {1}, IPv6 {2} 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherKeyWireguardReady {
+            get {
+                return ResourceManager.GetString("MsgAetherKeyWireguardReady", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 The command of the Aether profile gives {0} an address the core does not take; write an IP address and a port after it, such as 127.0.0.1:20808 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherListenAddressInvalid {
+            get {
+                return ResourceManager.GetString("MsgAetherListenAddressInvalid", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 The command of the Aether profile gives {0} an address the app does not connect to: the app connects to the core on 127.0.0.1, so write 127.0.0.1, or 0.0.0.0 for every address, and a port after it 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherListenAddressUnreachable {
+            get {
+                return ResourceManager.GetString("MsgAetherListenAddressUnreachable", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Port {0}, which the Aether core listens on, is taken by another program or reserved by the system; change the Aether listen port in the settings, or the ports of the command 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherListenPortInUse {
+            get {
+                return ResourceManager.GetString("MsgAetherListenPortInUse", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 The command of the Aether profile tells the core to listen on {0}, which is no port (1 to 65535); change the ports of the command 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherListenPortInvalid {
+            get {
+                return ResourceManager.GetString("MsgAetherListenPortInvalid", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 The Aether listen port and the three ports after it cannot include the local ports of PattN: the mixed port and the six ports after it 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherListenPortLocalProxy {
+            get {
+                return ResourceManager.GetString("MsgAetherListenPortLocalProxy", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 The command of the Aether profile tells the core to listen on {0} with two of its listeners (a listener the command leaves out still listens: the one the app dials on the Aether listen port, any other on the core's default, 1819, 1820 or 1821); give each listener a port of its own 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherListenPortShared {
+            get {
+                return ResourceManager.GetString("MsgAetherListenPortShared", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Port {0}, which the Aether core needs, is already used by the app itself, for example by its local proxy; change the Aether listen port in the settings, or the ports of the command 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherListenPortTaken {
+            get {
+                return ResourceManager.GetString("MsgAetherListenPortTaken", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 With Tor or Psiphon in the path the core also uses the ports after the Aether listen port, and none of them can be the local proxy port of the app; change the Aether listen port in the settings 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherNextPortTaken {
+            get {
+                return ResourceManager.GetString("MsgAetherNextPortTaken", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Disconnect the Aether profile before clearing Psiphon data; the running connection uses it 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherPsiphonClearBlocked {
+            get {
+                return ResourceManager.GetString("MsgAetherPsiphonClearBlocked", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Psiphon data cleared 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherPsiphonCleared {
+            get {
+                return ResourceManager.GetString("MsgAetherPsiphonCleared", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Psiphon data could not be cleared 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherPsiphonClearFailed {
+            get {
+                return ResourceManager.GetString("MsgAetherPsiphonClearFailed", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Psiphon → WARP works with the MASQUE protocol only 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherPsiphonNeedsMasque {
+            get {
+                return ResourceManager.GetString("MsgAetherPsiphonNeedsMasque", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 psiphon-tunnel-core is not in the Aether core folder, so a profile with Psiphon cannot connect; update aether-core under Check Update 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherPsiphonUnavailable {
+            get {
+                return ResourceManager.GetString("MsgAetherPsiphonUnavailable", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Disconnect the Aether profile before getting these keys; the running connection uses them 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherRenewBlocked {
+            get {
+                return ResourceManager.GetString("MsgAetherRenewBlocked", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 The two hops must be different addresses 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherSameHop {
+            get {
+                return ResourceManager.GetString("MsgAetherSameHop", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Disconnect the Aether profile before scanning; a scan would open a second tunnel on the running connection&apos;s key 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherScanBlocked {
+            get {
+                return ResourceManager.GetString("MsgAetherScanBlocked", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Scan cancelled 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherScanCancelled {
+            get {
+                return ResourceManager.GetString("MsgAetherScanCancelled", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 No endpoint found 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherScanFailed {
+            get {
+                return ResourceManager.GetString("MsgAetherScanFailed", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Found {0} 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherScanFound {
+            get {
+                return ResourceManager.GetString("MsgAetherScanFound", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Found outer hop {0} and inner hop {1} 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherScanFoundHops {
+            get {
+                return ResourceManager.GetString("MsgAetherScanFoundHops", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Scanning for an endpoint… 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherScanStarted {
+            get {
+                return ResourceManager.GetString("MsgAetherScanStarted", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Endpoint found 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherScanSuccess {
+            get {
+                return ResourceManager.GetString("MsgAetherScanSuccess", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Port {0}, three above the Aether listen port, which Xray opens for the Aether core to dial out through, is taken by another program or reserved by the system; change the Aether listen port in the settings 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherSecondaryPortInUse {
+            get {
+                return ResourceManager.GetString("MsgAetherSecondaryPortInUse", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 An inbound of this configuration already listens on {0}, the port three above the Aether listen port, which the Aether core dials out through; change the Aether listen port in the settings 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherSecondaryPortTaken {
+            get {
+                return ResourceManager.GetString("MsgAetherSecondaryPortTaken", resourceCulture);
+            }
+        }
+
+
+        /// <summary>
+        ///   查找类似 A balancer or an observatory of this configuration picks the outbounds whose tags start with {0}, which would include exit-node, the outbound the Aether core dials out by; change that selector 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherTemplateExitNodeSelected {
+            get {
+                return ResourceManager.GetString("MsgAetherTemplateExitNodeSelected", resourceCulture);
+            }
+        }
+
+
+        /// <summary>
+        ///   查找类似 Untested: the running Aether profile holds the Aether listen port 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherTestSkipped {
+            get {
+                return ResourceManager.GetString("MsgAetherTestSkipped", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Write at least one bridge line, or choose another bridge setting 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherTorBridgesMissing {
+            get {
+                return ResourceManager.GetString("MsgAetherTorBridgesMissing", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Tor → WARP works with the MASQUE protocol only 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherTorNeedsMasque {
+            get {
+                return ResourceManager.GetString("MsgAetherTorNeedsMasque", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Tor and Psiphon go together only with one inside the tunnel and the other around it 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherTorPsiphonConflict {
+            get {
+                return ResourceManager.GetString("MsgAetherTorPsiphonConflict", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 lyrebird is not in the Aether core folder, so Tor bridges cannot be used; Tor connects only where it is not blocked 的本地化字符串。
+        /// </summary>
+        public static string MsgAetherTorTransportsUnavailable {
+            get {
+                return ResourceManager.GetString("MsgAetherTorTransportsUnavailable", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 cipherSuites only apply with the unsafe fingerprint. Choose unsafe, or clear cipherSuites. 的本地化字符串。
+        /// </summary>
+        public static string MsgCipherSuitesNeedUnsafe {
+            get {
+                return ResourceManager.GetString("MsgCipherSuitesNeedUnsafe", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 EchOutbound needs a &quot;tag&quot; that is not empty, not direct or block, and does not start with proxy 的本地化字符串。
+        /// </summary>
+        public static string MsgEchOutboundInvalidTag {
+            get {
+                return ResourceManager.GetString("MsgEchOutboundInvalidTag", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 EchOutbound requires EchConfigList 的本地化字符串。
+        /// </summary>
+        public static string MsgEchOutboundNeedsEchConfigList {
+            get {
+                return ResourceManager.GetString("MsgEchOutboundNeedsEchConfigList", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 The tag &quot;{0}&quot; of EchOutbound is already used by another outbound 的本地化字符串。
+        /// </summary>
+        public static string MsgEchOutboundTagConflict {
+            get {
+                return ResourceManager.GetString("MsgEchOutboundTagConflict", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 psiphon_servers is already up to date ({0}) 的本地化字符串。
+        /// </summary>
+        public static string MsgPsiphonServersCurrent {
+            get {
+                return ResourceManager.GetString("MsgPsiphonServersCurrent", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 The downloaded psiphon_servers is not Psiphon&apos;s signed server list; the one in use stays 的本地化字符串。
+        /// </summary>
+        public static string MsgPsiphonServersInvalid {
+            get {
+                return ResourceManager.GetString("MsgPsiphonServersInvalid", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 psiphon_servers updated: {0} servers, published {1} 的本地化字符串。
+        /// </summary>
+        public static string MsgPsiphonServersUpdated {
+            get {
+                return ResourceManager.GetString("MsgPsiphonServersUpdated", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 &quot;{0}&quot; could not be built in the chain of its subscription 的本地化字符串。
+        /// </summary>
+        public static string MsgRoutingRuleChainHopNotBuilt {
+            get {
+                return ResourceManager.GetString("MsgRoutingRuleChainHopNotBuilt", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Two profiles named &quot;{0}&quot; were found; please rename one 的本地化字符串。
+        /// </summary>
+        public static string MsgRoutingRuleTargetDuplicate {
+            get {
+                return ResourceManager.GetString("MsgRoutingRuleTargetDuplicate", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 No profile named &quot;{0}&quot; was found 的本地化字符串。
+        /// </summary>
+        public static string MsgRoutingRuleTargetNotFound {
+            get {
+                return ResourceManager.GetString("MsgRoutingRuleTargetNotFound", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 The profile &quot;{0}&quot;, which a routing rule sends traffic to, could not be built; fix it, or turn off the rules that use it 的本地化字符串。
+        /// </summary>
+        public static string MsgRoutingRuleTargetUnbuilt {
+            get {
+                return ResourceManager.GetString("MsgRoutingRuleTargetUnbuilt", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 WebSocket and HTTPUpgrade connect only with alpn http/1.1 or none. Choose http/1.1, or leave alpn empty. 的本地化字符串。
+        /// </summary>
+        public static string MsgWebsocketAlpnHttp1Only {
+            get {
+                return ResourceManager.GetString("MsgWebsocketAlpnHttp1Only", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Xray-core was not updated: an Xray still runs from {0}, as a speed or latency test does; update again once it has ended 的本地化字符串。
+        /// </summary>
+        public static string MsgXrayCopyInUse {
+            get {
+                return ResourceManager.GetString("MsgXrayCopyInUse", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 On Windows PattN runs Xray-core as {0}, a copy of xray.exe, and that copy could not be made the same as xray.exe: {1} 的本地化字符串。
+        /// </summary>
+        public static string MsgXrayRunCopyFailed {
+            get {
+                return ResourceManager.GetString("MsgXrayRunCopyFailed", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Akamai (Psiphon list) 的本地化字符串。
+        /// </summary>
+        public static string TbAetherCdnSetAkamai {
+            get {
+                return ResourceManager.GetString("TbAetherCdnSetAkamai", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Bunny (Psiphon list) 的本地化字符串。
+        /// </summary>
+        public static string TbAetherCdnSetBunny {
+            get {
+                return ResourceManager.GetString("TbAetherCdnSetBunny", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Cloudflare 的本地化字符串。
+        /// </summary>
+        public static string TbAetherCdnSetCloudflare {
+            get {
+                return ResourceManager.GetString("TbAetherCdnSetCloudflare", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 CloudFront 的本地化字符串。
+        /// </summary>
+        public static string TbAetherCdnSetCloudfront {
+            get {
+                return ResourceManager.GetString("TbAetherCdnSetCloudfront", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Curated fronting edges 的本地化字符串。
+        /// </summary>
+        public static string TbAetherCdnSetCurated {
+            get {
+                return ResourceManager.GetString("TbAetherCdnSetCurated", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Fastly 的本地化字符串。
+        /// </summary>
+        public static string TbAetherCdnSetFastly {
+            get {
+                return ResourceManager.GetString("TbAetherCdnSetFastly", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 GitHub 的本地化字符串。
+        /// </summary>
+        public static string TbAetherCdnSetGithub {
+            get {
+                return ResourceManager.GetString("TbAetherCdnSetGithub", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Legacy Android overrides 的本地化字符串。
+        /// </summary>
+        public static string TbAetherCdnSetLegacy {
+            get {
+                return ResourceManager.GetString("TbAetherCdnSetLegacy", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Vercel 的本地化字符串。
+        /// </summary>
+        public static string TbAetherCdnSetVercel {
+            get {
+                return ResourceManager.GetString("TbAetherCdnSetVercel", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Clear Psiphon data 的本地化字符串。
+        /// </summary>
+        public static string TbAetherClearPsiphon {
+            get {
+                return ResourceManager.GetString("TbAetherClearPsiphon", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Forgets the servers Psiphon has learned and the lists it fetched. Its next start begins from the bundled list again, or from a fresh download when the switch above is off 的本地化字符串。
+        /// </summary>
+        public static string TbAetherClearPsiphonHint {
+            get {
+                return ResourceManager.GetString("TbAetherClearPsiphonHint", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Aether command 的本地化字符串。
+        /// </summary>
+        public static string TbAetherCommand {
+            get {
+                return ResourceManager.GetString("TbAetherCommand", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Edited by hand: this command runs as written, and the settings above are not applied, except for Xray-core settings 的本地化字符串。
+        /// </summary>
+        public static string TbAetherCommandCustom {
+            get {
+                return ResourceManager.GetString("TbAetherCommandCustom", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 DNS inside the tunnel 的本地化字符串。
+        /// </summary>
+        public static string TbAetherDns {
+            get {
+                return ResourceManager.GetString("TbAetherDns", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Comma-separated; leave blank for 1.1.1.1 and 1.0.0.1 的本地化字符串。
+        /// </summary>
+        public static string TbAetherDnsHint {
+            get {
+                return ResourceManager.GetString("TbAetherDnsHint", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Encrypted Client Hello 的本地化字符串。
+        /// </summary>
+        public static string TbAetherEch {
+            get {
+                return ResourceManager.GetString("TbAetherEch", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 ECH DNS 的本地化字符串。
+        /// </summary>
+        public static string TbAetherEchDns {
+            get {
+                return ResourceManager.GetString("TbAetherEchDns", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 ECH domain 的本地化字符串。
+        /// </summary>
+        public static string TbAetherEchDomain {
+            get {
+                return ResourceManager.GetString("TbAetherEchDomain", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Hides the server name of the MASQUE handshake; without a usable key, Aether does not connect 的本地化字符串。
+        /// </summary>
+        public static string TbAetherEchHint {
+            get {
+                return ResourceManager.GetString("TbAetherEchHint", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Leave blank to scan 的本地化字符串。
+        /// </summary>
+        public static string TbAetherEndpointHint {
+            get {
+                return ResourceManager.GetString("TbAetherEndpointHint", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 exit-node dialMode 的本地化字符串。
+        /// </summary>
+        public static string TbAetherExitDialMode {
+            get {
+                return ResourceManager.GetString("TbAetherExitDialMode", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 exit-node finalMask raw JSON, format: { FinalMaskObject } 的本地化字符串。
+        /// </summary>
+        public static string TbAetherExitFinalMask {
+            get {
+                return ResourceManager.GetString("TbAetherExitFinalMask", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Exit location 的本地化字符串。
+        /// </summary>
+        public static string TbAetherExitLoc {
+            get {
+                return ResourceManager.GetString("TbAetherExitLoc", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 DE,SE allows only those; !IR,RU refuses those; blank accepts any 的本地化字符串。
+        /// </summary>
+        public static string TbAetherExitLocHint {
+            get {
+                return ResourceManager.GetString("TbAetherExitLocHint", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 exit-node 的本地化字符串。
+        /// </summary>
+        public static string TbAetherExitNode {
+            get {
+                return ResourceManager.GetString("TbAetherExitNode", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 freedom (default) 的本地化字符串。
+        /// </summary>
+        public static string TbAetherExitNodeFreedom {
+            get {
+                return ResourceManager.GetString("TbAetherExitNodeFreedom", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 The core dials out through this profile&apos;s outbound, as through a hop of a proxy chain; finalMask and dialMode below are for freedom only 的本地化字符串。
+        /// </summary>
+        public static string TbAetherExitNodeHint {
+            get {
+                return ResourceManager.GetString("TbAetherExitNodeHint", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Fingerprint 的本地化字符串。
+        /// </summary>
+        public static string TbAetherFingerprint {
+            get {
+                return ResourceManager.GetString("TbAetherFingerprint", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Fragment ClientHello 的本地化字符串。
+        /// </summary>
+        public static string TbAetherFragment {
+            get {
+                return ResourceManager.GetString("TbAetherFragment", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Fragment delay (ms) 的本地化字符串。
+        /// </summary>
+        public static string TbAetherFragmentDelay {
+            get {
+                return ResourceManager.GetString("TbAetherFragmentDelay", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Fragment size (bytes) 的本地化字符串。
+        /// </summary>
+        public static string TbAetherFragmentSize {
+            get {
+                return ResourceManager.GetString("TbAetherFragmentSize", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Get new WARP keys 的本地化字符串。
+        /// </summary>
+        public static string TbAetherGetKeys {
+            get {
+                return ResourceManager.GetString("TbAetherGetKeys", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Leave blank for the endpoint WARP assigns 的本地化字符串。
+        /// </summary>
+        public static string TbAetherGoolPeerHint {
+            get {
+                return ResourceManager.GetString("TbAetherGoolPeerHint", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Inner hop 的本地化字符串。
+        /// </summary>
+        public static string TbAetherInnerHop {
+            get {
+                return ResourceManager.GetString("TbAetherInnerHop", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 IP version 的本地化字符串。
+        /// </summary>
+        public static string TbAetherIpVersion {
+            get {
+                return ResourceManager.GetString("TbAetherIpVersion", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 API address 的本地化字符串。
+        /// </summary>
+        public static string TbAetherKeysApiAddress {
+            get {
+                return ResourceManager.GetString("TbAetherKeysApiAddress", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Leave blank for the address of the API server name 的本地化字符串。
+        /// </summary>
+        public static string TbAetherKeysApiAddressHint {
+            get {
+                return ResourceManager.GetString("TbAetherKeysApiAddressHint", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 API host 的本地化字符串。
+        /// </summary>
+        public static string TbAetherKeysApiHost {
+            get {
+                return ResourceManager.GetString("TbAetherKeysApiHost", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Leave blank for api.devices.cloudflare.com, then api.cloudflareclient.com if it gets no answer and the server name is blank too. Cloudflare refuses a server name that differs from the host 的本地化字符串。
+        /// </summary>
+        public static string TbAetherKeysApiHostHint {
+            get {
+                return ResourceManager.GetString("TbAetherKeysApiHostHint", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 API server name (SNI) 的本地化字符串。
+        /// </summary>
+        public static string TbAetherKeysApiSni {
+            get {
+                return ResourceManager.GetString("TbAetherKeysApiSni", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Leave blank for the API host 的本地化字符串。
+        /// </summary>
+        public static string TbAetherKeysApiSniHint {
+            get {
+                return ResourceManager.GetString("TbAetherKeysApiSniHint", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Hides the server name of the calls to the WARP API; without a usable ECH key, no WARP key is requested 的本地化字符串。
+        /// </summary>
+        public static string TbAetherKeysEchHint {
+            get {
+                return ResourceManager.GetString("TbAetherKeysEchHint", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Sends the ClientHello of the calls to the WARP API in pieces, for networks that filter the name of the API 的本地化字符串。
+        /// </summary>
+        public static string TbAetherKeysFragmentHint {
+            get {
+                return ResourceManager.GetString("TbAetherKeysFragmentHint", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Get new keys for 的本地化字符串。
+        /// </summary>
+        public static string TbAetherKeysKind {
+            get {
+                return ResourceManager.GetString("TbAetherKeysKind", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 All 的本地化字符串。
+        /// </summary>
+        public static string TbAetherKeysKindAll {
+            get {
+                return ResourceManager.GetString("TbAetherKeysKindAll", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 The core&apos;s output and the WARP keys appear here 的本地化字符串。
+        /// </summary>
+        public static string TbAetherKeysLogEmpty {
+            get {
+                return ResourceManager.GetString("TbAetherKeysLogEmpty", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Log 的本地化字符串。
+        /// </summary>
+        public static string TbAetherLog {
+            get {
+                return ResourceManager.GetString("TbAetherLog", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Scan results and the WARP key status appear here 的本地化字符串。
+        /// </summary>
+        public static string TbAetherLogEmpty {
+            get {
+                return ResourceManager.GetString("TbAetherLogEmpty", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 MASQUE SNI 的本地化字符串。
+        /// </summary>
+        public static string TbAetherMasqueSni {
+            get {
+                return ResourceManager.GetString("TbAetherMasqueSni", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Aggressive 的本地化字符串。
+        /// </summary>
+        public static string TbAetherNoizeAggressive {
+            get {
+                return ResourceManager.GetString("TbAetherNoizeAggressive", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Automatic 的本地化字符串。
+        /// </summary>
+        public static string TbAetherNoizeAuto {
+            get {
+                return ResourceManager.GetString("TbAetherNoizeAuto", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Balanced 的本地化字符串。
+        /// </summary>
+        public static string TbAetherNoizeBalanced {
+            get {
+                return ResourceManager.GetString("TbAetherNoizeBalanced", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Firewall 的本地化字符串。
+        /// </summary>
+        public static string TbAetherNoizeFirewall {
+            get {
+                return ResourceManager.GetString("TbAetherNoizeFirewall", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 GFW 的本地化字符串。
+        /// </summary>
+        public static string TbAetherNoizeGfw {
+            get {
+                return ResourceManager.GetString("TbAetherNoizeGfw", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Light 的本地化字符串。
+        /// </summary>
+        public static string TbAetherNoizeLight {
+            get {
+                return ResourceManager.GetString("TbAetherNoizeLight", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Off 的本地化字符串。
+        /// </summary>
+        public static string TbAetherNoizeOff {
+            get {
+                return ResourceManager.GetString("TbAetherNoizeOff", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Obfuscation 的本地化字符串。
+        /// </summary>
+        public static string TbAetherObfuscation {
+            get {
+                return ResourceManager.GetString("TbAetherObfuscation", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Other settings 的本地化字符串。
+        /// </summary>
+        public static string TbAetherOtherSettings {
+            get {
+                return ResourceManager.GetString("TbAetherOtherSettings", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Outer hop 的本地化字符串。
+        /// </summary>
+        public static string TbAetherOuterHop {
+            get {
+                return ResourceManager.GetString("TbAetherOuterHop", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Protocol 的本地化字符串。
+        /// </summary>
+        public static string TbAetherProtocol {
+            get {
+                return ResourceManager.GetString("TbAetherProtocol", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Psiphon 的本地化字符串。
+        /// </summary>
+        public static string TbAetherPsiphon {
+            get {
+                return ResourceManager.GetString("TbAetherPsiphon", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Start from the bundled server list 的本地化字符串。
+        /// </summary>
+        public static string TbAetherPsiphonBundledList {
+            get {
+                return ResourceManager.GetString("TbAetherPsiphonBundledList", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 On: Psiphon dials the servers in psiphon_servers.dat at once and fetches a fresh list only when they fail. Off: it fetches a fresh list before its first connection, so the list must be reachable, as it is behind WARP 的本地化字符串。
+        /// </summary>
+        public static string TbAetherPsiphonBundledListHint {
+            get {
+                return ResourceManager.GetString("TbAetherPsiphonBundledListHint", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 CDN fronting IPs 的本地化字符串。
+        /// </summary>
+        public static string TbAetherPsiphonCdnIps {
+            get {
+                return ResourceManager.GetString("TbAetherPsiphonCdnIps", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 CDN edge lists to scan 的本地化字符串。
+        /// </summary>
+        public static string TbAetherPsiphonCdnSets {
+            get {
+                return ResourceManager.GetString("TbAetherPsiphonCdnSets", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 All lists built into Psiphon 的本地化字符串。
+        /// </summary>
+        public static string TbAetherPsiphonCdnSetsAll {
+            get {
+                return ResourceManager.GetString("TbAetherPsiphonCdnSetsAll", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Which of the edge lists built into Psiphon the fronting scan tries. None checked means all of them; beside IPs of your own they are tried after those 的本地化字符串。
+        /// </summary>
+        public static string TbAetherPsiphonCdnSetsHint {
+            get {
+                return ResourceManager.GetString("TbAetherPsiphonCdnSetsHint", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 CDN fronting server names 的本地化字符串。
+        /// </summary>
+        public static string TbAetherPsiphonCdnSni {
+            get {
+                return ResourceManager.GetString("TbAetherPsiphonCdnSni", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 WARP → Psiphon 的本地化字符串。
+        /// </summary>
+        public static string TbAetherPsiphonChain {
+            get {
+                return ResourceManager.GetString("TbAetherPsiphonChain", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Comma-separated; leave blank for the built-in list 的本地化字符串。
+        /// </summary>
+        public static string TbAetherPsiphonListHint {
+            get {
+                return ResourceManager.GetString("TbAetherPsiphonListHint", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Psiphon connection 的本地化字符串。
+        /// </summary>
+        public static string TbAetherPsiphonMode {
+            get {
+                return ResourceManager.GetString("TbAetherPsiphonMode", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Automatic 的本地化字符串。
+        /// </summary>
+        public static string TbAetherPsiphonModeAuto {
+            get {
+                return ResourceManager.GetString("TbAetherPsiphonModeAuto", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 CDN fronting only 的本地化字符串。
+        /// </summary>
+        public static string TbAetherPsiphonModeCdn {
+            get {
+                return ResourceManager.GetString("TbAetherPsiphonModeCdn", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Direct only 的本地化字符串。
+        /// </summary>
+        public static string TbAetherPsiphonModeDirect {
+            get {
+                return ResourceManager.GetString("TbAetherPsiphonModeDirect", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Off 的本地化字符串。
+        /// </summary>
+        public static string TbAetherPsiphonOff {
+            get {
+                return ResourceManager.GetString("TbAetherPsiphonOff", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Psiphon only 的本地化字符串。
+        /// </summary>
+        public static string TbAetherPsiphonOnly {
+            get {
+                return ResourceManager.GetString("TbAetherPsiphonOnly", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Exit country 的本地化字符串。
+        /// </summary>
+        public static string TbAetherPsiphonRegion {
+            get {
+                return ResourceManager.GetString("TbAetherPsiphonRegion", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Any country 的本地化字符串。
+        /// </summary>
+        public static string TbAetherPsiphonRegionAny {
+            get {
+                return ResourceManager.GetString("TbAetherPsiphonRegionAny", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Psiphon → WARP 的本地化字符串。
+        /// </summary>
+        public static string TbAetherPsiphonReverse {
+            get {
+                return ResourceManager.GetString("TbAetherPsiphonReverse", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Getting new WARP keys… 的本地化字符串。
+        /// </summary>
+        public static string TbAetherRenewing {
+            get {
+                return ResourceManager.GetString("TbAetherRenewing", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Get new WARP keys… 的本地化字符串。
+        /// </summary>
+        public static string TbAetherRenewKey {
+            get {
+                return ResourceManager.GetString("TbAetherRenewKey", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Save anyway 的本地化字符串。
+        /// </summary>
+        public static string TbAetherSaveAnyway {
+            get {
+                return ResourceManager.GetString("TbAetherSaveAnyway", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Scan for an endpoint 的本地化字符串。
+        /// </summary>
+        public static string TbAetherScan {
+            get {
+                return ResourceManager.GetString("TbAetherScan", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Scan anyway 的本地化字符串。
+        /// </summary>
+        public static string TbAetherScanAnyway {
+            get {
+                return ResourceManager.GetString("TbAetherScanAnyway", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Balanced 的本地化字符串。
+        /// </summary>
+        public static string TbAetherScanBalanced {
+            get {
+                return ResourceManager.GetString("TbAetherScanBalanced", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Ironclad 的本地化字符串。
+        /// </summary>
+        public static string TbAetherScanIronclad {
+            get {
+                return ResourceManager.GetString("TbAetherScanIronclad", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Scan mode 的本地化字符串。
+        /// </summary>
+        public static string TbAetherScanMode {
+            get {
+                return ResourceManager.GetString("TbAetherScanMode", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Scanning… 的本地化字符串。
+        /// </summary>
+        public static string TbAetherScanning {
+            get {
+                return ResourceManager.GetString("TbAetherScanning", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Thorough 的本地化字符串。
+        /// </summary>
+        public static string TbAetherScanThorough {
+            get {
+                return ResourceManager.GetString("TbAetherScanThorough", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Turbo 的本地化字符串。
+        /// </summary>
+        public static string TbAetherScanTurbo {
+            get {
+                return ResourceManager.GetString("TbAetherScanTurbo", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Verified 的本地化字符串。
+        /// </summary>
+        public static string TbAetherScanVerified {
+            get {
+                return ResourceManager.GetString("TbAetherScanVerified", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Tor 的本地化字符串。
+        /// </summary>
+        public static string TbAetherTor {
+            get {
+                return ResourceManager.GetString("TbAetherTor", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Bridge lines 的本地化字符串。
+        /// </summary>
+        public static string TbAetherTorBridgeLines {
+            get {
+                return ResourceManager.GetString("TbAetherTorBridgeLines", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 One per line, as in torrc: obfs4 1.2.3.4:443 FINGERPRINT cert=… iat-mode=0 的本地化字符串。
+        /// </summary>
+        public static string TbAetherTorBridgeLinesHint {
+            get {
+                return ResourceManager.GetString("TbAetherTorBridgeLinesHint", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Bridges 的本地化字符串。
+        /// </summary>
+        public static string TbAetherTorBridges {
+            get {
+                return ResourceManager.GetString("TbAetherTorBridges", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 When Tor is blocked 的本地化字符串。
+        /// </summary>
+        public static string TbAetherTorBridgesAuto {
+            get {
+                return ResourceManager.GetString("TbAetherTorBridgesAuto", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 From the start 的本地化字符串。
+        /// </summary>
+        public static string TbAetherTorBridgesFirst {
+            get {
+                return ResourceManager.GetString("TbAetherTorBridgesFirst", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Never 的本地化字符串。
+        /// </summary>
+        public static string TbAetherTorBridgesNever {
+            get {
+                return ResourceManager.GetString("TbAetherTorBridgesNever", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 My own bridge lines 的本地化字符串。
+        /// </summary>
+        public static string TbAetherTorBridgesOwn {
+            get {
+                return ResourceManager.GetString("TbAetherTorBridgesOwn", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 WARP → Tor 的本地化字符串。
+        /// </summary>
+        public static string TbAetherTorChain {
+            get {
+                return ResourceManager.GetString("TbAetherTorChain", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Off 的本地化字符串。
+        /// </summary>
+        public static string TbAetherTorOff {
+            get {
+                return ResourceManager.GetString("TbAetherTorOff", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Tor only 的本地化字符串。
+        /// </summary>
+        public static string TbAetherTorOnly {
+            get {
+                return ResourceManager.GetString("TbAetherTorOnly", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Bridge sources 的本地化字符串。
+        /// </summary>
+        public static string TbAetherTorRelays {
+            get {
+                return ResourceManager.GetString("TbAetherTorRelays", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 bridgedb and public relays 的本地化字符串。
+        /// </summary>
+        public static string TbAetherTorRelaysAuto {
+            get {
+                return ResourceManager.GetString("TbAetherTorRelaysAuto", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 bridgedb only 的本地化字符串。
+        /// </summary>
+        public static string TbAetherTorRelaysOff {
+            get {
+                return ResourceManager.GetString("TbAetherTorRelaysOff", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Public relays only 的本地化字符串。
+        /// </summary>
+        public static string TbAetherTorRelaysOnly {
+            get {
+                return ResourceManager.GetString("TbAetherTorRelaysOnly", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Tor → WARP 的本地化字符串。
+        /// </summary>
+        public static string TbAetherTorReverse {
+            get {
+                return ResourceManager.GetString("TbAetherTorReverse", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Transport 的本地化字符串。
+        /// </summary>
+        public static string TbAetherTransport {
+            get {
+                return ResourceManager.GetString("TbAetherTransport", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Use the settings 的本地化字符串。
+        /// </summary>
+        public static string TbAetherUseSettings {
+            get {
+                return ResourceManager.GetString("TbAetherUseSettings", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 EchOutbound 的本地化字符串。
+        /// </summary>
+        public static string TbEchOutbound {
+            get {
+                return ResourceManager.GetString("TbEchOutbound", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 {0} ({1}) 的本地化字符串。
+        /// </summary>
+        public static string TbLabelNumbered {
+            get {
+                return ResourceManager.GetString("TbLabelNumbered", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Choose a ready-made {0} 的本地化字符串。
+        /// </summary>
+        public static string TbPresetChoose {
+            get {
+                return ResourceManager.GetString("TbPresetChoose", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 default 的本地化字符串。
+        /// </summary>
+        public static string TbPresetDefault {
+            get {
+                return ResourceManager.GetString("TbPresetDefault", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Replace 的本地化字符串。
+        /// </summary>
+        public static string TbPresetReplace {
+            get {
+                return ResourceManager.GetString("TbPresetReplace", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 The current {0} is not on the list and will be lost. Replace it with {1}? 的本地化字符串。
+        /// </summary>
+        public static string TbPresetReplaceMessage {
+            get {
+                return ResourceManager.GetString("TbPresetReplaceMessage", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Replace the {0}? 的本地化字符串。
+        /// </summary>
+        public static string TbPresetReplaceTitle {
+            get {
+                return ResourceManager.GetString("TbPresetReplaceTitle", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 Aether listen port 的本地化字符串。
+        /// </summary>
+        public static string TbSettingsAetherListenPort {
+            get {
+                return ResourceManager.GetString("TbSettingsAetherListenPort", resourceCulture);
+            }
+        }
+
+        
+        /// <summary>
+        ///   查找类似 The core also takes the three ports after it 的本地化字符串。
+        /// </summary>
+        public static string TbSettingsAetherListenPortTip {
+            get {
+                return ResourceManager.GetString("TbSettingsAetherListenPortTip", resourceCulture);
+            }
+        }
     }
 }

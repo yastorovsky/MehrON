@@ -1,0 +1,63 @@
+<UserControl
+    x:Class="v2rayN.Desktop.Views.AetherLogPanel"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:resx="clr-namespace:ServiceLib.Resx;assembly=ServiceLib"
+    xmlns:vms="clr-namespace:ServiceLib.ViewModels;assembly=ServiceLib"
+    d:DesignWidth="700"
+    x:DataType="vms:AetherLogViewModel"
+    mc:Ignorable="d">
+    <!--  PattN: the log of an Aether page, newest last, with a button that copies it (design 3.2.2 row 43)  -->
+    <UserControl.Styles>
+        <Style Selector="TextBlock.output">
+            <Setter Property="Opacity" Value="0.7" />
+        </Style>
+        <Style Selector="TextBlock.warn">
+            <Setter Property="Foreground" Value="DarkOrange" />
+        </Style>
+        <Style Selector="TextBlock.error">
+            <Setter Property="Foreground" Value="IndianRed" />
+        </Style>
+    </UserControl.Styles>
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Top">
+            <Button
+                x:Name="btnCopy"
+                Margin="{StaticResource Margin4}"
+                Content="{x:Static resx:ResUI.menuEditCopy}"
+                DockPanel.Dock="Right" />
+            <TextBlock
+                Margin="{StaticResource Margin4}"
+                VerticalAlignment="Center"
+                Text="{x:Static resx:ResUI.TbAetherLog}" />
+        </DockPanel>
+        <Border
+            Height="280"
+            Margin="{StaticResource Margin4}"
+            BorderBrush="Gray"
+            BorderThickness="1"
+            CornerRadius="4">
+            <Grid>
+                <ListBox x:Name="lstLog" FontFamily="Cascadia Code,Consolas,Monospace">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate x:DataType="vms:AetherLogEntry">
+                            <TextBlock
+                                Classes.error="{Binding IsError}"
+                                Classes.output="{Binding IsOutput}"
+                                Classes.warn="{Binding IsWarning}"
+                                Text="{Binding Text}"
+                                TextWrapping="Wrap" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <TextBlock
+                    x:Name="txtEmpty"
+                    Margin="12"
+                    Opacity="0.7"
+                    TextWrapping="Wrap" />
+            </Grid>
+        </Border>
+    </DockPanel>
+</UserControl>

@@ -1,0 +1,1029 @@
+<base:WindowBase
+    x:Class="v2rayN.Views.AddServerAetherWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:base="clr-namespace:v2rayN.Base"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:reactiveui="http://reactiveui.net"
+    xmlns:resx="clr-namespace:ServiceLib.Resx;assembly=ServiceLib"
+    xmlns:views="clr-namespace:v2rayN.Views"
+    xmlns:vms="clr-namespace:ServiceLib.ViewModels;assembly=ServiceLib"
+    Title="{x:Static resx:ResUI.menuServers}"
+    Width="900"
+    Height="750"
+    x:TypeArguments="vms:AddServerAetherViewModel"
+    ResizeMode="CanResize"
+    ShowInTaskbar="False"
+    Style="{StaticResource WindowGlobal}"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <!--  PattN: fork-only window, the Aether editor (design 3.2): one row per setting, in PattNG's order, each shown as its settings call for  -->
+    <!--  The label beside the CDN edge lists sits 16 px down, level with the expander's header; a hint beside a switch keeps 4 px  -->
+    <!--  above and below, apart from the hint of the next row  -->
+    <DockPanel Margin="{StaticResource Margin8}">
+        <StackPanel
+            Margin="{StaticResource Margin4}"
+            HorizontalAlignment="Center"
+            DockPanel.Dock="Bottom"
+            Orientation="Horizontal">
+            <Button
+                x:Name="btnSave"
+                MinWidth="100"
+                Content="{x:Static resx:ResUI.TbConfirm}"
+                IsDefault="True"
+                Style="{StaticResource DefButton}" />
+            <Button
+                x:Name="btnCancel"
+                MinWidth="100"
+                Margin="{StaticResource MarginLeftRight8}"
+                Content="{x:Static resx:ResUI.TbCancel}"
+                IsCancel="true"
+                Style="{StaticResource DefButton}" />
+        </StackPanel>
+        <ScrollViewer
+            materialDesign:ScrollViewerAssist.IsAutoHideEnabled="True"
+            HorizontalScrollBarVisibility="Auto"
+            VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <!--  1. The WARP keys are shared by every Aether profile and got in a window of their own  -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="{StaticResource Margin4}"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource ModuleTitle}"
+                        Text="{x:Static resx:ResUI.menuServers}"
+                        TextWrapping="Wrap" />
+                    <Button
+                        x:Name="btnRenewKey"
+                        Grid.Column="1"
+                        Margin="{StaticResource Margin4}"
+                        HorizontalAlignment="Left"
+                        Content="{x:Static resx:ResUI.TbAetherRenewKey}"
+                        Style="{StaticResource DefButton}" />
+                </Grid>
+
+                <!--  2. Remarks  -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="{StaticResource Margin4}"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource ToolbarTextBlock}"
+                        Text="{x:Static resx:ResUI.TbRemarks}"
+                        TextWrapping="Wrap" />
+                    <TextBox
+                        x:Name="txtRemarks"
+                        Grid.Column="1"
+                        Width="400"
+                        Margin="{StaticResource Margin4}"
+                        Style="{StaticResource DefTextBox}" />
+                </Grid>
+
+                <!--  3. Protocol  -->
+                <Grid x:Name="rowProtocol">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="{StaticResource Margin4}"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource ToolbarTextBlock}"
+                        Text="{x:Static resx:ResUI.TbAetherProtocol}"
+                        TextWrapping="Wrap" />
+                    <ComboBox
+                        x:Name="cmbProtocol"
+                        Grid.Column="1"
+                        Width="400"
+                        Margin="{StaticResource Margin4}"
+                        Style="{StaticResource DefComboBox}" />
+                </Grid>
+
+                <!--  4. Transport  -->
+                <Grid x:Name="rowTransport">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="{StaticResource Margin4}"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource ToolbarTextBlock}"
+                        Text="{x:Static resx:ResUI.TbAetherTransport}"
+                        TextWrapping="Wrap" />
+                    <ComboBox
+                        x:Name="cmbTransport"
+                        Grid.Column="1"
+                        Width="400"
+                        Margin="{StaticResource Margin4}"
+                        Style="{StaticResource DefComboBox}" />
+                </Grid>
+
+                <!--  5. MASQUE SNI  -->
+                <Grid x:Name="rowMasqueSni">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="{StaticResource Margin4}"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource ToolbarTextBlock}"
+                        Text="{x:Static resx:ResUI.TbAetherMasqueSni}"
+                        TextWrapping="Wrap" />
+                    <TextBox
+                        x:Name="txtMasqueSni"
+                        Grid.Column="1"
+                        Width="400"
+                        Margin="{StaticResource Margin4}"
+                        Style="{StaticResource DefTextBox}" />
+                </Grid>
+
+                <!--  6. Fragment ClientHello, over HTTP/2 chosen  -->
+                <Grid x:Name="rowFragment">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="{StaticResource Margin4}"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource ToolbarTextBlock}"
+                        Text="{x:Static resx:ResUI.TbAetherFragment}"
+                        TextWrapping="Wrap" />
+                    <ToggleButton
+                        x:Name="togFragment"
+                        Grid.Column="1"
+                        Margin="{StaticResource Margin4}"
+                        HorizontalAlignment="Left" />
+                </Grid>
+
+                <!--  7. Fragment size  -->
+                <Grid x:Name="rowFragmentSize">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="{StaticResource Margin4}"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource ToolbarTextBlock}"
+                        Text="{x:Static resx:ResUI.TbAetherFragmentSize}"
+                        TextWrapping="Wrap" />
+                    <TextBox
+                        x:Name="txtFragmentSize"
+                        Grid.Column="1"
+                        Width="200"
+                        Margin="{StaticResource Margin4}"
+                        HorizontalAlignment="Left"
+                        materialDesign:HintAssist.Hint="8-16"
+                        Style="{StaticResource DefTextBox}" />
+                </Grid>
+
+                <!--  8. Fragment delay  -->
+                <Grid x:Name="rowFragmentDelay">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="{StaticResource Margin4}"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource ToolbarTextBlock}"
+                        Text="{x:Static resx:ResUI.TbAetherFragmentDelay}"
+                        TextWrapping="Wrap" />
+                    <TextBox
+                        x:Name="txtFragmentDelay"
+                        Grid.Column="1"
+                        Width="200"
+                        Margin="{StaticResource Margin4}"
+                        HorizontalAlignment="Left"
+                        materialDesign:HintAssist.Hint="2-10"
+                        Style="{StaticResource DefTextBox}" />
+                </Grid>
+
+                <!--  9. Encrypted Client Hello  -->
+                <Grid x:Name="rowEch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="{StaticResource Margin4}"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource ToolbarTextBlock}"
+                        Text="{x:Static resx:ResUI.TbAetherEch}"
+                        TextWrapping="Wrap" />
+                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                        <ToggleButton
+                            x:Name="togEch"
+                            Margin="{StaticResource Margin4}"
+                            HorizontalAlignment="Left" />
+                        <TextBlock
+                            Width="400"
+                            Margin="8,4,8,4"
+                            VerticalAlignment="Center"
+                            Style="{StaticResource ToolbarTextBlock}"
+                            Text="{x:Static resx:ResUI.TbAetherEchHint}"
+                            TextWrapping="Wrap" />
+                    </StackPanel>
+                </Grid>
+
+                <!--  10. ECH DNS: a list to pick from that takes any other value the core does as well  -->
+                <Grid x:Name="rowEchDns">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="{StaticResource Margin4}"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource ToolbarTextBlock}"
+                        Text="{x:Static resx:ResUI.TbAetherEchDns}"
+                        TextWrapping="Wrap" />
+                    <ComboBox
+                        x:Name="cmbEchDns"
+                        Grid.Column="1"
+                        Width="400"
+                        Margin="{StaticResource Margin4}"
+                        IsEditable="True"
+                        IsTextSearchEnabled="False"
+                        Style="{StaticResource DefComboBox}" />
+                </Grid>
+
+                <!--  11. ECH domain  -->
+                <Grid x:Name="rowEchDomain">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="{StaticResource Margin4}"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource ToolbarTextBlock}"
+                        Text="{x:Static resx:ResUI.TbAetherEchDomain}"
+                        TextWrapping="Wrap" />
+                    <ComboBox
+                        x:Name="cmbEchDomain"
+                        Grid.Column="1"
+                        Width="400"
+                        Margin="{StaticResource Margin4}"
+                        IsEditable="True"
+                        IsTextSearchEnabled="False"
+                        Style="{StaticResource DefComboBox}" />
+                </Grid>
+
+                <!--  12. Scan mode  -->
+                <Grid x:Name="rowScanMode">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="{StaticResource Margin4}"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource ToolbarTextBlock}"
+                        Text="{x:Static resx:ResUI.TbAetherScanMode}"
+                        TextWrapping="Wrap" />
+                    <ComboBox
+                        x:Name="cmbScanMode"
+                        Grid.Column="1"
+                        Width="400"
+                        Margin="{StaticResource Margin4}"
+                        Style="{StaticResource DefComboBox}" />
+                </Grid>
+
+                <!--  13. Obfuscation, not over HTTP/2  -->
+                <Grid x:Name="rowObfuscation">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="{StaticResource Margin4}"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource ToolbarTextBlock}"
+                        Text="{x:Static resx:ResUI.TbAetherObfuscation}"
+                        TextWrapping="Wrap" />
+                    <ComboBox
+                        x:Name="cmbObfuscation"
+                        Grid.Column="1"
+                        Width="400"
+                        Margin="{StaticResource Margin4}"
+                        Style="{StaticResource DefComboBox}" />
+                </Grid>
+
+                <!--  14. Fingerprint, over MASQUE on either carrier  -->
+                <Grid x:Name="rowFingerprint">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="{StaticResource Margin4}"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource ToolbarTextBlock}"
+                        Text="{x:Static resx:ResUI.TbAetherFingerprint}"
+                        TextWrapping="Wrap" />
+                    <ComboBox
+                        x:Name="cmbFingerprint"
+                        Grid.Column="1"
+                        Width="400"
+                        Margin="{StaticResource Margin4}"
+                        Style="{StaticResource DefComboBox}" />
+                </Grid>
+
+                <!--  15. exit-node  -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="{StaticResource Margin4}"
+                        VerticalAlignment="Top"
+                        Style="{StaticResource ToolbarTextBlock}"
+                        Text="{x:Static resx:ResUI.TbAetherExitNode}"
+                        TextWrapping="Wrap" />
+                    <views:ExitNodeField x:Name="exitNodeField" Grid.Column="1" />
+                </Grid>
+
+                <!--  16. exit-node finalMask, for freedom  -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="{StaticResource Margin4}"
+                        VerticalAlignment="Top"
+                        Style="{StaticResource ToolbarTextBlock}"
+                        Text="{x:Static resx:ResUI.TbAetherExitFinalMask}"
+                        TextWrapping="Wrap" />
+                    <views:PresetField
+                        x:Name="presetFinalMask"
+                        Grid.Column="1"
+                        IsMultiline="True" />
+                </Grid>
+
+                <!--  17. exit-node dialMode, for freedom  -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="{StaticResource Margin4}"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource ToolbarTextBlock}"
+                        Text="{x:Static resx:ResUI.TbAetherExitDialMode}"
+                        TextWrapping="Wrap" />
+                    <TextBox
+                        x:Name="txtDialMode"
+                        Grid.Column="1"
+                        Width="400"
+                        Margin="{StaticResource Margin4}"
+                        Style="{StaticResource DefTextBox}" />
+                </Grid>
+
+                <!--  18. Psiphon  -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="{StaticResource Margin4}"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource ToolbarTextBlock}"
+                        Text="{x:Static resx:ResUI.TbAetherPsiphon}"
+                        TextWrapping="Wrap" />
+                    <ComboBox
+                        x:Name="cmbPsiphon"
+                        Grid.Column="1"
+                        Width="400"
+                        Margin="{StaticResource Margin4}"
+                        Style="{StaticResource DefComboBox}" />
+                </Grid>
+
+                <!--  19. No Psiphon client in the core folder  -->
+                <Grid x:Name="rowPsiphonUnavailable">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="1"
+                        Width="400"
+                        Margin="{StaticResource Margin4}"
+                        Foreground="IndianRed"
+                        Style="{StaticResource ToolbarTextBlock}"
+                        Text="{x:Static resx:ResUI.MsgAetherPsiphonUnavailable}"
+                        TextWrapping="Wrap" />
+                </Grid>
+
+                <!--  20. Psiphon connection  -->
+                <Grid x:Name="rowPsiphonMode">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="{StaticResource Margin4}"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource ToolbarTextBlock}"
+                        Text="{x:Static resx:ResUI.TbAetherPsiphonMode}"
+                        TextWrapping="Wrap" />
+                    <ComboBox
+                        x:Name="cmbPsiphonMode"
+                        Grid.Column="1"
+                        Width="400"
+                        Margin="{StaticResource Margin4}"
+                        Style="{StaticResource DefComboBox}" />
+                </Grid>
+
+                <!--  21. CDN fronting IPs  -->
+                <Grid x:Name="rowPsiphonCdnIps">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="{StaticResource Margin4}"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource ToolbarTextBlock}"
+                        Text="{x:Static resx:ResUI.TbAetherPsiphonCdnIps}"
+                        TextWrapping="Wrap" />
+                    <TextBox
+                        x:Name="txtPsiphonCdnIps"
+                        Grid.Column="1"
+                        Width="400"
+                        Margin="{StaticResource Margin4}"
+                        materialDesign:HintAssist.Hint="{x:Static resx:ResUI.TbAetherPsiphonListHint}"
+                        Style="{StaticResource DefTextBox}" />
+                </Grid>
+
+                <!--  22. CDN fronting server names, beside IPs of one's own  -->
+                <Grid x:Name="rowPsiphonCdnSni">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="{StaticResource Margin4}"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource ToolbarTextBlock}"
+                        Text="{x:Static resx:ResUI.TbAetherPsiphonCdnSni}"
+                        TextWrapping="Wrap" />
+                    <TextBox
+                        x:Name="txtPsiphonCdnSni"
+                        Grid.Column="1"
+                        Width="400"
+                        Margin="{StaticResource Margin4}"
+                        materialDesign:HintAssist.Hint="{x:Static resx:ResUI.TbAetherPsiphonListHint}"
+                        Style="{StaticResource DefTextBox}" />
+                </Grid>
+
+                <!--  23. CDN edge lists to scan, folded behind a line that names the choice  -->
+                <Grid x:Name="rowPsiphonCdnSets">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="4,16,4,4"
+                        VerticalAlignment="Top"
+                        Style="{StaticResource ToolbarTextBlock}"
+                        Text="{x:Static resx:ResUI.TbAetherPsiphonCdnSets}"
+                        TextWrapping="Wrap" />
+                    <Expander
+                        x:Name="expPsiphonCdnSets"
+                        Grid.Column="1"
+                        Width="400"
+                        Margin="{StaticResource Margin4}"
+                        HorizontalAlignment="Left">
+                        <Expander.Header>
+                            <TextBlock
+                                x:Name="txtPsiphonCdnSetsSummary"
+                                Style="{StaticResource ToolbarTextBlock}"
+                                TextWrapping="Wrap" />
+                        </Expander.Header>
+                        <StackPanel>
+                            <TextBlock
+                                Margin="{StaticResource Margin4}"
+                                Opacity="0.7"
+                                Style="{StaticResource ToolbarTextBlock}"
+                                Text="{x:Static resx:ResUI.TbAetherPsiphonCdnSetsHint}"
+                                TextWrapping="Wrap" />
+                            <ItemsControl x:Name="lstPsiphonCdnSets">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <CheckBox
+                                            Margin="{StaticResource Margin4}"
+                                            Content="{Binding Label}"
+                                            IsChecked="{Binding IsChecked, Mode=TwoWay}" />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </Expander>
+                </Grid>
+
+                <!--  24. Exit country  -->
+                <Grid x:Name="rowPsiphonRegion">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="{StaticResource Margin4}"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource ToolbarTextBlock}"
+                        Text="{x:Static resx:ResUI.TbAetherPsiphonRegion}"
+                        TextWrapping="Wrap" />
+                    <ComboBox
+                        x:Name="cmbPsiphonRegion"
+                        Grid.Column="1"
+                        Width="400"
+                        Margin="{StaticResource Margin4}"
+                        MaxDropDownHeight="1000"
+                        Style="{StaticResource DefComboBox}" />
+                </Grid>
+
+                <!--  25. Start from the bundled server list  -->
+                <Grid x:Name="rowPsiphonBundledList">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="{StaticResource Margin4}"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource ToolbarTextBlock}"
+                        Text="{x:Static resx:ResUI.TbAetherPsiphonBundledList}"
+                        TextWrapping="Wrap" />
+                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                        <ToggleButton
+                            x:Name="togPsiphonBundledList"
+                            Margin="{StaticResource Margin4}"
+                            HorizontalAlignment="Left" />
+                        <TextBlock
+                            Width="400"
+                            Margin="8,4,8,4"
+                            VerticalAlignment="Center"
+                            Style="{StaticResource ToolbarTextBlock}"
+                            Text="{x:Static resx:ResUI.TbAetherPsiphonBundledListHint}"
+                            TextWrapping="Wrap" />
+                    </StackPanel>
+                </Grid>
+
+                <!--  26. Clear Psiphon data, shared by every profile, only while no session runs on it  -->
+                <Grid x:Name="rowClearPsiphon">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="1">
+                        <Button
+                            x:Name="btnClearPsiphon"
+                            Margin="{StaticResource Margin4}"
+                            HorizontalAlignment="Left"
+                            Content="{x:Static resx:ResUI.TbAetherClearPsiphon}"
+                            Style="{StaticResource DefButton}" />
+                        <TextBlock
+                            Width="400"
+                            Margin="{StaticResource MarginLeftRight8}"
+                            HorizontalAlignment="Left"
+                            Opacity="0.7"
+                            Style="{StaticResource ToolbarTextBlock}"
+                            Text="{x:Static resx:ResUI.TbAetherClearPsiphonHint}"
+                            TextWrapping="Wrap" />
+                    </StackPanel>
+                </Grid>
+
+                <!--  27. Tor  -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="{StaticResource Margin4}"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource ToolbarTextBlock}"
+                        Text="{x:Static resx:ResUI.TbAetherTor}"
+                        TextWrapping="Wrap" />
+                    <ComboBox
+                        x:Name="cmbTor"
+                        Grid.Column="1"
+                        Width="400"
+                        Margin="{StaticResource Margin4}"
+                        Style="{StaticResource DefComboBox}" />
+                </Grid>
+
+                <!--  28. No pluggable transport in the core folder  -->
+                <Grid x:Name="rowTorTransportsUnavailable">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="1"
+                        Width="400"
+                        Margin="{StaticResource Margin4}"
+                        Foreground="IndianRed"
+                        Style="{StaticResource ToolbarTextBlock}"
+                        Text="{x:Static resx:ResUI.MsgAetherTorTransportsUnavailable}"
+                        TextWrapping="Wrap" />
+                </Grid>
+
+                <!--  29. Bridges  -->
+                <Grid x:Name="rowTorBridges">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="{StaticResource Margin4}"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource ToolbarTextBlock}"
+                        Text="{x:Static resx:ResUI.TbAetherTorBridges}"
+                        TextWrapping="Wrap" />
+                    <ComboBox
+                        x:Name="cmbTorBridges"
+                        Grid.Column="1"
+                        Width="400"
+                        Margin="{StaticResource Margin4}"
+                        Style="{StaticResource DefComboBox}" />
+                </Grid>
+
+                <!--  30. Bridge sources  -->
+                <Grid x:Name="rowTorRelays">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="{StaticResource Margin4}"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource ToolbarTextBlock}"
+                        Text="{x:Static resx:ResUI.TbAetherTorRelays}"
+                        TextWrapping="Wrap" />
+                    <ComboBox
+                        x:Name="cmbTorRelays"
+                        Grid.Column="1"
+                        Width="400"
+                        Margin="{StaticResource Margin4}"
+                        Style="{StaticResource DefComboBox}" />
+                </Grid>
+
+                <!--  31. Bridge lines of one's own  -->
+                <Grid x:Name="rowTorBridgeLines">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="{StaticResource Margin4}"
+                        VerticalAlignment="Top"
+                        Style="{StaticResource ToolbarTextBlock}"
+                        Text="{x:Static resx:ResUI.TbAetherTorBridgeLines}"
+                        TextWrapping="Wrap" />
+                    <TextBox
+                        x:Name="txtTorBridgeLines"
+                        Grid.Column="1"
+                        Width="400"
+                        Margin="{StaticResource Margin4}"
+                        materialDesign:HintAssist.Hint="{x:Static resx:ResUI.TbAetherTorBridgeLinesHint}"
+                        AcceptsReturn="True"
+                        HorizontalScrollBarVisibility="Auto"
+                        MaxLines="6"
+                        MinLines="3"
+                        Style="{StaticResource MyOutlinedTextBox}"
+                        TextWrapping="NoWrap"
+                        VerticalScrollBarVisibility="Auto" />
+                </Grid>
+
+                <!--  32/33. Outer and inner hop of a two-hop protocol  -->
+                <Grid x:Name="rowOuterHop">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="{StaticResource Margin4}"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource ToolbarTextBlock}"
+                        Text="{x:Static resx:ResUI.TbAetherOuterHop}"
+                        TextWrapping="Wrap" />
+                    <TextBox
+                        x:Name="txtWiwOuter"
+                        Grid.Column="1"
+                        Width="400"
+                        Margin="{StaticResource Margin4}"
+                        materialDesign:HintAssist.Hint="{x:Static resx:ResUI.TbAetherEndpointHint}"
+                        Style="{StaticResource DefTextBox}" />
+                </Grid>
+                <Grid x:Name="rowInnerHop">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="{StaticResource Margin4}"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource ToolbarTextBlock}"
+                        Text="{x:Static resx:ResUI.TbAetherInnerHop}"
+                        TextWrapping="Wrap" />
+                    <TextBox
+                        x:Name="txtWiwInner"
+                        Grid.Column="1"
+                        Width="400"
+                        Margin="{StaticResource Margin4}"
+                        Style="{StaticResource DefTextBox}" />
+                </Grid>
+
+                <!--  32'/33'. Address and port of a one-hop protocol: blank to scan  -->
+                <Grid x:Name="rowAddress">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="{StaticResource Margin4}"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource ToolbarTextBlock}"
+                        Text="{x:Static resx:ResUI.TbAddress}"
+                        TextWrapping="Wrap" />
+                    <TextBox
+                        x:Name="txtAddress"
+                        Grid.Column="1"
+                        Width="400"
+                        Margin="{StaticResource Margin4}"
+                        materialDesign:HintAssist.Hint="{x:Static resx:ResUI.TbAetherEndpointHint}"
+                        Style="{StaticResource DefTextBox}" />
+                </Grid>
+                <Grid x:Name="rowPort">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="{StaticResource Margin4}"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource ToolbarTextBlock}"
+                        Text="{x:Static resx:ResUI.TbPort}"
+                        TextWrapping="Wrap" />
+                    <TextBox
+                        x:Name="txtPort"
+                        Grid.Column="1"
+                        Width="200"
+                        Margin="{StaticResource Margin4}"
+                        HorizontalAlignment="Left"
+                        Style="{StaticResource DefTextBox}" />
+                </Grid>
+
+                <!--  34. IP version, just before the scan  -->
+                <Grid x:Name="rowIpVersion">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="{StaticResource Margin4}"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource ToolbarTextBlock}"
+                        Text="{x:Static resx:ResUI.TbAetherIpVersion}"
+                        TextWrapping="Wrap" />
+                    <ComboBox
+                        x:Name="cmbIpVersion"
+                        Grid.Column="1"
+                        Width="400"
+                        Margin="{StaticResource Margin4}"
+                        Style="{StaticResource DefComboBox}" />
+                </Grid>
+
+                <!--  35-38. Other settings, folded away unless one holds a value of its own  -->
+                <Expander
+                    x:Name="expOtherSettings"
+                    Margin="{StaticResource Margin4}"
+                    Header="{x:Static resx:ResUI.TbAetherOtherSettings}">
+                    <!--  296: the rows sit 4 px in, by the expander's Margin4 alone, so their fields start where every other field does (300)  -->
+                    <StackPanel>
+                        <Grid x:Name="rowDns">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="296" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                Grid.Column="0"
+                                Margin="{StaticResource Margin4}"
+                                VerticalAlignment="Center"
+                                Style="{StaticResource ToolbarTextBlock}"
+                                Text="{x:Static resx:ResUI.TbAetherDns}"
+                                TextWrapping="Wrap" />
+                            <TextBox
+                                x:Name="txtDns"
+                                Grid.Column="1"
+                                Width="400"
+                                Margin="{StaticResource Margin4}"
+                                materialDesign:HintAssist.Hint="{x:Static resx:ResUI.TbAetherDnsHint}"
+                                Style="{StaticResource DefTextBox}" />
+                        </Grid>
+                        <Grid x:Name="rowExitLoc">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="296" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                Grid.Column="0"
+                                Margin="{StaticResource Margin4}"
+                                VerticalAlignment="Center"
+                                Style="{StaticResource ToolbarTextBlock}"
+                                Text="{x:Static resx:ResUI.TbAetherExitLoc}"
+                                TextWrapping="Wrap" />
+                            <TextBox
+                                x:Name="txtExitLoc"
+                                Grid.Column="1"
+                                Width="400"
+                                Margin="{StaticResource Margin4}"
+                                materialDesign:HintAssist.Hint="{x:Static resx:ResUI.TbAetherExitLocHint}"
+                                Style="{StaticResource DefTextBox}" />
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="296" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                Grid.Column="0"
+                                Margin="{StaticResource Margin4}"
+                                VerticalAlignment="Center"
+                                Style="{StaticResource ToolbarTextBlock}"
+                                Text="{x:Static resx:ResUI.TbTargetStrategy}"
+                                TextWrapping="Wrap" />
+                            <ComboBox
+                                x:Name="cmbTargetStrategy"
+                                Grid.Column="1"
+                                Width="200"
+                                Margin="{StaticResource Margin4}"
+                                Style="{StaticResource DefComboBox}" />
+                        </Grid>
+                    </StackPanel>
+                </Expander>
+
+                <!--  39-41. Scan, after every setting it runs on  -->
+                <Grid x:Name="rowScan">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                        <Button
+                            x:Name="btnScan"
+                            MinWidth="160"
+                            Margin="{StaticResource Margin4}"
+                            Style="{StaticResource DefButton}" />
+                        <ProgressBar
+                            x:Name="barScanning"
+                            Width="20"
+                            Height="20"
+                            Margin="{StaticResource Margin4}"
+                            IsIndeterminate="True"
+                            Style="{StaticResource MaterialDesignCircularProgressBar}"
+                            Value="0" />
+                        <Button
+                            x:Name="btnCancelScan"
+                            Margin="{StaticResource Margin4}"
+                            Content="{x:Static resx:ResUI.TbCancel}"
+                            Style="{StaticResource DefButton}" />
+                    </StackPanel>
+                </Grid>
+                <Grid x:Name="rowScanBlocked">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="1"
+                        Width="400"
+                        Margin="{StaticResource Margin4}"
+                        Opacity="0.7"
+                        Style="{StaticResource ToolbarTextBlock}"
+                        Text="{x:Static resx:ResUI.MsgAetherScanBlocked}"
+                        TextWrapping="Wrap" />
+                </Grid>
+                <Grid x:Name="rowCoreUnavailable">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="1"
+                        Width="400"
+                        Margin="{StaticResource Margin4}"
+                        Foreground="IndianRed"
+                        Style="{StaticResource ToolbarTextBlock}"
+                        Text="{x:Static resx:ResUI.MsgAetherCoreUnavailable}"
+                        TextWrapping="Wrap" />
+                </Grid>
+
+                <Separator Margin="0,2" Style="{DynamicResource MaterialDesignSeparator}" />
+
+                <!--  42. The command the core is started with, built from the settings above and open to a hand  -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="{StaticResource Margin4}"
+                        VerticalAlignment="Top"
+                        Style="{StaticResource ToolbarTextBlock}"
+                        Text="{x:Static resx:ResUI.TbAetherCommand}"
+                        TextWrapping="Wrap" />
+                    <StackPanel Grid.Column="1">
+                        <TextBox
+                            x:Name="txtCommand"
+                            Width="500"
+                            Margin="{StaticResource Margin4}"
+                            HorizontalAlignment="Left"
+                            AcceptsReturn="True"
+                            FontFamily="Consolas, Courier New"
+                            MaxLines="8"
+                            MinLines="3"
+                            Style="{StaticResource MyOutlinedTextBox}"
+                            TextWrapping="Wrap"
+                            VerticalScrollBarVisibility="Auto" />
+                        <StackPanel x:Name="panelCommandCustom">
+                            <TextBlock
+                                Width="500"
+                                Margin="{StaticResource MarginLeftRight8}"
+                                HorizontalAlignment="Left"
+                                Style="{StaticResource ToolbarTextBlock}"
+                                Text="{x:Static resx:ResUI.TbAetherCommandCustom}"
+                                TextWrapping="Wrap" />
+                            <Button
+                                x:Name="btnUseSettings"
+                                Margin="{StaticResource Margin4}"
+                                HorizontalAlignment="Left"
+                                Content="{x:Static resx:ResUI.TbAetherUseSettings}"
+                                Style="{StaticResource DefButton}" />
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+
+                <!--  43. Log  -->
+                <!--  As wide as the label column and the command box: inside the horizontal ScrollViewer a log without a width of its own would take the width of its longest line and never wrap  -->
+                <views:AetherLogPanel
+                    x:Name="logPanel"
+                    Width="808"
+                    Margin="{StaticResource Margin4}"
+                    HorizontalAlignment="Left" />
+            </StackPanel>
+        </ScrollViewer>
+    </DockPanel>
+</base:WindowBase>

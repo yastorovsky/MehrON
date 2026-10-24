@@ -1,0 +1,27 @@
+<UserControl
+    x:Class="v2rayN.Desktop.Views.ExitNodeField"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vms="clr-namespace:ServiceLib.ViewModels;assembly=ServiceLib"
+    d:DesignWidth="420"
+    x:DataType="vms:ExitNodeFieldViewModel"
+    mc:Ignorable="d">
+    <!--  PattN: the exit-node of an Aether core, freedom or a profile by its name, with what the name comes to under it (design 3.2.2 row 15)  -->
+    <StackPanel>
+        <ComboBox
+            x:Name="cmbNode"
+            Width="400"
+            Margin="{StaticResource Margin4}"
+            HorizontalAlignment="Left"
+            MaxDropDownHeight="1000" />
+        <TextBlock
+            x:Name="txtSupporting"
+            Width="400"
+            Margin="{StaticResource MarginLr8}"
+            HorizontalAlignment="Left"
+            IsVisible="False"
+            TextWrapping="Wrap" />
+    </StackPanel>
+</UserControl>

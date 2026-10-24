@@ -25,7 +25,7 @@ public record CoreConfigContextBuilderAllResult(
         [.. MainResult.ValidatorResult.Warnings, .. PreSocksResult?.ValidatorResult.Warnings ?? []]);
 }
 
-public class CoreConfigContextBuilder
+public partial class CoreConfigContextBuilder
 {
     /// <summary>
     ///     Builds a <see cref="CoreConfigContext" /> for the given node, resolves its proxy map,
@@ -446,6 +446,11 @@ public class CoreConfigContextBuilder
         var (groupChildList, _) = await GroupProfileManager.GetChildProfileItems(node);
         List<string> childIndexIdList = [];
         var childNodeValidatorResult = NodeValidatorResult.Empty();
+        if (SettleAetherChildren(context, node, groupChildList, childIndexIdList, childNodeValidatorResult) is { } aetherRefusal)
+        {
+            childNodeValidatorResult.Errors.Add(aetherRefusal);
+            return childNodeValidatorResult;
+        }
         foreach (var childNode in groupChildList)
         {
             if (ancestorsGroup.Contains(childNode.IndexId))

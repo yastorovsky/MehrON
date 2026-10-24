@@ -44,6 +44,10 @@ public partial class CoreConfigV2rayService(CoreConfigContext context)
                 return ret;
             }
 
+            // PattN: the ECH outbounds of this config are collected while its outbounds are built
+            context.EchOutbounds.Clear();
+            // PattN: and so are its Aether outbounds
+            context.Aether.Reset();
             GenLog();
 
             GenInbounds();
@@ -67,6 +71,15 @@ public partial class CoreConfigV2rayService(CoreConfigContext context)
                 }
             }
 
+            // PattN: what the Aether core sends out leaves through Xray; after GenDns, whose proxy strategies the
+            // exit-node must not get
+            var aetherError = GenAether(AetherPorts.SecondarySocksPortOf(AetherListenPort), forTest: false);
+            if (aetherError != null)
+            {
+                ret.Msg = aetherError;
+                return ret;
+            }
+
             GenStatistic();
 
             if (_config.CoreBasicItem.EnableFragment)
@@ -84,9 +97,25 @@ public partial class CoreConfigV2rayService(CoreConfigContext context)
                 _coreConfig.routing.rules.Add(finalRule);
             }
 
+            var coreConfigContent = ApplyFinalConfigModifiers();
+            // PattN: the ECH outbounds go after every other outbound
+            var echOutboundError = AppendEchOutbounds(ref coreConfigContent);
+            if (echOutboundError != null)
+            {
+                ret.Msg = echOutboundError;
+                return ret;
+            }
+            // PattN: an inbound on a port of the Aether core, a full configuration template's among them
+            var aetherConfigError = CheckAetherConfig(coreConfigContent);
+            if (aetherConfigError != null)
+            {
+                ret.Msg = aetherConfigError;
+                return ret;
+            }
+
             ret.Msg = string.Format(ResUI.SuccessfulConfiguration, "");
             ret.Success = true;
-            ret.Data = ApplyFinalConfigModifiers();
+            ret.Data = coreConfigContent;
             return ret;
         }
         catch (Exception ex)
@@ -121,6 +150,10 @@ public partial class CoreConfigV2rayService(CoreConfigContext context)
 
             var (lstIpEndPoints, lstTcpConns) = Utils.GetActiveNetworkInfo();
 
+            // PattN: the ECH outbounds of this config are collected while its outbounds are built
+            context.EchOutbounds.Clear();
+            // PattN: and so are its Aether outbounds
+            context.Aether.Reset();
             GenLog();
             _coreConfig.inbounds.Clear();
             _coreConfig.outbounds.Clear();
@@ -131,6 +164,11 @@ public partial class CoreConfigV2rayService(CoreConfigContext context)
             foreach (var it in selecteds)
             {
                 if (!(Global.XraySupportConfigType.Contains(it.ConfigType) || it.ConfigType.IsGroupType() || it.ConfigType is EConfigType.Outbound))
+                {
+                    continue;
+                }
+                // PattN: an Aether profile needs a core of its own on the Aether listen port, so its test runs alone
+                if (it.ConfigType == EConfigType.Aether)
                 {
                     continue;
                 }
@@ -154,6 +192,11 @@ public partial class CoreConfigV2rayService(CoreConfigContext context)
                         continue;
                     }
                     if (lstTcpConns?.FindIndex(_it => _it.LocalEndPoint.Port == k) >= 0)
+                    {
+                        continue;
+                    }
+                    // PattN: never a port the Aether core may take: the session's or a latency test's core may need it
+                    if (AetherPorts.IsReserved(k, AetherListenPort))
                     {
                         continue;
                     }
@@ -191,6 +234,14 @@ public partial class CoreConfigV2rayService(CoreConfigContext context)
                 //outbound
                 var proxyOutbounds =
                     new CoreConfigV2rayService(context with { Node = item }).BuildAllProxyOutbounds(tag);
+                // PattN: a group or a chain that dials an Aether core is tested on its own, with its core (design
+                // 2.12.1); one left in the batch is not tested rather than dial a core that is not there
+                if (proxyOutbounds.Any(context.Aether.IsAetherOutbound))
+                {
+                    _coreConfig.inbounds.Remove(inbound);
+                    it.AllowTest = false;
+                    continue;
+                }
                 _coreConfig.outbounds.AddRange(proxyOutbounds);
                 if (proxyOutbounds.Count(n => n.tag.StartsWith(tag)) > 1)
                 {
@@ -214,6 +265,8 @@ public partial class CoreConfigV2rayService(CoreConfigContext context)
                 }
                 _coreConfig.routing.rules.Add(rule);
             }
+            // PattN: a test has no DNS, so the Aether outbounds pass every name on
+            TrimAetherOutboundsForTest();
 
             if (_config.CoreBasicItem.EnableFragment)
             {
@@ -225,9 +278,18 @@ public partial class CoreConfigV2rayService(CoreConfigContext context)
             }
             ApplyOutboundBindInterface();
             ApplyOutboundSendThrough();
+            var coreConfigContent = ApplyCustomOutboundReplace();
+            // PattN: the ECH outbounds go after every other outbound
+            var echOutboundError = AppendEchOutbounds(ref coreConfigContent);
+            if (echOutboundError != null)
+            {
+                ret.Msg = echOutboundError;
+                return ret;
+            }
+
             //ret.Msg =string.Format(ResUI.SuccessfulConfiguration"), node.getSummary());
             ret.Success = true;
-            ret.Data = ApplyCustomOutboundReplace();
+            ret.Data = coreConfigContent;
             return ret;
         }
         catch (Exception ex)
@@ -270,6 +332,10 @@ public partial class CoreConfigV2rayService(CoreConfigContext context)
                 return ret;
             }
 
+            // PattN: the ECH outbounds of this config are collected while its outbounds are built
+            context.EchOutbounds.Clear();
+            // PattN: and so are its Aether outbounds
+            context.Aether.Reset();
             GenLog();
             GenOutbounds();
 
@@ -291,6 +357,21 @@ public partial class CoreConfigV2rayService(CoreConfigContext context)
 
             _coreConfig.routing.rules.Add(BuildFinalRule());
 
+            // PattN: a test has no DNS (one bound to the uplink has its own, D2-3), so the Aether outbounds pass every
+            // name on. A test whose own core the tester starts (it picks the secondary port) routes that core through
+            // this Xray, after the inbounds and rules of the session were cleared; one that measures through the live
+            // session's core leaves its routing to the session's Xray, and is refused for what one core cannot serve all
+            // the same.
+            TrimAetherOutboundsForTest();
+            var aetherError = context.Aether.SecondaryPort is { } secondaryPort
+                ? GenAether(secondaryPort, forTest: true)
+                : CheckAether();
+            if (aetherError != null)
+            {
+                ret.Msg = aetherError;
+                return ret;
+            }
+
             if (_config.CoreBasicItem.EnableFragment)
             {
                 ApplyOutboundFragment();
@@ -299,12 +380,30 @@ public partial class CoreConfigV2rayService(CoreConfigContext context)
             {
                 ApplyFinalFragment();
             }
+            // PattN: the Xray of an Aether latency test bound to the uplink under a TUN looks names up by its own DNS (D2-3)
+            LookUpNamesByUplink();
             ApplyOutboundBindInterface();
             ApplyOutboundSendThrough();
 
+            var coreConfigContent = ApplyCustomOutboundReplace();
+            // PattN: the ECH outbounds go after every other outbound
+            var echOutboundError = AppendEchOutbounds(ref coreConfigContent);
+            if (echOutboundError != null)
+            {
+                ret.Msg = echOutboundError;
+                return ret;
+            }
+            // PattN: the test inbound on a port of the Aether core
+            var aetherPortError = CheckAetherConfig(coreConfigContent);
+            if (aetherPortError != null)
+            {
+                ret.Msg = aetherPortError;
+                return ret;
+            }
+
             ret.Msg = string.Format(ResUI.SuccessfulConfiguration, "");
             ret.Success = true;
-            ret.Data = ApplyCustomOutboundReplace();
+            ret.Data = coreConfigContent;
             return ret;
         }
         catch (Exception ex)

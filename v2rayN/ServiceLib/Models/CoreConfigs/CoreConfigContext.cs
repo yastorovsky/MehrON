@@ -31,4 +31,5 @@ public record CoreConfigContext
 
     // Generation Context
     public Dictionary<object, string> CustomOutboundMap { get; init; } = new();
+    public AetherBuild Aether { get; init; } = new();
 }

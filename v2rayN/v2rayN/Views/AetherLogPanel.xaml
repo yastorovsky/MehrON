@@ -1,0 +1,72 @@
+<reactiveui:ReactiveUserControl
+    x:Class="v2rayN.Views.AetherLogPanel"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:reactiveui="http://reactiveui.net"
+    xmlns:resx="clr-namespace:ServiceLib.Resx;assembly=ServiceLib"
+    xmlns:vms="clr-namespace:ServiceLib.ViewModels;assembly=ServiceLib"
+    d:DesignWidth="700"
+    x:TypeArguments="vms:AetherLogViewModel"
+    mc:Ignorable="d">
+    <!--  PattN: the log of an Aether page, newest last, with a button that copies it (design 3.2.2 row 43)  -->
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Top">
+            <Button
+                x:Name="btnCopy"
+                Margin="{StaticResource Margin4}"
+                Content="{x:Static resx:ResUI.menuEditCopy}"
+                DockPanel.Dock="Right"
+                Style="{StaticResource DefButton}" />
+            <TextBlock
+                Margin="{StaticResource Margin4}"
+                VerticalAlignment="Center"
+                Style="{StaticResource ModuleTitle}"
+                Text="{x:Static resx:ResUI.TbAetherLog}" />
+        </DockPanel>
+        <Border
+            Height="280"
+            Margin="{StaticResource Margin4}"
+            BorderBrush="{DynamicResource MaterialDesignDivider}"
+            BorderThickness="1"
+            CornerRadius="4">
+            <Grid>
+                <ListBox
+                    x:Name="lstLog"
+                    materialDesign:ScrollViewerAssist.IsAutoHideEnabled="True"
+                    FontFamily="Consolas, Courier New"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Text}" TextWrapping="Wrap">
+                                <TextBlock.Style>
+                                    <Style BasedOn="{StaticResource ToolbarTextBlock}" TargetType="{x:Type TextBlock}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsOutput}" Value="True">
+                                                <Setter Property="Opacity" Value="0.7" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding IsWarning}" Value="True">
+                                                <Setter Property="Foreground" Value="DarkOrange" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding IsError}" Value="True">
+                                                <Setter Property="Foreground" Value="IndianRed" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <TextBlock
+                    x:Name="txtEmpty"
+                    Margin="12"
+                    Opacity="0.7"
+                    Style="{StaticResource ToolbarTextBlock}"
+                    TextWrapping="Wrap" />
+            </Grid>
+        </Border>
+    </DockPanel>
+</reactiveui:ReactiveUserControl>

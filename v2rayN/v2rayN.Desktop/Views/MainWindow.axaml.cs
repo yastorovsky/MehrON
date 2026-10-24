@@ -56,6 +56,7 @@ public partial class MainWindow : WindowBase<MainWindowViewModel>
             this.BindCommand(ViewModel, vm => vm.AddAnytlsServerCmd, v => v.menuAddAnytlsServer).DisposeWith(disposables);
             this.BindCommand(ViewModel, vm => vm.AddNaiveServerCmd, v => v.menuAddNaiveServer).DisposeWith(disposables);
             this.BindCommand(ViewModel, vm => vm.AddAetherServerCmd, v => v.menuAddAetherServer).DisposeWith(disposables);
+            this.BindCommand(ViewModel, vm => vm.AetherKeysCmd, v => v.menuAetherKeys).DisposeWith(disposables);
             this.BindCommand(ViewModel, vm => vm.AddPsiphonServerCmd, v => v.menuAddPsiphonServer).DisposeWith(disposables);
             this.BindCommand(ViewModel, vm => vm.AddCustomServerCmd, v => v.menuAddCustomServer).DisposeWith(disposables);
             this.BindCommand(ViewModel, vm => vm.AddCustomOutboundServerCmd, v => v.menuAddCustomOutboundServer).DisposeWith(disposables);

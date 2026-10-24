@@ -43,6 +43,7 @@
                         <MenuItem x:Name="menuAddServerViaImage" Header="{x:Static resx:ResUI.menuAddServerViaImage}" />
                         <Separator />
                         <MenuItem x:Name="menuAddAetherServer" Header="{x:Static resx:ResUI.menuAddAetherServer}" />
+                        <MenuItem x:Name="menuAetherKeys" Header="{x:Static resx:ResUI.TbAetherRenewKey}" />
                         <MenuItem x:Name="menuAddPsiphonServer" Header="{x:Static resx:ResUI.menuAddPsiphonServer}" />
                         <MenuItem x:Name="menuAddCustomServer" Header="{x:Static resx:ResUI.menuAddCustomServer}" />
                         <MenuItem x:Name="menuAddPolicyGroupServer" Header="{x:Static resx:ResUI.menuAddPolicyGroupServer}" />

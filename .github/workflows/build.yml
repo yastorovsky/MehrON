@@ -197,7 +197,7 @@ jobs:
           # Download latest Aether
           Write-Host "Downloading latest Aether..."
           $aetherZip = "aether-latest.zip"
-          curl.exe -L -s -o $aetherZip "https://github.com/CluvexStudio/Aether/releases/latest/download/aether-windows-x86_64.zip"
+          curl.exe -L -s -o $aetherZip "https://github.com/patterniha/Aether/releases/latest/download/aether-windows-x86_64.zip"
           Expand-Archive -Path $aetherZip -DestinationPath "aether-extracted" -Force
           $aetherExe = Get-ChildItem -Path "aether-extracted" -Recurse -Filter "aether.exe" | Select-Object -First 1
           if ($aetherExe) {
@@ -399,7 +399,7 @@ jobs:
 
           # Download latest Aether (Linux x86_64)
           echo "Downloading latest Aether..."
-          curl -fsSL "https://github.com/CluvexStudio/Aether/releases/latest/download/aether-linux-x86_64.tar.gz" -o aether.tar.gz
+          curl -fsSL "https://github.com/patterniha/Aether/releases/latest/download/aether-linux-x86_64-musl.tar.gz" -o aether.tar.gz
           mkdir -p aether-extracted
           tar -xzf aether.tar.gz -C aether-extracted
           aetherExe=$(find aether-extracted -type f -name "aether" | head -n 1)

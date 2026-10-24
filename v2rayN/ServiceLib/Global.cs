@@ -61,6 +61,8 @@ public class Global
     public const string DnsTag = "dns-module";
     public const string DirectDnsTag = "direct-dns";
     public const string BalancerTagSuffix = "-balancer";
+    public const string AetherSecondarySocksTag = "secondary-socks";
+    public const string AetherExitNodeTag = "exit-node";
     public const string StreamSecurity = "tls";
     public const string StreamSecurityReality = "reality";
     public const string Loopback = "127.0.0.1";
@@ -267,6 +269,7 @@ public class Global
         { EConfigType.WireGuard, "wireguard" },
         { EConfigType.Anytls, "anytls" },
         { EConfigType.Naive, "naive" }
+            { EConfigType.Aether, "socks" },
     };
 
     public static readonly List<string> VmessSecurities =
@@ -687,12 +690,26 @@ public class Global
         { ECoreType.overtls, "ShadowsocksR-Live/overtls" },
         { ECoreType.shadowquic, "spongebob888/shadowquic" },
         { ECoreType.mieru, "enfein/mieru" },
-        { ECoreType.aether, "CluvexStudio/Aether" },
+        { ECoreType.aether, "patterniha/Aether" },
         { ECoreType.psiphon, "shirokhorshid/psiphon-tunnel-core" },
         { ECoreType.v2rayN, "yastorovsky/MehrON" },
     };
 
-    public static readonly List<string> OtherGeoUrls =
+        public static readonly List<string> AetherEchDnsOptions =
+    [
+        "udp://1.1.1.1",
+        "tcp://1.1.1.1",
+        "https://1.1.1.1/dns-query",
+        "https://dns.google/dns-query",
+    ];
+
+    public static readonly List<string> AetherEchDomainOptions =
+    [
+        "cloudflare-ech.com",
+        "crypto.cloudflare.com",
+    ];
+
+public static readonly List<string> OtherGeoUrls =
     [
         @"https://raw.githubusercontent.com/Loyalsoldier/geoip/release/geoip-only-cn-private.dat",
         @"https://raw.githubusercontent.com/Loyalsoldier/geoip/release/Country.mmdb",

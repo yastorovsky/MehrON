@@ -3,6 +3,7 @@ namespace ServiceLib.Models.Configs;
 [Serializable]
 public class CoreBasicItem
 {
+    public int? AetherListenPort { get; set; }
     public bool LogEnabled { get; set; }
 
     public string Loglevel { get; set; }

@@ -143,6 +143,7 @@ public sealed class AppManager
             await StatisticsManager.Instance.SaveTo();
             await CoreManager.Instance.CoreStop();
             await SniSpoofingManager.Instance.StopAsync();
+            await AetherCoreManager.Instance.StopAllAsync();
             StatisticsManager.Instance.Close();
 
             Logging.SaveLog("AppExitAsync End");
@@ -292,6 +293,19 @@ public sealed class AppManager
         return ids.Select(itemMap.GetValueOrDefault)
             .Where(item => item != null)
             .ToList();
+    }
+
+        public async Task<List<ProfileItem>> GetProfileItemsViaRemarksAsync(string? name)
+    {
+        var wanted = KotlinText.TrimOrNull(name) ?? string.Empty;
+        if (wanted.Length == 0)
+        {
+            return [];
+        }
+        var candidates = await SQLiteHelper.Instance.TableAsync<ProfileItem>()
+            .Where(it => it.Remarks.Contains(wanted))
+            .ToListAsync();
+        return candidates.Where(it => KotlinText.Trim(it.Remarks ?? string.Empty) == wanted).ToList();
     }
 
     public async Task<ProfileItem?> GetProfileItemViaRemarks(string? remarks)

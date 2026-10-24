@@ -1,110 +1,52 @@
-<?xml version="1.0" encoding="utf-8"?>
-<root>
-  <!--
-    Microsoft ResX Schema
-
-    Version 2.0
-
-    The primary goals of this format is to allow a simple XML format
-    that is mostly human readable. The generation and parsing of the
-    various data types are done through the TypeConverter classes
-    associated with the data types.
-
-    Example:
-
-    ... ado.net/XML headers & schema ...
-    <resheader name="resmimetype">text/microsoft-resx</resheader>
-    <resheader name="version">2.0</resheader>
-    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
-    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
-    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
-    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-        <value>[base64 mime encoded serialized .NET Framework object]</value>
-    </data>
-    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
-        <comment>This is a comment</comment>
-    </data>
-
-    There are any number of "resheader" rows that contain simple
-    name/value pairs.
-
-    Each data row contains a name, and value. The row also contains a
-    type or mimetype. Type corresponds to a .NET class that support
-    text/value conversion through the TypeConverter architecture.
-    Classes that don't support this are serialized and stored with the
-    mimetype set.
-
-    The mimetype is used for serialized objects, and tells the
-    ResXResourceReader how to depersist the object. This is currently not
-    extensible. For a given mimetype the value must be set accordingly:
-
-    Note - application/x-microsoft.net.object.binary.base64 is the format
-    that the ResXResourceWriter will generate, however the reader can
-    read any of the formats listed below.
-
-    mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with
-            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
-            : and then encoded with base64 encoding.
-
-    mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with
-            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-            : and then encoded with base64 encoding.
-
-    mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array
-            : using a System.ComponentModel.TypeConverter
-            : and then encoded with base64 encoding.
-    -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
+<?xml version='1.0' encoding='utf-8'?>
+<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  
+  <xs:schema id="root">
+    <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xs:element name="root" ns1:IsDataSet="true">
+      <xs:complexType>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element name="metadata">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" />
+              </xs:sequence>
+              <xs:attribute name="name" use="required" type="xsd:string" />
+              <xs:attribute name="type" type="xsd:string" />
+              <xs:attribute name="mimetype" type="xsd:string" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="assembly">
+            <xs:complexType>
+              <xs:attribute name="alias" type="xsd:string" />
+              <xs:attribute name="name" type="xsd:string" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="data">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+                <xs:element name="comment" type="xsd:string" minOccurs="0" ns1:Ordinal="2" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" ns1:Ordinal="1" />
+              <xs:attribute name="type" type="xsd:string" ns1:Ordinal="3" />
+              <xs:attribute name="mimetype" type="xsd:string" ns1:Ordinal="4" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="resheader">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" />
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -2069,5 +2011,659 @@ The "Get Certificate" action may fail if a self-signed certificate is used or if
   </data>
   <data name="TbPleaseSelectProfile" xml:space="preserve">
     <value>Please select a server profile</value>
+  </data>
+<data name="menuCheckAndUpdate" xml:space="preserve">
+    <value>Check and Update</value>
+  </data>
+  <data name="TbEchOutbound" xml:space="preserve">
+    <value>EchOutbound</value>
+  </data>
+  <data name="MsgEchOutboundNeedsEchConfigList" xml:space="preserve">
+    <value>EchOutbound requires EchConfigList</value>
+  </data>
+  <data name="MsgEchOutboundInvalidTag" xml:space="preserve">
+    <value>EchOutbound needs a "tag" that is not empty, not direct or block, and does not start with proxy</value>
+  </data>
+  <data name="MsgEchOutboundTagConflict" xml:space="preserve">
+    <value>The tag "{0}" of EchOutbound is already used by another outbound</value>
+  </data>
+  <data name="menuAddMasqueServer" xml:space="preserve">
+    <value>Add [MASQUE]</value>
+  </data>
+  <data name="MsgAetherConfigSingleProfile" xml:space="preserve">
+    <value>A configuration can use only one Aether profile</value>
+  </data>
+  <data name="MsgAetherConfigTwoExits" xml:space="preserve">
+    <value>One Aether core would have to dial out two ways here: the same tunnel is used on its own and behind a proxy chain's hop, behind two different hops, or with two different exit-node settings</value>
+  </data>
+  <data name="MsgAetherChainOneProfile" xml:space="preserve">
+    <value>A proxy chain can have only one Aether profile</value>
+  </data>
+  <data name="MsgAetherChainHopMissing" xml:space="preserve">
+    <value>The hop the Aether profile of this proxy chain dials out through could not be built, and the Aether core would reach the internet without it</value>
+  </data>
+  <data name="MsgAetherChainHopGroup" xml:space="preserve">
+    <value>The Aether profile of the proxy chain "{0}" would dial out through a policy group or a proxy chain; put a single profile on its entry side</value>
+  </data>
+  <data name="MsgAetherInGroupHop" xml:space="preserve">
+    <value>The Aether profile "{1}" is inside "{0}", which a proxy chain dials through; put the Aether profile in the chain itself</value>
+  </data>
+  <data name="MsgAetherChainHopDropped" xml:space="preserve">
+    <value>The proxy chain "{0}" holds an Aether profile and is built whole or not at all: "{1}" could not be used, and without it the chain would carry the traffic a shorter way than it names</value>
+  </data>
+  <data name="MsgAetherExitNodeNotFound" xml:space="preserve">
+    <value>No profile named "{0}" was found</value>
+  </data>
+  <data name="MsgAetherExitNodeDuplicate" xml:space="preserve">
+    <value>Two profiles named "{0}" were found; please rename one</value>
+  </data>
+  <data name="MsgAetherExitNodeUnusable" xml:space="preserve">
+    <value>The exit-node profile "{0}" gives no outbound; choose another one, or freedom</value>
+  </data>
+  <data name="MsgAetherExitNodeEchUnusable" xml:space="preserve">
+    <value>The echOutbound of the exit-node profile "{0}" cannot be used; fix it in that profile, or choose another one, or freedom</value>
+  </data>
+  <data name="MsgAetherListenPortTaken" xml:space="preserve">
+    <value>Port {0}, which the Aether core needs, is already used by the app itself, for example by its local proxy; change the Aether listen port in the settings, or the ports of the command</value>
+  </data>
+  <data name="MsgAetherSecondaryPortTaken" xml:space="preserve">
+    <value>An inbound of this configuration already listens on {0}, the port three above the Aether listen port, which the Aether core dials out through; change the Aether listen port in the settings</value>
+  </data>
+  <data name="MsgAetherGroupLeavesOut" xml:space="preserve">
+    <value>Policy group "{0}" leaves out "{1}": a second Aether profile with other settings, and one core serves one profile</value>
+  </data>
+  <data name="MsgAetherConnecting" xml:space="preserve">
+    <value>The Aether core is still connecting</value>
+  </data>
+  <data name="MsgAetherConnected" xml:space="preserve">
+    <value>The Aether core is connected</value>
+  </data>
+  <data name="MsgAetherCoreStopped" xml:space="preserve">
+    <value>The Aether core stopped running</value>
+  </data>
+  <data name="MsgAetherCoreStoppedNoEchKey" xml:space="preserve">
+    <value>The Aether core stopped: ECH is on, but no usable ECH key was found. Without one, the server name would have gone out in the clear.</value>
+  </data>
+  <data name="MsgAetherCoreStoppedWithError" xml:space="preserve">
+    <value>The Aether core stopped running: {0}</value>
+  </data>
+  <data name="MsgAetherCoreStoppedChainEnded" xml:space="preserve">
+    <value>Tor or Psiphon inside the Aether tunnel ended, so the connection was stopped: {0}</value>
+  </data>
+  <data name="MsgAetherCoreCannotStart" xml:space="preserve">
+    <value>The Aether core could not start. On Windows, an aether-core older than 2.3.2 needs the Microsoft Visual C++ 2015-2022 Redistributable (x64); update aether-core under Check Update</value>
+  </data>
+  <data name="MsgAetherTemplateExitNodeSelected" xml:space="preserve">
+    <value>A balancer or an observatory of this configuration picks the outbounds whose tags start with {0}, which would include exit-node, the outbound the Aether core dials out by; change that selector</value>
+  </data>
+  <data name="MsgAetherTestSkipped" xml:space="preserve">
+    <value>Untested: the running Aether profile holds the Aether listen port</value>
+  </data>
+  <data name="MsgPsiphonServersUpdated" xml:space="preserve">
+    <value>psiphon_servers updated: {0} servers, published {1}</value>
+  </data>
+  <data name="MsgPsiphonServersInvalid" xml:space="preserve">
+    <value>The downloaded psiphon_servers is not Psiphon's signed server list; the one in use stays</value>
+  </data>
+  <data name="MsgPsiphonServersCurrent" xml:space="preserve">
+    <value>psiphon_servers is already up to date ({0})</value>
+  </data>
+  <data name="TbSettingsAetherListenPort" xml:space="preserve">
+    <value>Aether listen port</value>
+  </data>
+  <data name="TbSettingsAetherListenPortTip" xml:space="preserve">
+    <value>The core also takes the three ports after it</value>
+  </data>
+  <data name="FillAetherListenPort" xml:space="preserve">
+    <value>Use a port from 1024 to 65532 for the Aether listen port</value>
+  </data>
+  <data name="MsgAetherListenPortLocalProxy" xml:space="preserve">
+    <value>The Aether listen port and the three ports after it cannot include the local ports of PattN: the mixed port and the six ports after it</value>
+  </data>
+  <data name="MsgAetherListenPortInUse" xml:space="preserve">
+    <value>Port {0}, which the Aether core listens on, is taken by another program or reserved by the system; change the Aether listen port in the settings, or the ports of the command</value>
+  </data>
+  <data name="MsgAetherSecondaryPortInUse" xml:space="preserve">
+    <value>Port {0}, three above the Aether listen port, which Xray opens for the Aether core to dial out through, is taken by another program or reserved by the system; change the Aether listen port in the settings</value>
+  </data>
+  <data name="MsgRoutingRuleChainHopNotBuilt" xml:space="preserve">
+    <value>"{0}" could not be built in the chain of its subscription</value>
+  </data>
+  <data name="MsgAetherListenPortInvalid" xml:space="preserve">
+    <value>The command of the Aether profile tells the core to listen on {0}, which is no port (1 to 65535); change the ports of the command</value>
+  </data>
+  <data name="MsgAetherListenAddressInvalid" xml:space="preserve">
+    <value>The command of the Aether profile gives {0} an address the core does not take; write an IP address and a port after it, such as 127.0.0.1:20808</value>
+  </data>
+  <data name="MsgAetherListenAddressUnreachable" xml:space="preserve">
+    <value>The command of the Aether profile gives {0} an address the app does not connect to: the app connects to the core on 127.0.0.1, so write 127.0.0.1, or 0.0.0.0 for every address, and a port after it</value>
+  </data>
+  <data name="MsgAetherListenPortShared" xml:space="preserve">
+    <value>The command of the Aether profile tells the core to listen on {0} with two of its listeners (a listener the command leaves out still listens: the one the app dials on the Aether listen port, any other on the core's default, 1819, 1820 or 1821); give each listener a port of its own</value>
+  </data>
+  <data name="MsgRoutingRuleTargetNotFound" xml:space="preserve">
+    <value>No profile named "{0}" was found</value>
+  </data>
+  <data name="MsgRoutingRuleTargetDuplicate" xml:space="preserve">
+    <value>Two profiles named "{0}" were found; please rename one</value>
+  </data>
+  <data name="MsgRoutingRuleTargetUnbuilt" xml:space="preserve">
+    <value>The profile "{0}", which a routing rule sends traffic to, could not be built; fix it, or turn off the rules that use it</value>
+  </data>
+  <data name="TbAetherRenewKey" xml:space="preserve">
+    <value>Get new WARP keys…</value>
+  </data>
+  <data name="TbAetherProtocol" xml:space="preserve">
+    <value>Protocol</value>
+  </data>
+  <data name="TbAetherTransport" xml:space="preserve">
+    <value>Transport</value>
+  </data>
+  <data name="TbAetherMasqueSni" xml:space="preserve">
+    <value>MASQUE SNI</value>
+  </data>
+  <data name="TbAetherFragment" xml:space="preserve">
+    <value>Fragment ClientHello</value>
+  </data>
+  <data name="TbAetherFragmentSize" xml:space="preserve">
+    <value>Fragment size (bytes)</value>
+  </data>
+  <data name="TbAetherFragmentDelay" xml:space="preserve">
+    <value>Fragment delay (ms)</value>
+  </data>
+  <data name="TbAetherEch" xml:space="preserve">
+    <value>Encrypted Client Hello</value>
+  </data>
+  <data name="TbAetherEchHint" xml:space="preserve">
+    <value>Hides the server name of the MASQUE handshake; without a usable key, Aether does not connect</value>
+  </data>
+  <data name="TbAetherEchDns" xml:space="preserve">
+    <value>ECH DNS</value>
+  </data>
+  <data name="TbAetherEchDomain" xml:space="preserve">
+    <value>ECH domain</value>
+  </data>
+  <data name="TbAetherScanMode" xml:space="preserve">
+    <value>Scan mode</value>
+  </data>
+  <data name="TbAetherScanTurbo" xml:space="preserve">
+    <value>Turbo</value>
+  </data>
+  <data name="TbAetherScanBalanced" xml:space="preserve">
+    <value>Balanced</value>
+  </data>
+  <data name="TbAetherScanThorough" xml:space="preserve">
+    <value>Thorough</value>
+  </data>
+  <data name="TbAetherScanVerified" xml:space="preserve">
+    <value>Verified</value>
+  </data>
+  <data name="TbAetherScanIronclad" xml:space="preserve">
+    <value>Ironclad</value>
+  </data>
+  <data name="TbAetherObfuscation" xml:space="preserve">
+    <value>Obfuscation</value>
+  </data>
+  <data name="TbAetherNoizeAuto" xml:space="preserve">
+    <value>Automatic</value>
+  </data>
+  <data name="TbAetherNoizeOff" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="TbAetherNoizeLight" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="TbAetherNoizeFirewall" xml:space="preserve">
+    <value>Firewall</value>
+  </data>
+  <data name="TbAetherNoizeBalanced" xml:space="preserve">
+    <value>Balanced</value>
+  </data>
+  <data name="TbAetherNoizeGfw" xml:space="preserve">
+    <value>GFW</value>
+  </data>
+  <data name="TbAetherNoizeAggressive" xml:space="preserve">
+    <value>Aggressive</value>
+  </data>
+  <data name="TbAetherFingerprint" xml:space="preserve">
+    <value>Fingerprint</value>
+  </data>
+  <data name="TbAetherIpVersion" xml:space="preserve">
+    <value>IP version</value>
+  </data>
+  <data name="TbAetherExitNode" xml:space="preserve">
+    <value>exit-node</value>
+  </data>
+  <data name="TbAetherExitNodeFreedom" xml:space="preserve">
+    <value>freedom (default)</value>
+  </data>
+  <data name="TbAetherExitNodeHint" xml:space="preserve">
+    <value>The core dials out through this profile's outbound, as through a hop of a proxy chain; finalMask and dialMode below are for freedom only</value>
+  </data>
+  <data name="TbAetherExitFinalMask" xml:space="preserve">
+    <value>exit-node finalMask raw JSON, format: { FinalMaskObject }</value>
+  </data>
+  <data name="TbAetherExitDialMode" xml:space="preserve">
+    <value>exit-node dialMode</value>
+  </data>
+  <data name="TbLabelNumbered" xml:space="preserve">
+    <value>{0} ({1})</value>
+  </data>
+  <data name="TbAetherPsiphon" xml:space="preserve">
+    <value>Psiphon</value>
+  </data>
+  <data name="TbAetherPsiphonOff" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="TbAetherPsiphonChain" xml:space="preserve">
+    <value>WARP → Psiphon</value>
+  </data>
+  <data name="TbAetherPsiphonReverse" xml:space="preserve">
+    <value>Psiphon → WARP</value>
+  </data>
+  <data name="TbAetherPsiphonOnly" xml:space="preserve">
+    <value>Psiphon only</value>
+  </data>
+  <data name="TbAetherTor" xml:space="preserve">
+    <value>Tor</value>
+  </data>
+  <data name="TbAetherTorOff" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="TbAetherTorChain" xml:space="preserve">
+    <value>WARP → Tor</value>
+  </data>
+  <data name="TbAetherTorReverse" xml:space="preserve">
+    <value>Tor → WARP</value>
+  </data>
+  <data name="TbAetherTorOnly" xml:space="preserve">
+    <value>Tor only</value>
+  </data>
+  <data name="TbAetherPsiphonMode" xml:space="preserve">
+    <value>Psiphon connection</value>
+  </data>
+  <data name="TbAetherPsiphonModeAuto" xml:space="preserve">
+    <value>Automatic</value>
+  </data>
+  <data name="TbAetherPsiphonModeCdn" xml:space="preserve">
+    <value>CDN fronting only</value>
+  </data>
+  <data name="TbAetherPsiphonModeDirect" xml:space="preserve">
+    <value>Direct only</value>
+  </data>
+  <data name="TbAetherPsiphonCdnIps" xml:space="preserve">
+    <value>CDN fronting IPs</value>
+  </data>
+  <data name="TbAetherPsiphonCdnSni" xml:space="preserve">
+    <value>CDN fronting server names</value>
+  </data>
+  <data name="TbAetherPsiphonListHint" xml:space="preserve">
+    <value>Comma-separated; leave blank for the built-in list</value>
+  </data>
+  <data name="TbAetherPsiphonCdnSets" xml:space="preserve">
+    <value>CDN edge lists to scan</value>
+  </data>
+  <data name="TbAetherPsiphonCdnSetsAll" xml:space="preserve">
+    <value>All lists built into Psiphon</value>
+  </data>
+  <data name="TbAetherPsiphonCdnSetsHint" xml:space="preserve">
+    <value>Which of the edge lists built into Psiphon the fronting scan tries. None checked means all of them; beside IPs of your own they are tried after those</value>
+  </data>
+  <data name="TbAetherCdnSetCloudflare" xml:space="preserve">
+    <value>Cloudflare</value>
+  </data>
+  <data name="TbAetherCdnSetFastly" xml:space="preserve">
+    <value>Fastly</value>
+  </data>
+  <data name="TbAetherCdnSetCloudfront" xml:space="preserve">
+    <value>CloudFront</value>
+  </data>
+  <data name="TbAetherCdnSetAkamai" xml:space="preserve">
+    <value>Akamai (Psiphon list)</value>
+  </data>
+  <data name="TbAetherCdnSetBunny" xml:space="preserve">
+    <value>Bunny (Psiphon list)</value>
+  </data>
+  <data name="TbAetherCdnSetVercel" xml:space="preserve">
+    <value>Vercel</value>
+  </data>
+  <data name="TbAetherCdnSetGithub" xml:space="preserve">
+    <value>GitHub</value>
+  </data>
+  <data name="TbAetherCdnSetCurated" xml:space="preserve">
+    <value>Curated fronting edges</value>
+  </data>
+  <data name="TbAetherCdnSetLegacy" xml:space="preserve">
+    <value>Legacy Android overrides</value>
+  </data>
+  <data name="TbAetherPsiphonRegion" xml:space="preserve">
+    <value>Exit country</value>
+  </data>
+  <data name="TbAetherPsiphonRegionAny" xml:space="preserve">
+    <value>Any country</value>
+  </data>
+  <data name="TbAetherPsiphonBundledList" xml:space="preserve">
+    <value>Start from the bundled server list</value>
+  </data>
+  <data name="TbAetherPsiphonBundledListHint" xml:space="preserve">
+    <value>On: Psiphon dials the servers in psiphon_servers.dat at once and fetches a fresh list only when they fail. Off: it fetches a fresh list before its first connection, so the list must be reachable, as it is behind WARP</value>
+  </data>
+  <data name="TbAetherClearPsiphon" xml:space="preserve">
+    <value>Clear Psiphon data</value>
+  </data>
+  <data name="TbAetherClearPsiphonHint" xml:space="preserve">
+    <value>Forgets the servers Psiphon has learned and the lists it fetched. Its next start begins from the bundled list again, or from a fresh download when the switch above is off</value>
+  </data>
+  <data name="TbAetherTorBridges" xml:space="preserve">
+    <value>Bridges</value>
+  </data>
+  <data name="TbAetherTorBridgesAuto" xml:space="preserve">
+    <value>When Tor is blocked</value>
+  </data>
+  <data name="TbAetherTorBridgesFirst" xml:space="preserve">
+    <value>From the start</value>
+  </data>
+  <data name="TbAetherTorBridgesNever" xml:space="preserve">
+    <value>Never</value>
+  </data>
+  <data name="TbAetherTorBridgesOwn" xml:space="preserve">
+    <value>My own bridge lines</value>
+  </data>
+  <data name="TbAetherTorRelays" xml:space="preserve">
+    <value>Bridge sources</value>
+  </data>
+  <data name="TbAetherTorRelaysAuto" xml:space="preserve">
+    <value>bridgedb and public relays</value>
+  </data>
+  <data name="TbAetherTorRelaysOnly" xml:space="preserve">
+    <value>Public relays only</value>
+  </data>
+  <data name="TbAetherTorRelaysOff" xml:space="preserve">
+    <value>bridgedb only</value>
+  </data>
+  <data name="TbAetherTorBridgeLines" xml:space="preserve">
+    <value>Bridge lines</value>
+  </data>
+  <data name="TbAetherTorBridgeLinesHint" xml:space="preserve">
+    <value>One per line, as in torrc: obfs4 1.2.3.4:443 FINGERPRINT cert=… iat-mode=0</value>
+  </data>
+  <data name="TbAetherOuterHop" xml:space="preserve">
+    <value>Outer hop</value>
+  </data>
+  <data name="TbAetherInnerHop" xml:space="preserve">
+    <value>Inner hop</value>
+  </data>
+  <data name="TbAetherEndpointHint" xml:space="preserve">
+    <value>Leave blank to scan</value>
+  </data>
+  <data name="TbAetherGoolPeerHint" xml:space="preserve">
+    <value>Leave blank for the endpoint WARP assigns</value>
+  </data>
+  <data name="TbAetherOtherSettings" xml:space="preserve">
+    <value>Other settings</value>
+  </data>
+  <data name="TbAetherDns" xml:space="preserve">
+    <value>DNS inside the tunnel</value>
+  </data>
+  <data name="TbAetherDnsHint" xml:space="preserve">
+    <value>Comma-separated; leave blank for 1.1.1.1 and 1.0.0.1</value>
+  </data>
+  <data name="TbAetherExitLoc" xml:space="preserve">
+    <value>Exit location</value>
+  </data>
+  <data name="TbAetherExitLocHint" xml:space="preserve">
+    <value>DE,SE allows only those; !IR,RU refuses those; blank accepts any</value>
+  </data>
+  <data name="TbAetherScan" xml:space="preserve">
+    <value>Scan for an endpoint</value>
+  </data>
+  <data name="TbAetherScanning" xml:space="preserve">
+    <value>Scanning…</value>
+  </data>
+  <data name="TbAetherScanAnyway" xml:space="preserve">
+    <value>Scan anyway</value>
+  </data>
+  <data name="TbAetherSaveAnyway" xml:space="preserve">
+    <value>Save anyway</value>
+  </data>
+  <data name="MsgAetherScanBlocked" xml:space="preserve">
+    <value>Disconnect the Aether profile before scanning; a scan would open a second tunnel on the running connection's key</value>
+  </data>
+  <data name="TbAetherCommand" xml:space="preserve">
+    <value>Aether command</value>
+  </data>
+  <data name="TbAetherCommandCustom" xml:space="preserve">
+    <value>Edited by hand: this command runs as written, and the settings above are not applied, except for Xray-core settings</value>
+  </data>
+  <data name="TbAetherUseSettings" xml:space="preserve">
+    <value>Use the settings</value>
+  </data>
+  <data name="TbAetherLog" xml:space="preserve">
+    <value>Log</value>
+  </data>
+  <data name="TbAetherLogEmpty" xml:space="preserve">
+    <value>Scan results and the WARP key status appear here</value>
+  </data>
+  <data name="MsgAetherKeysMissing" xml:space="preserve">
+    <value>You don't have the required WARP key; please get it first</value>
+  </data>
+  <data name="MsgAetherInvalidMasqueSni" xml:space="preserve">
+    <value>The MASQUE SNI must be a domain name, such as www.cloudflare.com</value>
+  </data>
+  <data name="MsgAetherInvalidEndpoint" xml:space="preserve">
+    <value>Use an IP address and a port, or leave the address empty to scan</value>
+  </data>
+  <data name="MsgAetherInvalidHop" xml:space="preserve">
+    <value>Write an address and a port, such as 162.159.192.1:2408</value>
+  </data>
+  <data name="MsgAetherSameHop" xml:space="preserve">
+    <value>The two hops must be different addresses</value>
+  </data>
+  <data name="MsgAetherInvalidFragment" xml:space="preserve">
+    <value>Use a number or a range such as 16-32: size 1–4096 bytes, delay 0–1000 ms</value>
+  </data>
+  <data name="MsgAetherInvalidDns" xml:space="preserve">
+    <value>Write resolver addresses such as 1.1.1.1 or 10.0.0.1:5353, separated by commas</value>
+  </data>
+  <data name="MsgAetherInvalidExitLoc" xml:space="preserve">
+    <value>Write two-letter country codes separated by commas, with a leading ! to refuse them</value>
+  </data>
+  <data name="MsgAetherInvalidEchDns" xml:space="preserve">
+    <value>The ECH DNS must be udp://IP, tcp://IP or the https:// address of a DNS-over-HTTPS server</value>
+  </data>
+  <data name="MsgAetherInvalidEchDomain" xml:space="preserve">
+    <value>The ECH domain must be a domain name, such as cloudflare-ech.com</value>
+  </data>
+  <data name="MsgAetherPsiphonNeedsMasque" xml:space="preserve">
+    <value>Psiphon → WARP works with the MASQUE protocol only</value>
+  </data>
+  <data name="MsgAetherTorNeedsMasque" xml:space="preserve">
+    <value>Tor → WARP works with the MASQUE protocol only</value>
+  </data>
+  <data name="MsgAetherTorPsiphonConflict" xml:space="preserve">
+    <value>Tor and Psiphon go together only with one inside the tunnel and the other around it</value>
+  </data>
+  <data name="MsgAetherTorBridgesMissing" xml:space="preserve">
+    <value>Write at least one bridge line, or choose another bridge setting</value>
+  </data>
+  <data name="MsgAetherNextPortTaken" xml:space="preserve">
+    <value>With Tor or Psiphon in the path the core also uses the ports after the Aether listen port, and none of them can be the local proxy port of the app; change the Aether listen port in the settings</value>
+  </data>
+  <data name="MsgAetherInvalidCommand" xml:space="preserve">
+    <value>The command has to name arguments for the Aether core, with the port it listens on after --bind</value>
+  </data>
+  <data name="MsgAetherScanStarted" xml:space="preserve">
+    <value>Scanning for an endpoint…</value>
+  </data>
+  <data name="MsgAetherScanFound" xml:space="preserve">
+    <value>Found {0}</value>
+  </data>
+  <data name="MsgAetherScanFoundHops" xml:space="preserve">
+    <value>Found outer hop {0} and inner hop {1}</value>
+  </data>
+  <data name="MsgAetherScanSuccess" xml:space="preserve">
+    <value>Endpoint found</value>
+  </data>
+  <data name="MsgAetherScanFailed" xml:space="preserve">
+    <value>No endpoint found</value>
+  </data>
+  <data name="MsgAetherScanCancelled" xml:space="preserve">
+    <value>Scan cancelled</value>
+  </data>
+  <data name="MsgAetherPsiphonCleared" xml:space="preserve">
+    <value>Psiphon data cleared</value>
+  </data>
+  <data name="MsgAetherPsiphonClearFailed" xml:space="preserve">
+    <value>Psiphon data could not be cleared</value>
+  </data>
+  <data name="MsgAetherPsiphonClearBlocked" xml:space="preserve">
+    <value>Disconnect the Aether profile before clearing Psiphon data; the running connection uses it</value>
+  </data>
+  <data name="TbPresetDefault" xml:space="preserve">
+    <value>default</value>
+  </data>
+  <data name="TbPresetChoose" xml:space="preserve">
+    <value>Choose a ready-made {0}</value>
+  </data>
+  <data name="TbPresetReplace" xml:space="preserve">
+    <value>Replace</value>
+  </data>
+  <data name="TbPresetReplaceTitle" xml:space="preserve">
+    <value>Replace the {0}?</value>
+  </data>
+  <data name="TbPresetReplaceMessage" xml:space="preserve">
+    <value>The current {0} is not on the list and will be lost. Replace it with {1}?</value>
+  </data>
+  <data name="MsgAetherKeyWireguardReady" xml:space="preserve">
+    <value>WireGuard key: device {0}, IPv4 {1}, IPv6 {2}</value>
+  </data>
+  <data name="MsgAetherKeyWireguardMissing" xml:space="preserve">
+    <value>WireGuard key: none yet; one is registered on the first scan or connection</value>
+  </data>
+  <data name="MsgAetherKeyWireguardInnerReady" xml:space="preserve">
+    <value>WireGuard inner hop key: device {0}, IPv4 {1}, IPv6 {2}</value>
+  </data>
+  <data name="MsgAetherKeyWireguardInnerMissing" xml:space="preserve">
+    <value>WireGuard inner hop key: none yet; one is registered on the first scan or connection</value>
+  </data>
+  <data name="MsgAetherKeyMasqueReady" xml:space="preserve">
+    <value>MASQUE key: device {0}, IPv4 {1}, IPv6 {2}</value>
+  </data>
+  <data name="MsgAetherKeyMasqueMissing" xml:space="preserve">
+    <value>MASQUE key: none yet; one is registered on the first scan or connection</value>
+  </data>
+  <data name="MsgAetherKeyMasqueInnerReady" xml:space="preserve">
+    <value>MASQUE inner hop key: device {0}, IPv4 {1}, IPv6 {2}</value>
+  </data>
+  <data name="MsgAetherKeyMasqueInnerMissing" xml:space="preserve">
+    <value>MASQUE inner hop key: none yet; one is registered on the first scan or connection</value>
+  </data>
+  <data name="MsgAetherKeyGoolReady" xml:space="preserve">
+    <value>WireGuard over MASQUE key: device {0}, IPv4 {1}, IPv6 {2}</value>
+  </data>
+  <data name="MsgAetherKeyGoolMissing" xml:space="preserve">
+    <value>WireGuard over MASQUE key: none yet; one is registered on the first scan or connection</value>
+  </data>
+  <data name="MsgAetherKeyOuterReady" xml:space="preserve">
+    <value>Outer hop key: device {0}, IPv4 {1}, IPv6 {2}</value>
+  </data>
+  <data name="MsgAetherKeyOuterMissing" xml:space="preserve">
+    <value>Outer hop key: none yet; one is registered on the first scan or connection</value>
+  </data>
+  <data name="MsgAetherKeyInnerReady" xml:space="preserve">
+    <value>Inner hop key: device {0}, IPv4 {1}, IPv6 {2}</value>
+  </data>
+  <data name="MsgAetherKeyInnerMissing" xml:space="preserve">
+    <value>Inner hop key: none yet; one is registered on the first scan or connection</value>
+  </data>
+  <data name="MsgAetherPsiphonUnavailable" xml:space="preserve">
+    <value>psiphon-tunnel-core is not in the Aether core folder, so a profile with Psiphon cannot connect; update aether-core under Check Update</value>
+  </data>
+  <data name="MsgAetherTorTransportsUnavailable" xml:space="preserve">
+    <value>lyrebird is not in the Aether core folder, so Tor bridges cannot be used; Tor connects only where it is not blocked</value>
+  </data>
+  <data name="MsgAetherCoreUnavailable" xml:space="preserve">
+    <value>The Aether core is not installed; get aether-core under Check Update</value>
+  </data>
+  <data name="TbAetherGetKeys" xml:space="preserve">
+    <value>Get new WARP keys</value>
+  </data>
+  <data name="TbAetherRenewing" xml:space="preserve">
+    <value>Getting new WARP keys…</value>
+  </data>
+  <data name="TbAetherKeysKind" xml:space="preserve">
+    <value>Get new keys for</value>
+  </data>
+  <data name="TbAetherKeysKindAll" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="TbAetherKeysApiAddress" xml:space="preserve">
+    <value>API address</value>
+  </data>
+  <data name="TbAetherKeysApiAddressHint" xml:space="preserve">
+    <value>Leave blank for the address of the API server name</value>
+  </data>
+  <data name="TbAetherKeysApiSni" xml:space="preserve">
+    <value>API server name (SNI)</value>
+  </data>
+  <data name="TbAetherKeysApiSniHint" xml:space="preserve">
+    <value>Leave blank for the API host</value>
+  </data>
+  <data name="TbAetherKeysApiHost" xml:space="preserve">
+    <value>API host</value>
+  </data>
+  <data name="TbAetherKeysApiHostHint" xml:space="preserve">
+    <value>Leave blank for api.devices.cloudflare.com, then api.cloudflareclient.com if it gets no answer and the server name is blank too. Cloudflare refuses a server name that differs from the host</value>
+  </data>
+  <data name="TbAetherKeysFragmentHint" xml:space="preserve">
+    <value>Sends the ClientHello of the calls to the WARP API in pieces, for networks that filter the name of the API</value>
+  </data>
+  <data name="TbAetherKeysEchHint" xml:space="preserve">
+    <value>Hides the server name of the calls to the WARP API; without a usable ECH key, no WARP key is requested</value>
+  </data>
+  <data name="MsgAetherRenewBlocked" xml:space="preserve">
+    <value>Disconnect the Aether profile before getting these keys; the running connection uses them</value>
+  </data>
+  <data name="TbAetherKeysLogEmpty" xml:space="preserve">
+    <value>The core's output and the WARP keys appear here</value>
+  </data>
+  <data name="MsgAetherKeyRenewing" xml:space="preserve">
+    <value>Registering new WARP keys; the keys in use stay in place until all the new ones are ready…</value>
+  </data>
+  <data name="MsgAetherKeyRenewed" xml:space="preserve">
+    <value>The new WARP keys are in place and are used from the next connection</value>
+  </data>
+  <data name="MsgAetherKeyRenewFailed" xml:space="preserve">
+    <value>Registering the new WARP keys failed; the current keys were kept</value>
+  </data>
+  <data name="MsgAetherKeyRenewCancelled" xml:space="preserve">
+    <value>Getting new WARP keys cancelled</value>
+  </data>
+  <data name="MsgAetherKeysInvalidApiAddress" xml:space="preserve">
+    <value>The API address must be an IP address or a domain name, with or without a port, such as 188.114.97.6:443 or [2606:4700::1]:8443</value>
+  </data>
+  <data name="MsgAetherKeysInvalidApiSni" xml:space="preserve">
+    <value>The API server name must be a domain name, such as api.devices.cloudflare.com</value>
+  </data>
+  <data name="MsgAetherKeysInvalidApiHost" xml:space="preserve">
+    <value>The API host must be a domain name, such as api.devices.cloudflare.com</value>
+  </data>
+  <data name="MsgAetherKeysInvalidCommand" xml:space="preserve">
+    <value>The command has to register keys: --register followed by all, wg, masque, mim, gool-classic (WARP-in-WARP) or gool (WireGuard over MASQUE)</value>
+  </data>
+  <data name="MsgCipherSuitesNeedUnsafe" xml:space="preserve">
+    <value>cipherSuites only apply with the unsafe fingerprint. Choose unsafe, or clear cipherSuites.</value>
+  </data>
+  <data name="MsgWebsocketAlpnHttp1Only" xml:space="preserve">
+    <value>WebSocket and HTTPUpgrade connect only with alpn http/1.1 or none. Choose http/1.1, or leave alpn empty.</value>
+  </data>
+  <data name="menuAetherLicenses" xml:space="preserve">
+    <value>Aether core licenses</value>
+  </data>
+  <data name="MsgXrayRunCopyFailed" xml:space="preserve">
+    <value>On Windows PattN runs Xray-core as {0}, a copy of xray.exe, and that copy could not be made the same as xray.exe: {1}</value>
+  </data>
+  <data name="MsgXrayCopyInUse" xml:space="preserve">
+    <value>Xray-core was not updated: an Xray still runs from {0}, as a speed or latency test does; update again once it has ended</value>
   </data>
 </root>

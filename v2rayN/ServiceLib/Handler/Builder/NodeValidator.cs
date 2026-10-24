@@ -31,6 +31,11 @@ public class NodeValidator
 
     private static void ValidateNodeAndCoreSupport(ProfileItem item, ECoreType coreType, ValidationContext v)
     {
+        if (item.ConfigType is EConfigType.Aether)
+        {
+            ValidateAether(item, coreType, v);
+            return;
+        }
         if (item.ConfigType is EConfigType.Custom)
         {
             return;

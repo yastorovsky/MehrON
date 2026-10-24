@@ -43,3 +43,4 @@ global using ServiceLib.Services;
 global using ServiceLib.Services.CoreConfig;
 global using ServiceLib.Services.Statistics;
 global using SQLite;
+global using ServiceLib.Aether;

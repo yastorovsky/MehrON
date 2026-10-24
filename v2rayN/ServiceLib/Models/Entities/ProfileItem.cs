@@ -40,6 +40,12 @@ public class ProfileItem
                 > 1 => $"***{arrAddr.Last()}",
                 _ => Address
             };
+            if (ConfigType == EConfigType.Aether)
+            {
+                var path = AetherCore.Of(this, AetherPorts.DefaultListenPort).PathLabel();
+                summary += Address.IsNullOrEmpty() || Port <= 0 ? $"{Remarks}({path})" : $"{Remarks}({path}, {addr}:{Port})";
+                return summary;
+            }
             summary += $"{Remarks}({addr}:{Port})";
         }
         return summary;

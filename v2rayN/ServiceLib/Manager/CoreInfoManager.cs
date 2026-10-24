@@ -343,13 +343,14 @@ public sealed class CoreInfoManager
                 new CoreInfo
                 {
                     CoreType = ECoreType.aether,
-                    CoreExes = [ "aether" ],
-                    Arguments = "-4",
+                    CoreExes = [AetherBinaries.CoreName],
+                    Arguments = "",
                     Url = urlAether,
                     ReleaseApiUrl = urlAether.Replace(Global.GithubUrl, Global.GithubApiUrl),
                     DownloadUrlWin64 = urlAether + "/download/{0}/aether-windows-x86_64.zip",
-                    DownloadUrlLinux64 = urlAether + "/download/{0}/aether-linux-x86_64.tar.gz",
-                    DownloadUrlLinuxArm64 = urlAether + "/download/{0}/aether-linux-arm64.tar.gz",
+                    DownloadUrlWinArm64 = urlAether + "/download/{0}/aether-windows-x86_64.zip",
+                    DownloadUrlLinux64 = urlAether + "/download/{0}/aether-linux-x86_64-musl.tar.gz",
+                    DownloadUrlLinuxArm64 = urlAether + "/download/{0}/aether-linux-aarch64-musl.tar.gz",
                     DownloadUrlOSX64 = urlAether + "/download/{0}/aether-macos-x86_64.tar.gz",
                     DownloadUrlOSXArm64 = urlAether + "/download/{0}/aether-macos-arm64.tar.gz",
                     Match = "aether",

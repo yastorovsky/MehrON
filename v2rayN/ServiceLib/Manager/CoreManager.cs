@@ -21,11 +21,19 @@ public class CoreManager
     private bool _linuxSudo = false;
     private Func<bool, string, Task>? _updateFunc;
     private const string _tag = "CoreHandler";
+    private readonly AetherCoreTurns _turns = new();
+    private bool _aetherSessionWatched;
+    public Func<string, Task>? AetherCoresStopped { get; set; }
 
     public async Task Init(Config config, Func<bool, string, Task> updateFunc)
     {
         _config = config;
         _updateFunc = updateFunc;
+        if (!_aetherSessionWatched)
+        {
+            _aetherSessionWatched = true;
+            AetherCoreManager.Instance.SessionEnded += OnAetherSessionEnded;
+        }
 
         //Copy the bin folder to the storage location (for init)
         if (Environment.GetEnvironmentVariable(Global.LocalAppData) == "1")
@@ -149,6 +157,10 @@ public class CoreManager
                     // 3. Re-generate main core config with updated AllProxiesMap and start main core (Xray / Sing-box)
                     await CoreConfigHandler.GenerateClientConfig(mainContext, fileName);
                     await CoreStart(mainContext);
+        if (await AetherCoreLoad.AfterXrayAsync(aether, generation) == AetherCoreLoadOutcome.AetherFailed)
+        {
+            return;
+        }
                     if (preContext != null)
                     {
                         await WaitForProxyPort(preContext);
@@ -172,6 +184,10 @@ public class CoreManager
                     await WaitForPort(midPort);
 
                     await CoreStart(mainContext);
+        if (await AetherCoreLoad.AfterXrayAsync(aether, generation) == AetherCoreLoadOutcome.AetherFailed)
+        {
+            return;
+        }
                     if (preContext != null)
                     {
                         await WaitForProxyPort(preContext);
@@ -187,6 +203,10 @@ public class CoreManager
                 else if (exit.ConfigType == EConfigType.Custom)
                 {
                     await CoreStart(mainContext);
+        if (await AetherCoreLoad.AfterXrayAsync(aether, generation) == AetherCoreLoadOutcome.AetherFailed)
+        {
+            return;
+        }
                     var localSocksPort = AppManager.Instance.GetLocalPort(EInboundProtocol.socks);
                     await WaitForPort(localSocksPort);
 
@@ -223,10 +243,18 @@ public class CoreManager
             await CoreStartPreService(preContext, isFirst: true);
             await WaitForProxyPort(preContext);
             await CoreStart(mainContext);
+        if (await AetherCoreLoad.AfterXrayAsync(aether, generation) == AetherCoreLoadOutcome.AetherFailed)
+        {
+            return;
+        }
         }
         else
         {
             await CoreStart(mainContext);
+        if (await AetherCoreLoad.AfterXrayAsync(aether, generation) == AetherCoreLoadOutcome.AetherFailed)
+        {
+            return;
+        }
             await WaitForProxyPort(preContext);
             await CoreStartPreService(preContext);
         }
@@ -907,4 +935,47 @@ public class CoreManager
     }
 
     #endregion Process
+
+    #region PattN: Aether
+
+    private AetherCoreLoadSteps AetherLoadSteps(CoreConfigContext mainContext)
+    {
+        return new AetherCoreLoadSteps
+        {
+            Core = () => mainContext.Aether.Core,
+            MissingCore = AetherCoreLoad.MissingCoreMessage,
+            NewGeneration = _turns.NewGeneration,
+            CancelProbes = () => AetherCoreManager.Instance.CancelProbesAsync(),
+            ReapLeftovers = AetherCoreManager.Instance.ReapLeftovers,
+            SecondaryPort = () => mainContext.Aether.SecondaryInboundPort,
+            XrayUp = () => _processService is { HasExited: false },
+            WaitForPort = AetherCoreLoad.WaitForPortAsync,
+            StartSession = (core, generation) => AetherCoreManager.Instance.StartSessionAsync(core, generation),
+            StopCores = CoreStop,
+            Report = UpdateFunc,
+        };
+    }
+
+    public async Task<ProcessService?> RunAetherExitXrayAsync(string configFileName)
+    {
+        var coreInfo = CoreInfoManager.Instance.GetCoreInfo(ECoreType.Xray);
+        return await RunProcess(coreInfo, configFileName, displayLog: false, mayNeedSudo: false);
+    }
+
+    private async Task OnAetherSessionEnded(AetherSessionEnded ended)
+    {
+        var stopped = await _turns.EndIfCurrentAsync(ended.Generation, async () =>
+        {
+            Logging.SaveLog("CoreManager: the Aether core exited while running, stopping the cores");
+            await UpdateFunc(true, ended.Message);
+            await CoreStop();
+        });
+        if (stopped && AetherCoresStopped is { } coresStopped)
+        {
+            await coresStopped(ended.Message);
+        }
+    }
+
+    #endregion PattN: Aether
+
 }

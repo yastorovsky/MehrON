@@ -1,0 +1,43 @@
+<Window
+    x:Class="v2rayN.Desktop.Views.ChoiceDialog"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Width="480"
+    MinWidth="350"
+    MaxWidth="640"
+    CanResize="False"
+    ShowInTaskbar="False"
+    SizeToContent="Height"
+    WindowDecorations="Full"
+    WindowStartupLocation="CenterOwner"
+    mc:Ignorable="d">
+    <!--  PattN: a question with buttons of its own, a twin of MessageBoxDialog (design 3.2.4)  -->
+    <Grid Margin="24" RowDefinitions="*,Auto">
+        <ScrollViewer
+            Grid.Row="0"
+            MinHeight="60"
+            MaxHeight="300"
+            Margin="0,0,0,24"
+            HorizontalScrollBarVisibility="Disabled"
+            VerticalScrollBarVisibility="Auto">
+            <TextBlock
+                x:Name="txtMessage"
+                VerticalAlignment="Center"
+                FontSize="14"
+                LineHeight="22"
+                TextWrapping="Wrap" />
+        </ScrollViewer>
+
+        <!--  The buttons wrap onto a second line where they are wider than the window, as in a long translation, every line at the right, as the WPF twin's RightWrapPanel does  -->
+        <WrapPanel
+            x:Name="panelButtons"
+            Grid.Row="1"
+            HorizontalAlignment="Right"
+            ItemSpacing="12"
+            ItemsAlignment="End"
+            LineSpacing="12"
+            Orientation="Horizontal" />
+    </Grid>
+</Window>

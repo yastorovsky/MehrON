@@ -12,6 +12,7 @@ public class Config
 
     #region other entities
 
+    public AetherItem AetherItem { get; set; }
     public CoreBasicItem CoreBasicItem { get; set; }
     public TunModeItem TunModeItem { get; set; }
     public KcpItem KcpItem { get; set; }

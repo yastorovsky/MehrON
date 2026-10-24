@@ -476,10 +476,10 @@ public partial class ProfilesViewModel : MyReactiveObject
         var eConfigType = item.ConfigType;
 
         bool? ret = false;
-        if (item.CoreType == ECoreType.aether)
+        if (item.ConfigType == EConfigType.Aether || item.CoreType == ECoreType.aether)
         {
-            var addAetherServerViewModel = new AddAetherServerViewModel(item);
-            ret = await AppManager.Instance.WindowDialog.ShowDialogAsync(addAetherServerViewModel);
+            var addServerAetherViewModel = new AddServerAetherViewModel(item);
+            ret = await AppManager.Instance.WindowDialog.ShowDialogAsync(addServerAetherViewModel);
         }
         else if (item.CoreType == ECoreType.psiphon)
         {

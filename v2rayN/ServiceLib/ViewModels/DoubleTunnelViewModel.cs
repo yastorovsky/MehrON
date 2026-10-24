@@ -62,7 +62,7 @@ public partial class DoubleTunnelViewModel : MyReactiveObject, ICloseable
     {
         var allProfiles = await AppManager.Instance.ProfileItems(string.Empty) ?? [];
         var validProfiles = allProfiles
-            .Where(p => !p.ConfigType.IsGroupType() && (p.ConfigType != EConfigType.Custom || p.CoreType is ECoreType.aether or ECoreType.psiphon))
+            .Where(p => !p.ConfigType.IsGroupType() && (p.ConfigType == EConfigType.Aether || p.ConfigType != EConfigType.Custom || p.CoreType is ECoreType.aether or ECoreType.psiphon))
             .OrderBy(p => p.Remarks)
             .ToList();
 

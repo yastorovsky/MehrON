@@ -34,6 +34,7 @@ public partial class MainWindowViewModel : MyReactiveObject
     public ReactiveCommand<RxVoid, RxVoid> AddAnytlsServerCmd { get; }
     public ReactiveCommand<RxVoid, RxVoid> AddNaiveServerCmd { get; }
     public ReactiveCommand<RxVoid, RxVoid> AddAetherServerCmd { get; }
+    public ReactiveCommand<RxVoid, RxVoid> AetherKeysCmd { get; }
     public ReactiveCommand<RxVoid, RxVoid> AddPsiphonServerCmd { get; }
     public ReactiveCommand<RxVoid, RxVoid> AddCustomServerCmd { get; }
     public ReactiveCommand<RxVoid, RxVoid> AddCustomOutboundServerCmd { get; }
@@ -155,6 +156,11 @@ public partial class MainWindowViewModel : MyReactiveObject
         AddAetherServerCmd = ReactiveCommand.CreateFromTask(async () =>
         {
             await AddAetherServerAsync();
+        });
+        AetherKeysCmd = ReactiveCommand.CreateFromTask(async () =>
+        {
+            var vm = new AetherKeysViewModel();
+            await AppManager.Instance.WindowDialog.ShowDialogAsync(vm);
         });
         AddPsiphonServerCmd = ReactiveCommand.CreateFromTask(async () =>
         {
@@ -566,17 +572,14 @@ public partial class MainWindowViewModel : MyReactiveObject
         var item = editItem ?? new ProfileItem
         {
             Subid = _config.SubIndexId,
-            ConfigType = EConfigType.Custom,
-            CoreType = ECoreType.aether,
+            ConfigType = EConfigType.Aether,
+            CoreType = ECoreType.Xray,
             IsSub = false,
-            PreSocksPort = 1819,
-            Address = "127.0.0.1",
-            Port = 1819,
             Remarks = "Aether WARP",
         };
 
-        var addAetherServerViewModel = new AddAetherServerViewModel(item);
-        var ret = await AppManager.Instance.WindowDialog.ShowDialogAsync(addAetherServerViewModel);
+        var addServerAetherViewModel = new AddServerAetherViewModel(item);
+        var ret = await AppManager.Instance.WindowDialog.ShowDialogAsync(addServerAetherViewModel);
         if (ret == true)
         {
             await RefreshServersDispatcherAsync();
