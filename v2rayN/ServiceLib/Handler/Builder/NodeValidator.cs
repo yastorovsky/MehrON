@@ -279,7 +279,7 @@ public class NodeValidator
     /// </summary>
     private static void ValidateAether(ProfileItem item, ECoreType coreType, ValidationContext v)
     {
-        if (coreType is not ECoreType.Xray || !Global.XraySupportConfigType.Contains(item.ConfigType))
+        if (coreType is not ECoreType.Xray and not ECoreType.aether || !Global.XraySupportConfigType.Contains(item.ConfigType))
         {
             v.Error(string.Format(ResUI.MsgCoreNotSupportProtocol, coreType.ToString(), item.ConfigType));
         }

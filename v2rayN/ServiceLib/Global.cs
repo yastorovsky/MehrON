@@ -385,6 +385,7 @@ public class Global
         EConfigType.WireGuard,
         EConfigType.SOCKS,
         EConfigType.HTTP,
+        EConfigType.Aether,
     ];
 
     public static readonly HashSet<EConfigType> SingboxSupportConfigType =

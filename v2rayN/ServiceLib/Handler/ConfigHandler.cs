@@ -661,7 +661,7 @@ public static class ConfigHandler
         }
 
         item.ConfigType = EConfigType.Aether;
-        item.CoreType = ECoreType.aether;
+        item.CoreType = ECoreType.Xray;
 
         await AddServerCommon(config, item, true);
         return 0;

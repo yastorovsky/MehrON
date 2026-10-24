@@ -84,7 +84,7 @@ public partial class AddServerAetherViewModel : MyReactiveObject, ICloseable
         _item = profileItem;
         _initial = JsonUtils.DeepCopy(profileItem) ?? new ProfileItem();
         _initial.ConfigType = EConfigType.Aether;
-        _initial.CoreType = ECoreType.aether;
+        _initial.CoreType = ECoreType.Xray;
         ListenPort = _source.ListenPort;
 
         var extra = _initial.GetProtocolExtra();
@@ -441,7 +441,7 @@ public partial class AddServerAetherViewModel : MyReactiveObject, ICloseable
         var psiphonOn = psiphon != AetherPsiphon.Off;
         var torOn = tor != AetherTor.Off;
         profile.ConfigType = EConfigType.Aether;
-        profile.CoreType = ECoreType.aether;
+        profile.CoreType = ECoreType.Xray;
         profile.Remarks = Remarks;
         profile.Address = Address;
         profile.Port = PortOf(Port);

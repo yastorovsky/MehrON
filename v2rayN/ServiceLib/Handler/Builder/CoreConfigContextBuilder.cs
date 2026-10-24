@@ -42,6 +42,10 @@ public partial class CoreConfigContextBuilder
         bool refuseRuleTargets = true)
     {
         var runCoreType = AppManager.Instance.GetCoreType(node, node.ConfigType);
+        if (node.ConfigType == EConfigType.Aether)
+        {
+            runCoreType = ECoreType.Xray;
+        }
         var coreType = runCoreType == ECoreType.sing_box ? ECoreType.sing_box : ECoreType.Xray;
         var context = new CoreConfigContext
         {
