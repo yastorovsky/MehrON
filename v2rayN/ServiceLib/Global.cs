@@ -253,7 +253,8 @@ public class Global
         { EConfigType.TUIC, "tuic://" },
         { EConfigType.WireGuard, "wireguard://" },
         { EConfigType.Anytls, "anytls://" },
-        { EConfigType.Naive, "naive://" }
+        { EConfigType.Naive, "naive://" },
+        { EConfigType.Aether, "aether://" },
     };
 
     public static readonly Dictionary<EConfigType, string> ProtocolTypes = new()
@@ -268,8 +269,8 @@ public class Global
         { EConfigType.TUIC, "tuic" },
         { EConfigType.WireGuard, "wireguard" },
         { EConfigType.Anytls, "anytls" },
-        { EConfigType.Naive, "naive" }
-            { EConfigType.Aether, "socks" },
+        { EConfigType.Naive, "naive" },
+        { EConfigType.Aether, "socks" },
     };
 
     public static readonly List<string> VmessSecurities =
