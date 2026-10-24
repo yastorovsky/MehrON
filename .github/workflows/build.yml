@@ -533,7 +533,7 @@ jobs:
   publish-release:
     name: Publish Release
     needs: [build-windows, build-linux]
-    if: github.ref_type == 'tag' || inputs.create_release == true
+    if: github.ref_type == 'tag' || inputs.create_release == true || github.ref_name == 'Beta'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -622,4 +622,4 @@ jobs:
             MehrON-linux-amd64.deb
             MehrON-linux-64.deb
           draft: false
-          prerelease: ${{ github.ref_name == 'Beta' }}
+          prerelease: ${{ contains(env.TAG_NAME, 'beta') || github.ref_name == 'Beta' }}
