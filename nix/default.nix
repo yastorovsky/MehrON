@@ -64,7 +64,7 @@ stdenv.mkDerivation rec {
   inherit pname version;
 
   src = fetchurl {
-    url = "https://github.com/yastorovsky/MehrON/releases/download/v${version}-beta/MehrON-FM-Edition-nixos-64.tar.gz";
+    url = "https://github.com/yastorovsky/MehrON/releases/download/v${version}-beta/MehrON-linux-64.tar.gz";
     hash = "sha256-DjNY93dyIzTkdQqokJVlbv3LosANh986b45gRC1w83s=";
   };
 

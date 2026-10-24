@@ -137,7 +137,7 @@ nix profile install github:yastorovsky/MehrON#default
 ```
 
 ### 📥 دانلود مستقیم فایل ریلیز
-می‌توانید آرشیو اختصاصی **`MehrON-FM-Edition-nixos-64.tar.gz`** را مستقیماً از بخش [ریلیزهای گیت‌هاب](https://github.com/yastorovsky/MehrON/releases) دریافت و استفاده نمایید.
+می‌توانید آرشیو اختصاصی **`MehrON-linux-64.tar.gz`** را مستقیماً از بخش [ریلیزهای گیت‌هاب](https://github.com/yastorovsky/MehrON/releases) دریافت و استفاده نمایید.
 
 ## بیلد از سورس
 
