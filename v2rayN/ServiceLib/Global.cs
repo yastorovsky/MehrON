@@ -773,19 +773,7 @@ public class Global
         { ECoreType.v2rayN, "yastorovsky/MehrON" },
     };
 
-        public static readonly List<string> AetherEchDnsOptions =
-    [
-        "udp://1.1.1.1",
-        "tcp://1.1.1.1",
-        "https://1.1.1.1/dns-query",
-        "https://dns.google/dns-query",
-    ];
 
-    public static readonly List<string> AetherEchDomainOptions =
-    [
-        "cloudflare-ech.com",
-        "crypto.cloudflare.com",
-    ];
 
 public static readonly List<string> OtherGeoUrls =
     [
