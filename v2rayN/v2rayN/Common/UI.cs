@@ -16,6 +16,20 @@ internal class UI
         return MessageBox.Show(msg, caption, MessageBoxButton.YesNo, MessageBoxImage.Question);
     }
 
+    public static int ShowChoice(string? title, string msg, IReadOnlyList<string> buttons, int cancelIndex)
+    {
+        var owner = System.Windows.Application.Current.Windows.OfType<System.Windows.Window>().FirstOrDefault(window => window.IsActive)
+                    ?? System.Windows.Application.Current.MainWindow;
+        var dialog = new Views.ChoiceDialog(title ?? caption, msg, buttons, cancelIndex);
+        if (owner != null && owner != dialog && owner.IsVisible)
+        {
+            dialog.Owner = owner;
+        }
+        dialog.ShowDialog();
+        return dialog.Choice;
+    }
+
+
     public static bool? OpenFileDialog(out string fileName, string filter)
     {
         fileName = string.Empty;
