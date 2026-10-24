@@ -62,11 +62,6 @@ public partial class CoreConfigV2rayService
         // PattN: per-profile targetStrategy, set on the outbound itself (not in sockopt)
         outbound.targetStrategy = _node.GetTargetStrategy();
         outbound.tag = baseTagName;
-        // PattN: an Aether outbound's targetStrategy defaults by where its traffic leaves, and GenAether reads it
-        if (_node.ConfigType == EConfigType.Aether)
-        {
-            RecordAetherOutbound(outbound);
-        }
         return outbound;
     }
 
@@ -187,12 +182,6 @@ public partial class CoreConfigV2rayService
                         outboundSettings.version = 2;
                         break;
                     }
-                case EConfigType.MASQUE:
-                    {
-                        outboundSettings.address = outboundAddress;
-                        outboundSettings.port = outboundPort;
-                        break;
-                    }
                 case EConfigType.WireGuard:
                     {
                         var address = _node.Address;
@@ -218,15 +207,16 @@ public partial class CoreConfigV2rayService
                         outbound.settings = setting;
                         break;
                     }
-                // PattN: a SOCKS outbound to the Aether core on the loopback address, with no stream settings of its own
-                case EConfigType.Aether:
+                case EConfigType.Custom:
                     {
-                        FillAetherOutbound(outbound);
-                        return;
+                        var socksPort = _node.PreSocksPort is > 0 and <= 65535 ? _node.PreSocksPort.Value : (_node.CoreType == ECoreType.aether ? 1819 : 1080);
+                        outboundSettings.address = Global.Loopback;
+                        outboundSettings.port = socksPort;
+                        break;
                     }
             }
 
-            outbound.protocol = Global.ProtocolTypes[_node.ConfigType];
+            outbound.protocol = _node.ConfigType == EConfigType.Custom ? "socks" : Global.ProtocolTypes[_node.ConfigType];
             if (_node.ConfigType == EConfigType.Hysteria2)
             {
                 outbound.protocol = "hysteria";
@@ -275,10 +265,6 @@ public partial class CoreConfigV2rayService
             {
                 network = "hysteria";
             }
-            else if (_node.ConfigType == EConfigType.MASQUE)
-            {
-                network = "masque";
-            }
             streamSettings.network = network;
             if (_node.DialMode.IsNotEmpty())
             {
@@ -287,7 +273,6 @@ public partial class CoreConfigV2rayService
                 streamSettings.sockopt.dialMode = _node.DialMode;
             }
             var transport = _node.GetTransportExtra();
-            var protocolExtra = _node.GetProtocolExtra();
             var host = string.Empty;
             var path = string.Empty;
             var kcpSeed = string.Empty;
@@ -360,12 +345,6 @@ public partial class CoreConfigV2rayService
                 {
                     // For legacy xray compatibility, remove this in the future
                     tlsSettings.echForceQuery = "full";
-                }
-                // PattN: the ECH config query goes through the profile's ECH outbound, which is
-                // appended to the config after every other outbound (AppendEchOutbounds)
-                if (NodeValidator.ValidateEchOutbound(_node, out var echOutbound) == null && echOutbound != null)
-                {
-                    tlsSettings.echSockopt = new Sockopt4Ray { dialerProxy = AddEchOutbound(echOutbound) };
                 }
                 var certs = CertPemManager.ParsePemChain(_node.Cert);
                 if (certs.Count > 0)
@@ -538,6 +517,7 @@ public partial class CoreConfigV2rayService
                     break;
 
                 case "hysteria":
+                    var protocolExtra = _node.GetProtocolExtra();
                     var ports = protocolExtra?.Ports;
                     int? upMbps = protocolExtra?.UpMbps is { } su and >= 0
                         ? su
@@ -608,7 +588,6 @@ public partial class CoreConfigV2rayService
                     hy2Finalmask.udp?.Reverse();
                     streamSettings.finalmask = hy2Finalmask;
                     break;
-
 
                 default:
                     // raw
@@ -701,21 +680,15 @@ public partial class CoreConfigV2rayService
         }
         // Based on actual network flow instead of data packets
         var nodesReverse = nodes.AsEnumerable().Reverse().ToList();
-        // PattN: an Aether hop dials through no hop, and the hop on its entry side is the exit-node (V2rayAetherService.cs)
-        var aetherChain = new AetherChainLayout(context, _node, nodesReverse, baseTagName);
         var resultOutbounds = new List<Outbounds4Ray>();
         for (var i = 0; i < nodesReverse.Count; i++)
         {
             var node = nodesReverse[i];
             var currentTag = i == 0 ? baseTagName : $"chain-{baseTagName}-{i}-{node.Remarks}";
             var dialerProxyTag = i != nodesReverse.Count - 1 ? $"chain-{baseTagName}-{i + 1}-{nodesReverse[i + 1].Remarks}" : null;
-            // PattN: the hop the Aether hop dials out through is tagged exit-node, and the Aether hop dials through none
-            (currentTag, dialerProxyTag) = aetherChain.Tags(i, currentTag, dialerProxyTag);
             if (node.ConfigType.IsGroupType())
             {
                 var childProfiles = new CoreConfigV2rayService(context with { Node = node, }).BuildGroupProxyOutbounds(currentTag);
-                // PattN: an Aether profile inside a group or a chain that is a hop
-                RefuseAetherInGroupHop(node, childProfiles);
                 if (!dialerProxyTag.IsNullOrEmpty())
                 {
                     var chainEndNodes =
@@ -773,10 +746,12 @@ public partial class CoreConfigV2rayService
 
             if (!dialerProxyTag.IsNullOrEmpty())
             {
-                FillDialerProxy(outbound, dialerProxyTag);
+                var nextNode = i != nodesReverse.Count - 1 ? nodesReverse[i + 1] : null;
+                if (node.ConfigType != EConfigType.Custom || nextNode?.ConfigType != EConfigType.Custom)
+                {
+                    FillDialerProxy(outbound, dialerProxyTag);
+                }
             }
-            // PattN: the Aether hop learns its chain and its way out
-            aetherChain.Settle(i, outbound);
 
             resultOutbounds.Add(outbound);
         }
@@ -924,8 +899,6 @@ public partial class CoreConfigV2rayService
             {
                 context.CustomOutboundMap[clonedOutbound] = context.CustomOutboundMap[outbound];
             }
-            // PattN: a copy of an Aether outbound is one too
-            context.Aether.AddCopy(outbound, clonedOutbound);
         }
         return clonedOutbounds;
     }

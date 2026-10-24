@@ -24,19 +24,11 @@ public record CoreConfigContext
 
     public bool IsWindows { get; init; }
     public bool IsMacOS { get; init; }
-    public bool IsLinux { get; init; }
 
     // Defaults to true so that a context built without this flag keeps routing IPv6 into the
     // tunnel; only a positive detection of the host having no global IPv6 address turns it off.
     public bool HasGlobalIPv6Address { get; init; } = true;
 
-    public bool IsIPv6DisabledByOs { get; init; }
-
     // Generation Context
     public Dictionary<object, string> CustomOutboundMap { get; init; } = new();
-
-    public List<EchOutboundItem> EchOutbounds { get; init; } = [];
-    public AetherBuild Aether { get; init; } = new();
 }
-
-public record EchOutboundItem(System.Text.Json.Nodes.JsonObject Outbound, string Tag);

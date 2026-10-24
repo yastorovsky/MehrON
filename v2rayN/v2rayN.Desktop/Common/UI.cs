@@ -16,15 +16,6 @@ internal class UI
         return result == ButtonResult.Yes ? ButtonResult.Yes : ButtonResult.No;
     }
 
-    public static async Task<int> ShowChoice(string? title, string msg, IReadOnlyList<string> buttons, int cancelIndex)
-    {
-        var owner = WindowDialog.TryGetOwnerWindow();
-        var dialog = new ChoiceDialog(title ?? caption, msg, buttons, cancelIndex);
-        var result = await dialog.ShowDialog<int?>(owner);
-        return result ?? -1;
-    }
-
-
     public static async Task<string?> OpenFileDialog(FilePickerFileType? filter)
     {
         var sp = GetStorageProvider();

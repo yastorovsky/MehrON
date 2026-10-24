@@ -40,12 +40,6 @@ public class ProfileItem
                 > 1 => $"***{arrAddr.Last()}",
                 _ => Address
             };
-            if (ConfigType == EConfigType.Aether)
-            {
-                var path = AetherCore.Of(this, AetherPorts.DefaultListenPort).PathLabel();
-                summary += Address.IsNullOrEmpty() || Port <= 0 ? $"{Remarks}({path})" : $"{Remarks}({path}, {addr}:{Port})";
-                return summary;
-            }
             summary += $"{Remarks}({addr}:{Port})";
         }
         return summary;
@@ -215,7 +209,6 @@ public class ProfileItem
     public string Cert { get; set; }
     public string CertSha { get; set; }
     public string EchConfigList { get; set; }
-    public string EchOutbound { get; set; }
     public string VerifyPeerCertByName { get; set; }
     public string Finalmask { get; set; }
 

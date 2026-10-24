@@ -77,7 +77,7 @@ jobs:
       if: env.Target == 'windows' && env.Arch == '64'
       run: |
         set -euo pipefail
-        wget -nv -O sing-box.zip "https://github.com/SagerNet/sing-box/releases/download/v1.14.4/sing-box-1.14.4-windows-amd64.zip"
+        wget -nv -O sing-box.zip "https://github.com/SagerNet/sing-box/releases/download/v1.14.1/sing-box-1.14.1-windows-amd64.zip"
         7z x -y -osing-box sing-box.zip
         cp -f sing-box/*/sing-box.exe PattN-$Target-$Arch/bin/sing_box/sing-box.exe
 
@@ -85,7 +85,7 @@ jobs:
       if: env.Target == 'windows' && env.Arch == '64'
       run: |
         set -euo pipefail
-        wget -nv -O mihomo.zip "https://github.com/MetaCubeX/mihomo/releases/download/v1.19.33/mihomo-windows-amd64-compatible-v1.19.33.zip"
+        wget -nv -O mihomo.zip "https://github.com/MetaCubeX/mihomo/releases/download/v1.19.31/mihomo-windows-amd64-compatible-v1.19.31.zip"
         7z x -y -omihomo mihomo.zip
         mkdir -p PattN-$Target-$Arch/bin/mihomo
         cp -f mihomo/*.exe PattN-$Target-$Arch/bin/mihomo/mihomo.exe

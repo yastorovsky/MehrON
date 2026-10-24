@@ -24,10 +24,6 @@ permissions:
   contents: write
   actions: read
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
   build-windows:
     name: Build Windows x64
@@ -131,7 +127,7 @@ jobs:
           Copy-Item -Path "rust-extracted/WinDivert.dll" -Destination "$binDir/sni-spoofing/" -Force -ErrorAction SilentlyContinue
           Remove-Item -Path $rustZip, "rust-extracted" -Recurse -Force -ErrorAction SilentlyContinue
 
-          # Download latest Xray-core (patterniha v26.10.22)
+          # Download latest Xray-core (patterniha v26.9.13)
           Write-Host "Downloading latest Xray-core..."
           $xrayZip = "xray-latest.zip"
           curl.exe -L -s -o $xrayZip "https://github.com/patterniha/Xray-core/releases/latest/download/Xray-windows-64.zip"
@@ -170,10 +166,10 @@ jobs:
             Copy-Item -Path "$coreRoot/srss" -Destination "$binDir/" -Recurse -Force
           }
 
-          # Download latest sing-box (v1.14.4)
-          Write-Host "Downloading latest sing-box (v1.14.4)..."
+          # Download latest sing-box (v1.14.1)
+          Write-Host "Downloading latest sing-box (v1.14.1)..."
           $singZip = "sing-box-latest.zip"
-          curl.exe -L -s -o $singZip "https://github.com/SagerNet/sing-box/releases/download/v1.14.4/sing-box-1.14.4-windows-amd64.zip"
+          curl.exe -L -s -o $singZip "https://github.com/SagerNet/sing-box/releases/download/v1.14.1/sing-box-1.14.1-windows-amd64.zip"
           Expand-Archive -Path $singZip -DestinationPath "sing-extracted" -Force
           $singExe = Get-ChildItem -Path "sing-extracted" -Recurse -Filter "sing-box.exe" | Select-Object -First 1
           if ($singExe) {
@@ -183,10 +179,10 @@ jobs:
             Copy-Item -Path "$coreRoot/sing_box/libcronet.dll" -Destination "$binDir/sing_box/" -Force
           }
 
-          # Download latest mihomo (v1.19.33)
-          Write-Host "Downloading latest mihomo (v1.19.33)..."
+          # Download latest mihomo (v1.19.31)
+          Write-Host "Downloading latest mihomo (v1.19.31)..."
           $mihomoZip = "mihomo-latest.zip"
-          curl.exe -L -s -o $mihomoZip "https://github.com/MetaCubeX/mihomo/releases/download/v1.19.33/mihomo-windows-amd64-compatible-v1.19.33.zip"
+          curl.exe -L -s -o $mihomoZip "https://github.com/MetaCubeX/mihomo/releases/download/v1.19.31/mihomo-windows-amd64-compatible-v1.19.31.zip"
           Expand-Archive -Path $mihomoZip -DestinationPath "mihomo-extracted" -Force
           $mihomoExe = Get-ChildItem -Path "mihomo-extracted" -Recurse -Filter "*.exe" | Select-Object -First 1
           if ($mihomoExe) {
@@ -194,26 +190,19 @@ jobs:
             Copy-Item -Path $mihomoExe.FullName -Destination "$binDir/mihomo/$($mihomoExe.Name)" -Force
           }
 
-          # Download latest Aether bundle (aether, psiphon-tunnel-core, lyrebird)
-          Write-Host "Downloading latest Aether bundle..."
+          # Download latest Aether
+          Write-Host "Downloading latest Aether..."
           $aetherZip = "aether-latest.zip"
-          curl.exe -L -s -o $aetherZip "https://github.com/patterniha/Aether/releases/latest/download/aether-windows-x86_64.zip"
+          curl.exe -L -s -o $aetherZip "https://github.com/CluvexStudio/Aether/releases/latest/download/aether-windows-x86_64.zip"
           Expand-Archive -Path $aetherZip -DestinationPath "aether-extracted" -Force
-          New-Item -ItemType Directory -Path "$binDir/aether" -Force | Out-Null
-          Get-ChildItem -Path "aether-extracted" -Recurse -File | ForEach-Object {
-            if ($_.Name -match "^(aether|psiphon-tunnel-core|lyrebird)\.exe$" -or $_.Name -match "\.txt$") {
-              Copy-Item -Path $_.FullName -Destination "$binDir/aether/$($_.Name)" -Force
+          $aetherExe = Get-ChildItem -Path "aether-extracted" -Recurse -Filter "aether.exe" | Select-Object -First 1
+          if ($aetherExe) {
+            New-Item -ItemType Directory -Path "$binDir/aether" -Force | Out-Null
+            Copy-Item -Path $aetherExe.FullName -Destination "$binDir/aether/aether.exe" -Force
+            if (Test-Path "$($aetherExe.DirectoryName)/pt") {
+              Copy-Item -Path "$($aetherExe.DirectoryName)/pt" -Destination "$binDir/aether/" -Recurse -Force
             }
           }
-          if (Test-Path "aether-extracted/LICENSES") {
-            Copy-Item -Path "aether-extracted/LICENSES" -Destination "$binDir/aether/LICENSES" -Recurse -Force
-          }
-
-          # Download Psiphon server list
-          Write-Host "Downloading Psiphon server list..."
-          curl.exe -fsSL --retry 3 --retry-delay 5 -o "$binDir/psiphon_servers.dat" "https://s3.amazonaws.com/psiphon/web/mjr4-p23r-puwl/server_list_compressed"
-          $stamp = [DateTimeOffset]::UtcNow.ToUnixTimeSeconds()
-          Set-Content -Path "$binDir/psiphon_servers.stamp" -Value "$stamp`n" -NoNewline
 
           # Build latest psiphon-tunnel-core from shirokhorshid fork
           Write-Host "Building psiphon-tunnel-core from shirokhorshid fork..."
@@ -242,20 +231,8 @@ jobs:
           if (-not (Test-Path "$binDir/mihomo/mihomo.exe")) {
             throw "mihomo.exe was not found or copied into bin/mihomo/"
           }
-          if (-not (Test-Path "$binDir/aether/psiphon-tunnel-core.exe") -and (Test-Path "$binDir/psiphon/psiphon.exe")) {
-            Copy-Item -Path "$binDir/psiphon/psiphon.exe" -Destination "$binDir/aether/psiphon-tunnel-core.exe" -Force
-          }
           if (-not (Test-Path "$binDir/aether/aether.exe")) {
             throw "aether.exe was not found or copied into bin/aether/"
-          }
-          if (-not (Test-Path "$binDir/aether/psiphon-tunnel-core.exe")) {
-            throw "psiphon-tunnel-core.exe was not found in bin/aether/"
-          }
-          if (-not (Test-Path "$binDir/aether/lyrebird.exe")) {
-            throw "lyrebird.exe was not found or copied into bin/aether/"
-          }
-          if (-not (Test-Path "$binDir/psiphon_servers.dat")) {
-            throw "psiphon_servers.dat was not found in bin/"
           }
           if (-not (Test-Path "$binDir/psiphon/psiphon.exe")) {
             throw "psiphon.exe was not found or copied into bin/psiphon/"
@@ -272,7 +249,6 @@ jobs:
           & "$binDir/sing_box/sing-box.exe" version
           & "$binDir/mihomo/mihomo.exe" -v
           & "$binDir/aether/aether.exe" --version
-          & "$binDir/aether/psiphon-tunnel-core.exe" --version
 
           # Download official rules containing gfw, geolocation-!cn, etc.
           Write-Host "Downloading geo rules..."
@@ -399,7 +375,7 @@ jobs:
 
           # Download latest sing-box (Linux amd64)
           echo "Downloading latest sing-box..."
-          curl -fsSL "https://github.com/SagerNet/sing-box/releases/download/v1.14.4/sing-box-1.14.4-linux-amd64.tar.gz" -o sing-box.tar.gz
+          curl -fsSL "https://github.com/SagerNet/sing-box/releases/download/v1.14.1/sing-box-1.14.1-linux-amd64.tar.gz" -o sing-box.tar.gz
           mkdir -p sing-extracted
           tar -xzf sing-box.tar.gz -C sing-extracted
           singExe=$(find sing-extracted -type f -name "sing-box" | head -n 1)
@@ -411,34 +387,28 @@ jobs:
 
           # Download latest mihomo (Linux amd64)
           echo "Downloading latest mihomo..."
-          curl -fsSL "https://github.com/MetaCubeX/mihomo/releases/download/v1.19.33/mihomo-linux-amd64-compatible-v1.19.33.gz" -o mihomo.gz
+          curl -fsSL "https://github.com/MetaCubeX/mihomo/releases/download/v1.19.31/mihomo-linux-amd64-compatible-v1.19.31.gz" -o mihomo.gz
           gzip -d mihomo.gz
           cp -f mihomo "$binDir/mihomo/mihomo"
           chmod +x "$binDir/mihomo/mihomo"
           rm -f mihomo
 
-          # Download latest Aether bundle (Linux x86_64: aether, psiphon-tunnel-core, lyrebird)
-          echo "Downloading latest Aether bundle..."
-          curl -fsSL "https://github.com/patterniha/Aether/releases/latest/download/aether-linux-x86_64-musl.tar.gz" -o aether.tar.gz
-          mkdir -p aether-extracted "$binDir/aether"
+          # Download latest Aether (Linux x86_64)
+          echo "Downloading latest Aether..."
+          curl -fsSL "https://github.com/CluvexStudio/Aether/releases/latest/download/aether-linux-x86_64.tar.gz" -o aether.tar.gz
+          mkdir -p aether-extracted
           tar -xzf aether.tar.gz -C aether-extracted
-          for bin in aether psiphon-tunnel-core lyrebird; do
-            binFile=$(find aether-extracted -type f -name "$bin" | head -n 1)
-            if [ -n "$binFile" ]; then
-              cp -f "$binFile" "$binDir/aether/$bin"
-              chmod +x "$binDir/aether/$bin"
+          aetherExe=$(find aether-extracted -type f -name "aether" | head -n 1)
+          if [ -n "$aetherExe" ]; then
+            cp -f "$aetherExe" "$binDir/aether/aether"
+            chmod +x "$binDir/aether/aether"
+            aetherDir=$(dirname "$aetherExe")
+            if [ -d "$aetherDir/pt" ]; then
+              cp -rf "$aetherDir/pt" "$binDir/aether/"
+              find "$binDir/aether/pt" -type f -exec chmod +x {} + || true
             fi
-          done
-          find aether-extracted -maxdepth 2 -type f -name "*.txt" -exec cp -f {} "$binDir/aether/" \; 2>/dev/null || true
-          if [ -d "aether-extracted/LICENSES" ]; then
-            cp -rf "aether-extracted/LICENSES" "$binDir/aether/"
           fi
           rm -rf aether.tar.gz aether-extracted
-
-          # Download Psiphon server list
-          echo "Downloading Psiphon server list..."
-          curl -fsSL --retry 3 --retry-delay 5 "https://s3.amazonaws.com/psiphon/web/mjr4-p23r-puwl/server_list_compressed" -o "$binDir/psiphon_servers.dat"
-          date +%s > "$binDir/psiphon_servers.stamp"
 
           # Build latest psiphon-tunnel-core from shirokhorshid fork (Linux amd64)
           echo "Building psiphon-tunnel-core from shirokhorshid fork..."
@@ -459,14 +429,7 @@ jobs:
           if [ ! -f "$binDir/xray/xray" ]; then echo "xray was not found!" >&2; exit 1; fi
           if [ ! -f "$binDir/sing_box/sing-box" ]; then echo "sing-box was not found!" >&2; exit 1; fi
           if [ ! -f "$binDir/mihomo/mihomo" ]; then echo "mihomo was not found!" >&2; exit 1; fi
-          if [ ! -f "$binDir/aether/psiphon-tunnel-core" ] && [ -f "$binDir/psiphon/psiphon" ]; then
-            cp -f "$binDir/psiphon/psiphon" "$binDir/aether/psiphon-tunnel-core"
-            chmod +x "$binDir/aether/psiphon-tunnel-core"
-          fi
           if [ ! -f "$binDir/aether/aether" ]; then echo "aether was not found!" >&2; exit 1; fi
-          if [ ! -f "$binDir/aether/psiphon-tunnel-core" ]; then echo "psiphon-tunnel-core was not found in aether!" >&2; exit 1; fi
-          if [ ! -f "$binDir/aether/lyrebird" ]; then echo "lyrebird was not found in aether!" >&2; exit 1; fi
-          if [ ! -f "$binDir/psiphon_servers.dat" ]; then echo "psiphon_servers.dat was not found!" >&2; exit 1; fi
           if [ ! -f "$binDir/psiphon/psiphon" ]; then echo "psiphon was not found!" >&2; exit 1; fi
 
           echo "Verifying bundled core versions:"
@@ -474,7 +437,6 @@ jobs:
           "$binDir/sing_box/sing-box" version
           "$binDir/mihomo/mihomo" -v
           "$binDir/aether/aether" --version
-          "$binDir/aether/psiphon-tunnel-core" --version
 
           # Download official geo rules
           echo "Downloading geo rules..."
@@ -567,7 +529,7 @@ jobs:
   publish-release:
     name: Publish Release
     needs: [build-windows, build-linux]
-    if: github.ref_type == 'tag' || inputs.create_release == true || github.ref_name == 'Beta'
+    if: github.ref_type == 'tag' || inputs.create_release == true || github.ref_name == 'main' || github.ref_name == 'Beta'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -625,8 +587,10 @@ jobs:
           find ./dist/MehrON-linux-64/bin -type f -exec chmod +x {} + || true
           tar -czf ./MehrON-linux-64.tar.gz -C ./dist/MehrON-linux-64 .
           (cd ./dist/MehrON-linux-64 && zip -q -r ../../MehrON-linux-64.zip .)
+          cp -f ./MehrON-linux-64.tar.gz ./MehrON-FM-Edition-nixos-64.tar.gz
           echo "Linux package: MehrON-linux-64.tar.gz ($(du -h MehrON-linux-64.tar.gz | cut -f1))"
           echo "Linux package: MehrON-linux-64.zip ($(du -h MehrON-linux-64.zip | cut -f1))"
+          echo "NixOS FM Edition package: MehrON-FM-Edition-nixos-64.tar.gz ($(du -h MehrON-FM-Edition-nixos-64.tar.gz | cut -f1))"
 
       - name: Create or Update GitHub Release
         uses: softprops/action-gh-release@v2
@@ -635,9 +599,10 @@ jobs:
           tag_name: ${{ env.TAG_NAME }}
           target_commitish: ${{ github.ref_name }}
           body: |
-            ## MehrON ${{ env.TAG_NAME }}
+            ## MehrON ${{ env.TAG_NAME }} (FM Edition)
 
             ### ✨ Improvements & Highlights
+            - **🌸 FM Edition Branding**: Special edition branding across application interface, CLI versioning, and desktop entries.
             - **❄️ First-Class NixOS Support**: Native integration via Nix Flakes, derivation, and NixOS module.
             - **⚡ Native Architecture**: Unified and refined native runtime for Windows and Linux (Ubuntu / Debian / NixOS).
             - **🐧 Linux (Ubuntu / Debian x64) Support**: Native cross-platform desktop client release with bundled Linux cores, portable archives, and official .deb package.
@@ -648,12 +613,13 @@ jobs:
             - **📦 Core Engines & Routing**: Updated high-performance core binaries and latest geo-routing rules.
 
             ---
-            *Platforms: Windows x64 (Portable), Linux x64 (Ubuntu / Debian .deb & portable), NixOS (Flake & portable)*
+            *Platforms: Windows x64 (Portable), Linux x64 (Ubuntu / Debian .deb & portable), NixOS (MehrON-FM-Edition-nixos-64.tar.gz & Flake)*
           files: |
             MehrON-windows-64.zip
             MehrON-linux-64.tar.gz
             MehrON-linux-64.zip
             MehrON-linux-amd64.deb
             MehrON-linux-64.deb
+            MehrON-FM-Edition-nixos-64.tar.gz
           draft: false
-          prerelease: ${{ contains(env.TAG_NAME, 'beta') || github.ref_name == 'Beta' }}
+          prerelease: ${{ github.ref_name == 'Beta' }}

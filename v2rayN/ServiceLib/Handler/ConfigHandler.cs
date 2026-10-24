@@ -320,7 +320,7 @@ public static class ConfigHandler
             item.TransportExtra = profileItem.TransportExtra;
         }
 
-        if (item.CoreType == ECoreType.aether || item.ConfigType == EConfigType.Aether)
+        if (item.CoreType == ECoreType.aether)
         {
             return await AddAetherServer(config, item);
         }
@@ -332,7 +332,6 @@ public static class ConfigHandler
 
         var ret = item.ConfigType switch
         {
-            EConfigType.Aether => await AddAetherServer(config, item),
             EConfigType.VMess => await AddVMessServer(config, item),
             EConfigType.Shadowsocks => await AddShadowsocksServer(config, item),
             EConfigType.SOCKS => await AddSocksServer(config, item),
@@ -655,13 +654,14 @@ public static class ConfigHandler
             item.DisplayLog = profileItem.DisplayLog;
             item.PreSocksPort = profileItem.PreSocksPort;
             item.ProtoExtra = profileItem.ProtoExtra;
-            item.Finalmask = profileItem.Finalmask;
-            item.DialMode = profileItem.DialMode;
-            item.TargetStrategy = profileItem.TargetStrategy;
         }
 
-        item.ConfigType = EConfigType.Aether;
-        item.CoreType = ECoreType.Xray;
+        item.ConfigType = EConfigType.Custom;
+        item.CoreType = ECoreType.aether;
+        if (item.Address.IsNullOrEmpty())
+        {
+            item.Address = Global.Loopback;
+        }
 
         await AddServerCommon(config, item, true);
         return 0;

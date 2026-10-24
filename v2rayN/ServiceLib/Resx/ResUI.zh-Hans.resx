@@ -1,52 +1,110 @@
-<?xml version='1.0' encoding='utf-8'?>
-<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  
-  <xs:schema id="root">
-    <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xs:element name="root" ns1:IsDataSet="true">
-      <xs:complexType>
-        <xs:choice maxOccurs="unbounded">
-          <xs:element name="metadata">
-            <xs:complexType>
-              <xs:sequence>
-                <xs:element name="value" type="xsd:string" minOccurs="0" />
-              </xs:sequence>
-              <xs:attribute name="name" use="required" type="xsd:string" />
-              <xs:attribute name="type" type="xsd:string" />
-              <xs:attribute name="mimetype" type="xsd:string" />
-              <xs:attribute ref="xml:space" />
-            </xs:complexType>
-          </xs:element>
-          <xs:element name="assembly">
-            <xs:complexType>
-              <xs:attribute name="alias" type="xsd:string" />
-              <xs:attribute name="name" type="xsd:string" />
-            </xs:complexType>
-          </xs:element>
-          <xs:element name="data">
-            <xs:complexType>
-              <xs:sequence>
-                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
-                <xs:element name="comment" type="xsd:string" minOccurs="0" ns1:Ordinal="2" />
-              </xs:sequence>
-              <xs:attribute name="name" type="xsd:string" use="required" ns1:Ordinal="1" />
-              <xs:attribute name="type" type="xsd:string" ns1:Ordinal="3" />
-              <xs:attribute name="mimetype" type="xsd:string" ns1:Ordinal="4" />
-              <xs:attribute ref="xml:space" />
-            </xs:complexType>
-          </xs:element>
-          <xs:element name="resheader">
-            <xs:complexType>
-              <xs:sequence>
-                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
-              </xs:sequence>
-              <xs:attribute name="name" type="xsd:string" use="required" />
-            </xs:complexType>
-          </xs:element>
-        </xs:choice>
-      </xs:complexType>
-    </xs:element>
-  </xs:schema>
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!--
+    Microsoft ResX Schema
+
+    Version 2.0
+
+    The primary goals of this format is to allow a simple XML format
+    that is mostly human readable. The generation and parsing of the
+    various data types are done through the TypeConverter classes
+    associated with the data types.
+
+    Example:
+
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+
+    There are any number of "resheader" rows that contain simple
+    name/value pairs.
+
+    Each data row contains a name, and value. The row also contains a
+    type or mimetype. Type corresponds to a .NET class that support
+    text/value conversion through the TypeConverter architecture.
+    Classes that don't support this are serialized and stored with the
+    mimetype set.
+
+    The mimetype is used for serialized objects, and tells the
+    ResXResourceReader how to depersist the object. This is currently not
+    extensible. For a given mimetype the value must be set accordingly:
+
+    Note - application/x-microsoft.net.object.binary.base64 is the format
+    that the ResXResourceWriter will generate, however the reader can
+    read any of the formats listed below.
+
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -1856,662 +1914,5 @@
   </data>
   <data name="TbSortingProcess" xml:space="preserve">
     <value>进程</value>
-  </data>
-<data name="menuCheckAndUpdate" xml:space="preserve">
-    <value>检查并更新</value>
-  </data>
-  <data name="TbEchOutbound" xml:space="preserve">
-    <value>EchOutbound</value>
-  </data>
-  <data name="MsgEchOutboundNeedsEchConfigList" xml:space="preserve">
-    <value>EchOutbound 需要填写 EchConfigList</value>
-  </data>
-  <data name="MsgEchOutboundInvalidTag" xml:space="preserve">
-    <value>EchOutbound 必须包含非空的 "tag"，不能是 direct 或 block，且不能以 proxy 开头</value>
-  </data>
-  <data name="MsgEchOutboundTagConflict" xml:space="preserve">
-    <value>EchOutbound 的 tag "{0}" 已被其他出站使用</value>
-  </data>
-  <data name="menuAddMasqueServer" xml:space="preserve">
-    <value>添加 [MASQUE]</value>
-  </data>
-  <data name="MsgAetherConfigSingleProfile" xml:space="preserve">
-    <value>一个配置只能使用一个 Aether 配置</value>
-  </data>
-  <data name="MsgAetherConfigTwoExits" xml:space="preserve">
-    <value>这里一个 Aether 内核将不得不以两种方式向外连接：同一隧道既单独使用又位于代理链的某一跳之后，或位于两个不同的跳之后，或使用两种不同的 exit-node 设置</value>
-  </data>
-  <data name="MsgAetherChainOneProfile" xml:space="preserve">
-    <value>一个代理链只能包含一个 Aether 配置</value>
-  </data>
-  <data name="MsgAetherChainHopMissing" xml:space="preserve">
-    <value>无法构建此代理链中 Aether 配置向外连接所经的那一跳，Aether 内核将会不经它直接连接互联网</value>
-  </data>
-  <data name="MsgAetherChainHopGroup" xml:space="preserve">
-    <value>代理链“{0}”的 Aether 配置将经由一个策略组或代理链向外连接；请在其入口一侧放置单个配置</value>
-  </data>
-  <data name="MsgAetherInGroupHop" xml:space="preserve">
-    <value>Aether 配置“{1}”位于“{0}”之中，而代理链经由“{0}”连接；请把该 Aether 配置直接放入代理链</value>
-  </data>
-  <data name="MsgAetherChainHopDropped" xml:space="preserve">
-    <value>代理链“{0}”包含 Aether 配置，只能完整构建或完全不构建：“{1}”无法使用，缺少它代理链将以比其所列更短的路径传送流量</value>
-  </data>
-  <data name="MsgAetherExitNodeNotFound" xml:space="preserve">
-    <value>找不到名为“{0}”的配置</value>
-  </data>
-  <data name="MsgAetherExitNodeDuplicate" xml:space="preserve">
-    <value>找到两个名为“{0}”的配置；请重命名其中一个</value>
-  </data>
-  <data name="MsgAetherExitNodeUnusable" xml:space="preserve">
-    <value>exit-node 配置“{0}”无法生成出站；请另选一个，或选择 freedom</value>
-  </data>
-  <data name="MsgAetherExitNodeEchUnusable" xml:space="preserve">
-    <value>exit-node 配置“{0}”的 echOutbound 无法使用；请在该配置中修正，或另选一个，或选择 freedom</value>
-  </data>
-  <data name="MsgAetherListenPortTaken" xml:space="preserve">
-    <value>Aether 内核需要的端口 {0} 已被应用自身占用，例如其本地代理；请在设置中更改 Aether 监听端口，或更改命令中的端口</value>
-  </data>
-  <data name="MsgAetherSecondaryPortTaken" xml:space="preserve">
-    <value>此配置的某个入站已在 {0} 上监听，而这是比 Aether 监听端口大 3 的端口，Aether 内核经由它向外连接；请在设置中更改 Aether 监听端口</value>
-  </data>
-  <data name="MsgAetherGroupLeavesOut" xml:space="preserve">
-    <value>策略组“{0}”排除了“{1}”：这是另一个设置不同的 Aether 配置，而一个内核只能服务一个配置</value>
-  </data>
-  <data name="MsgAetherConnecting" xml:space="preserve">
-    <value>Aether 内核仍在连接中</value>
-  </data>
-  <data name="MsgAetherConnected" xml:space="preserve">
-    <value>Aether 内核已连接</value>
-  </data>
-  <data name="MsgAetherCoreStopped" xml:space="preserve">
-    <value>Aether 内核已停止运行</value>
-  </data>
-  <data name="MsgAetherCoreStoppedNoEchKey" xml:space="preserve">
-    <value>Aether 内核已停止：ECH 已开启，但没有找到可用的 ECH 密钥。没有密钥，服务器名称就会以明文发送。</value>
-  </data>
-  <data name="MsgAetherCoreStoppedWithError" xml:space="preserve">
-    <value>Aether 内核已停止运行：{0}</value>
-  </data>
-  <data name="MsgAetherCoreStoppedChainEnded" xml:space="preserve">
-    <value>Aether 隧道内的 Tor 或 Psiphon 已结束，因此连接已停止：{0}</value>
-  </data>
-  <data name="MsgAetherCoreCannotStart" xml:space="preserve">
-    <value>Aether 内核无法启动。在 Windows 上，2.3.2 之前的 aether-core 需要 Microsoft Visual C++ 2015-2022 Redistributable (x64)；请在“检查更新”中更新 aether-core</value>
-  </data>
-  <data name="MsgAetherTemplateExitNodeSelected" xml:space="preserve">
-    <value>此配置中的某个负载均衡器或观测器会选取标签以 {0} 开头的出站，其中也包括 exit-node，即 Aether 内核向外连接所经的出站；请修改该选择器</value>
-  </data>
-  <data name="MsgAetherTestSkipped" xml:space="preserve">
-    <value>未测试：正在运行的 Aether 配置占用了 Aether 监听端口</value>
-  </data>
-  <data name="MsgPsiphonServersUpdated" xml:space="preserve">
-    <value>psiphon_servers 已更新：{0} 个服务器，发布于 {1}</value>
-  </data>
-  <data name="MsgPsiphonServersInvalid" xml:space="preserve">
-    <value>下载的 psiphon_servers 不是 Psiphon 签名的服务器列表；继续使用当前列表</value>
-  </data>
-  <data name="MsgPsiphonServersCurrent" xml:space="preserve">
-    <value>psiphon_servers 已是最新（{0}）</value>
-  </data>
-  <data name="TbSettingsAetherListenPort" xml:space="preserve">
-    <value>Aether 监听端口</value>
-  </data>
-  <data name="TbSettingsAetherListenPortTip" xml:space="preserve">
-    <value>内核还会占用其后的三个端口</value>
-  </data>
-  <data name="FillAetherListenPort" xml:space="preserve">
-    <value>Aether 监听端口请使用 1024 到 65532 之间的端口</value>
-  </data>
-  <data name="MsgAetherListenPortLocalProxy" xml:space="preserve">
-    <value>Aether 监听端口及其后的三个端口不能包含 PattN 的本地端口：本地混合监听端口及其后的六个端口</value>
-  </data>
-  <data name="MsgAetherListenPortInUse" xml:space="preserve">
-    <value>Aether 内核监听的端口 {0} 已被其他程序占用或被系统保留；请在设置中更改 Aether 监听端口，或更改命令中的端口</value>
-  </data>
-  <data name="MsgAetherSecondaryPortInUse" xml:space="preserve">
-    <value>端口 {0}（比 Aether 监听端口大 3，Xray 在此为 Aether 内核提供向外连接的入口）已被其他程序占用或被系统保留；请在设置中更改 Aether 监听端口</value>
-  </data>
-  <data name="MsgRoutingRuleChainHopNotBuilt" xml:space="preserve">
-    <value>无法在其订阅的链中构建“{0}”</value>
-  </data>
-  <data name="MsgAetherListenPortInvalid" xml:space="preserve">
-    <value>Aether 配置的命令让内核监听 {0}，这不是有效端口（1 到 65535）；请更改命令中的端口</value>
-  </data>
-  <data name="MsgAetherListenAddressInvalid" xml:space="preserve">
-    <value>Aether 配置的命令给 {0} 写了内核不接受的地址；请在它后面写 IP 地址和端口，例如 127.0.0.1:20808</value>
-  </data>
-  <data name="MsgAetherListenAddressUnreachable" xml:space="preserve">
-    <value>Aether 配置的命令给 {0} 写了应用不会连接的地址：应用通过 127.0.0.1 连接内核，请在它后面写 127.0.0.1（或表示所有地址的 0.0.0.0）和端口</value>
-  </data>
-  <data name="MsgAetherListenPortShared" xml:space="preserve">
-    <value>Aether 配置的命令让内核用两个监听器监听 {0}（命令未写出的监听器仍会监听：应用连接的那个在 Aether 监听端口上，其他的在内核的默认端口上：1819、1820 或 1821）；请为每个监听器指定各自的端口</value>
-  </data>
-  <data name="MsgRoutingRuleTargetNotFound" xml:space="preserve">
-    <value>找不到名为“{0}”的配置</value>
-  </data>
-  <data name="MsgRoutingRuleTargetDuplicate" xml:space="preserve">
-    <value>找到两个名为“{0}”的配置；请重命名其中一个</value>
-  </data>
-  <data name="MsgRoutingRuleTargetUnbuilt" xml:space="preserve">
-    <value>无法构建路由规则发送流量所到的配置“{0}”；请修复它，或关闭使用它的规则</value>
-  </data>
-  <data name="menuAddAetherServer" xml:space="preserve">
-    <value>手动添加 Aether 配置</value>
-  </data>
-  <data name="TbAetherRenewKey" xml:space="preserve">
-    <value>获取新的 WARP 密钥…</value>
-  </data>
-  <data name="TbAetherProtocol" xml:space="preserve">
-    <value>协议</value>
-  </data>
-  <data name="TbAetherTransport" xml:space="preserve">
-    <value>传输</value>
-  </data>
-  <data name="TbAetherMasqueSni" xml:space="preserve">
-    <value>MASQUE 服务器名 (SNI)</value>
-  </data>
-  <data name="TbAetherFragment" xml:space="preserve">
-    <value>分片 ClientHello</value>
-  </data>
-  <data name="TbAetherFragmentSize" xml:space="preserve">
-    <value>分片大小（字节）</value>
-  </data>
-  <data name="TbAetherFragmentDelay" xml:space="preserve">
-    <value>分片间隔（毫秒）</value>
-  </data>
-  <data name="TbAetherEch" xml:space="preserve">
-    <value>加密客户端问候（ECH）</value>
-  </data>
-  <data name="TbAetherEchHint" xml:space="preserve">
-    <value>隐藏 MASQUE 握手中的服务器名称；没有可用的密钥时 Aether 不会连接</value>
-  </data>
-  <data name="TbAetherEchDns" xml:space="preserve">
-    <value>ECH DNS</value>
-  </data>
-  <data name="TbAetherEchDomain" xml:space="preserve">
-    <value>ECH 域名</value>
-  </data>
-  <data name="TbAetherScanMode" xml:space="preserve">
-    <value>扫描模式</value>
-  </data>
-  <data name="TbAetherScanTurbo" xml:space="preserve">
-    <value>极速</value>
-  </data>
-  <data name="TbAetherScanBalanced" xml:space="preserve">
-    <value>均衡</value>
-  </data>
-  <data name="TbAetherScanThorough" xml:space="preserve">
-    <value>全面</value>
-  </data>
-  <data name="TbAetherScanVerified" xml:space="preserve">
-    <value>已验证</value>
-  </data>
-  <data name="TbAetherScanIronclad" xml:space="preserve">
-    <value>可靠</value>
-  </data>
-  <data name="TbAetherObfuscation" xml:space="preserve">
-    <value>混淆</value>
-  </data>
-  <data name="TbAetherNoizeAuto" xml:space="preserve">
-    <value>自动</value>
-  </data>
-  <data name="TbAetherNoizeOff" xml:space="preserve">
-    <value>关闭</value>
-  </data>
-  <data name="TbAetherNoizeLight" xml:space="preserve">
-    <value>轻度</value>
-  </data>
-  <data name="TbAetherNoizeFirewall" xml:space="preserve">
-    <value>防火墙</value>
-  </data>
-  <data name="TbAetherNoizeBalanced" xml:space="preserve">
-    <value>均衡</value>
-  </data>
-  <data name="TbAetherNoizeGfw" xml:space="preserve">
-    <value>GFW</value>
-  </data>
-  <data name="TbAetherNoizeAggressive" xml:space="preserve">
-    <value>激进</value>
-  </data>
-  <data name="TbAetherFingerprint" xml:space="preserve">
-    <value>Fingerprint</value>
-  </data>
-  <data name="TbAetherIpVersion" xml:space="preserve">
-    <value>IP 版本</value>
-  </data>
-  <data name="TbAetherExitNode" xml:space="preserve">
-    <value>exit-node</value>
-  </data>
-  <data name="TbAetherExitNodeFreedom" xml:space="preserve">
-    <value>freedom（默认）</value>
-  </data>
-  <data name="TbAetherExitNodeHint" xml:space="preserve">
-    <value>内核经由此配置的出站向外连接，如同经由代理链的一跳；下方的 finalMask 和 dialMode 只用于 freedom</value>
-  </data>
-  <data name="TbAetherExitFinalMask" xml:space="preserve">
-    <value>exit-node 的 finalMask 原始 JSON 格式: { FinalMaskObject }</value>
-  </data>
-  <data name="TbAetherExitDialMode" xml:space="preserve">
-    <value>exit-node dialMode</value>
-  </data>
-  <data name="TbLabelNumbered" xml:space="preserve">
-    <value>{0}（{1}）</value>
-  </data>
-  <data name="TbAetherPsiphon" xml:space="preserve">
-    <value>Psiphon</value>
-  </data>
-  <data name="TbAetherPsiphonOff" xml:space="preserve">
-    <value>关闭</value>
-  </data>
-  <data name="TbAetherPsiphonChain" xml:space="preserve">
-    <value>WARP → Psiphon</value>
-  </data>
-  <data name="TbAetherPsiphonReverse" xml:space="preserve">
-    <value>Psiphon → WARP</value>
-  </data>
-  <data name="TbAetherPsiphonOnly" xml:space="preserve">
-    <value>仅 Psiphon</value>
-  </data>
-  <data name="TbAetherTor" xml:space="preserve">
-    <value>Tor</value>
-  </data>
-  <data name="TbAetherTorOff" xml:space="preserve">
-    <value>关闭</value>
-  </data>
-  <data name="TbAetherTorChain" xml:space="preserve">
-    <value>WARP → Tor</value>
-  </data>
-  <data name="TbAetherTorReverse" xml:space="preserve">
-    <value>Tor → WARP</value>
-  </data>
-  <data name="TbAetherTorOnly" xml:space="preserve">
-    <value>仅 Tor</value>
-  </data>
-  <data name="TbAetherPsiphonMode" xml:space="preserve">
-    <value>Psiphon 连接方式</value>
-  </data>
-  <data name="TbAetherPsiphonModeAuto" xml:space="preserve">
-    <value>自动</value>
-  </data>
-  <data name="TbAetherPsiphonModeCdn" xml:space="preserve">
-    <value>仅 CDN 前置</value>
-  </data>
-  <data name="TbAetherPsiphonModeDirect" xml:space="preserve">
-    <value>仅直连</value>
-  </data>
-  <data name="TbAetherPsiphonCdnIps" xml:space="preserve">
-    <value>CDN 前置 IP</value>
-  </data>
-  <data name="TbAetherPsiphonCdnSni" xml:space="preserve">
-    <value>CDN 前置服务器名 (SNI)</value>
-  </data>
-  <data name="TbAetherPsiphonListHint" xml:space="preserve">
-    <value>以逗号分隔；留空使用内置列表</value>
-  </data>
-  <data name="TbAetherPsiphonCdnSets" xml:space="preserve">
-    <value>要扫描的 CDN 边缘列表</value>
-  </data>
-  <data name="TbAetherPsiphonCdnSetsAll" xml:space="preserve">
-    <value>Psiphon 内置的全部列表</value>
-  </data>
-  <data name="TbAetherPsiphonCdnSetsHint" xml:space="preserve">
-    <value>前置扫描尝试 Psiphon 内置的哪些边缘列表。都不勾选表示全部；与你自己的 IP 一起时，在这些 IP 之后尝试</value>
-  </data>
-  <data name="TbAetherCdnSetCloudflare" xml:space="preserve">
-    <value>Cloudflare</value>
-  </data>
-  <data name="TbAetherCdnSetFastly" xml:space="preserve">
-    <value>Fastly</value>
-  </data>
-  <data name="TbAetherCdnSetCloudfront" xml:space="preserve">
-    <value>CloudFront</value>
-  </data>
-  <data name="TbAetherCdnSetAkamai" xml:space="preserve">
-    <value>Akamai（Psiphon 列表）</value>
-  </data>
-  <data name="TbAetherCdnSetBunny" xml:space="preserve">
-    <value>Bunny（Psiphon 列表）</value>
-  </data>
-  <data name="TbAetherCdnSetVercel" xml:space="preserve">
-    <value>Vercel</value>
-  </data>
-  <data name="TbAetherCdnSetGithub" xml:space="preserve">
-    <value>GitHub</value>
-  </data>
-  <data name="TbAetherCdnSetCurated" xml:space="preserve">
-    <value>精选前置边缘</value>
-  </data>
-  <data name="TbAetherCdnSetLegacy" xml:space="preserve">
-    <value>旧版 Android 覆盖</value>
-  </data>
-  <data name="TbAetherPsiphonRegion" xml:space="preserve">
-    <value>出口国家/地区</value>
-  </data>
-  <data name="TbAetherPsiphonRegionAny" xml:space="preserve">
-    <value>任意国家/地区</value>
-  </data>
-  <data name="TbAetherPsiphonBundledList" xml:space="preserve">
-    <value>从内置服务器列表开始</value>
-  </data>
-  <data name="TbAetherPsiphonBundledListHint" xml:space="preserve">
-    <value>开启：Psiphon 立即尝试 psiphon_servers.dat 中的服务器，仅在它们失败时才获取新列表。关闭：在首次连接前先获取新列表，因此列表必须可访问，例如通过 WARP</value>
-  </data>
-  <data name="TbAetherClearPsiphon" xml:space="preserve">
-    <value>清除 Psiphon 数据</value>
-  </data>
-  <data name="TbAetherClearPsiphonHint" xml:space="preserve">
-    <value>忘记 Psiphon 已学到的服务器及其获取的列表。下次启动将重新从内置列表开始；若上方开关关闭，则从新下载开始</value>
-  </data>
-  <data name="TbAetherTorBridges" xml:space="preserve">
-    <value>网桥</value>
-  </data>
-  <data name="TbAetherTorBridgesAuto" xml:space="preserve">
-    <value>Tor 被封锁时</value>
-  </data>
-  <data name="TbAetherTorBridgesFirst" xml:space="preserve">
-    <value>一开始就使用</value>
-  </data>
-  <data name="TbAetherTorBridgesNever" xml:space="preserve">
-    <value>从不</value>
-  </data>
-  <data name="TbAetherTorBridgesOwn" xml:space="preserve">
-    <value>使用我自己的网桥行</value>
-  </data>
-  <data name="TbAetherTorRelays" xml:space="preserve">
-    <value>网桥来源</value>
-  </data>
-  <data name="TbAetherTorRelaysAuto" xml:space="preserve">
-    <value>bridgedb 和公共中继</value>
-  </data>
-  <data name="TbAetherTorRelaysOnly" xml:space="preserve">
-    <value>仅公共中继</value>
-  </data>
-  <data name="TbAetherTorRelaysOff" xml:space="preserve">
-    <value>仅 bridgedb</value>
-  </data>
-  <data name="TbAetherTorBridgeLines" xml:space="preserve">
-    <value>网桥行</value>
-  </data>
-  <data name="TbAetherTorBridgeLinesHint" xml:space="preserve">
-    <value>每行一条，格式同 torrc：obfs4 1.2.3.4:443 指纹 cert=… iat-mode=0</value>
-  </data>
-  <data name="TbAetherOuterHop" xml:space="preserve">
-    <value>外层节点</value>
-  </data>
-  <data name="TbAetherInnerHop" xml:space="preserve">
-    <value>内层节点</value>
-  </data>
-  <data name="TbAetherEndpointHint" xml:space="preserve">
-    <value>留空则自动扫描</value>
-  </data>
-  <data name="TbAetherGoolPeerHint" xml:space="preserve">
-    <value>留空则使用 WARP 分配的端点</value>
-  </data>
-  <data name="TbAetherOtherSettings" xml:space="preserve">
-    <value>其他设置</value>
-  </data>
-  <data name="TbAetherDns" xml:space="preserve">
-    <value>隧道内 DNS</value>
-  </data>
-  <data name="TbAetherDnsHint" xml:space="preserve">
-    <value>以逗号分隔；留空则使用 1.1.1.1 和 1.0.0.1</value>
-  </data>
-  <data name="TbAetherExitLoc" xml:space="preserve">
-    <value>出口地区</value>
-  </data>
-  <data name="TbAetherExitLocHint" xml:space="preserve">
-    <value>DE,SE 表示只允许这些；!IR,RU 表示拒绝这些；留空则接受任意</value>
-  </data>
-  <data name="TbAetherScan" xml:space="preserve">
-    <value>扫描服务器</value>
-  </data>
-  <data name="TbAetherScanning" xml:space="preserve">
-    <value>扫描中…</value>
-  </data>
-  <data name="TbAetherScanAnyway" xml:space="preserve">
-    <value>仍然扫描</value>
-  </data>
-  <data name="TbAetherSaveAnyway" xml:space="preserve">
-    <value>仍然保存</value>
-  </data>
-  <data name="MsgAetherScanBlocked" xml:space="preserve">
-    <value>请先断开 Aether 连接，再进行扫描；扫描会使用当前连接的密钥打开第二条隧道</value>
-  </data>
-  <data name="TbAetherCommand" xml:space="preserve">
-    <value>Aether 命令</value>
-  </data>
-  <data name="TbAetherCommandCustom" xml:space="preserve">
-    <value>已手动编辑：此命令按原样运行，上面的设置不再生效（Xray-core 的设置除外）</value>
-  </data>
-  <data name="TbAetherUseSettings" xml:space="preserve">
-    <value>使用上方设置</value>
-  </data>
-  <data name="TbAetherLog" xml:space="preserve">
-    <value>日志</value>
-  </data>
-  <data name="TbAetherLogEmpty" xml:space="preserve">
-    <value>扫描结果和 WARP 密钥状态会显示在这里</value>
-  </data>
-  <data name="MsgAetherKeysMissing" xml:space="preserve">
-    <value>缺少所需的 WARP 密钥，请先获取</value>
-  </data>
-  <data name="MsgAetherInvalidMasqueSni" xml:space="preserve">
-    <value>MASQUE 服务器名 (SNI) 必须是域名，例如 www.cloudflare.com</value>
-  </data>
-  <data name="MsgAetherInvalidEndpoint" xml:space="preserve">
-    <value>请填写 IP 地址和端口，或将地址留空以自动扫描</value>
-  </data>
-  <data name="MsgAetherInvalidHop" xml:space="preserve">
-    <value>请填写地址和端口，例如 162.159.192.1:2408</value>
-  </data>
-  <data name="MsgAetherSameHop" xml:space="preserve">
-    <value>两个节点的地址必须不同</value>
-  </data>
-  <data name="MsgAetherInvalidFragment" xml:space="preserve">
-    <value>请填写数字或范围，例如 16-32：大小 1–4096 字节，间隔 0–1000 毫秒</value>
-  </data>
-  <data name="MsgAetherInvalidDns" xml:space="preserve">
-    <value>请填写解析器地址，例如 1.1.1.1 或 10.0.0.1:5353，以逗号分隔</value>
-  </data>
-  <data name="MsgAetherInvalidExitLoc" xml:space="preserve">
-    <value>请填写以逗号分隔的两位国家代码，前加 ! 表示拒绝</value>
-  </data>
-  <data name="MsgAetherInvalidEchDns" xml:space="preserve">
-    <value>ECH DNS 必须是 udp://IP、tcp://IP 或 DNS-over-HTTPS 服务器的 https:// 地址</value>
-  </data>
-  <data name="MsgAetherInvalidEchDomain" xml:space="preserve">
-    <value>ECH 域名必须是域名，例如 cloudflare-ech.com</value>
-  </data>
-  <data name="MsgAetherPsiphonNeedsMasque" xml:space="preserve">
-    <value>Psiphon → WARP 仅支持 MASQUE 协议</value>
-  </data>
-  <data name="MsgAetherTorNeedsMasque" xml:space="preserve">
-    <value>Tor → WARP 仅支持 MASQUE 协议</value>
-  </data>
-  <data name="MsgAetherTorPsiphonConflict" xml:space="preserve">
-    <value>Tor 与 Psiphon 只能一个在隧道内、一个在隧道外地组合使用</value>
-  </data>
-  <data name="MsgAetherTorBridgesMissing" xml:space="preserve">
-    <value>请至少填写一条网桥行，或选择其他网桥设置</value>
-  </data>
-  <data name="MsgAetherNextPortTaken" xml:space="preserve">
-    <value>使用 Tor 或 Psiphon 时，内核还会占用 Aether 监听端口之后的端口，它们都不能是应用的本地代理端口；请在设置中更改 Aether 监听端口</value>
-  </data>
-  <data name="MsgAetherInvalidCommand" xml:space="preserve">
-    <value>命令必须包含 Aether 内核的参数，并在 --bind 后给出监听端口</value>
-  </data>
-  <data name="MsgAetherScanStarted" xml:space="preserve">
-    <value>正在扫描服务器…</value>
-  </data>
-  <data name="MsgAetherScanFound" xml:space="preserve">
-    <value>已找到 {0}</value>
-  </data>
-  <data name="MsgAetherScanFoundHops" xml:space="preserve">
-    <value>已找到外层节点 {0} 和内层节点 {1}</value>
-  </data>
-  <data name="MsgAetherScanSuccess" xml:space="preserve">
-    <value>已找到服务器</value>
-  </data>
-  <data name="MsgAetherScanFailed" xml:space="preserve">
-    <value>未找到服务器</value>
-  </data>
-  <data name="MsgAetherScanCancelled" xml:space="preserve">
-    <value>已取消扫描</value>
-  </data>
-  <data name="MsgAetherPsiphonCleared" xml:space="preserve">
-    <value>已清除 Psiphon 数据</value>
-  </data>
-  <data name="MsgAetherPsiphonClearFailed" xml:space="preserve">
-    <value>无法清除 Psiphon 数据</value>
-  </data>
-  <data name="MsgAetherPsiphonClearBlocked" xml:space="preserve">
-    <value>清除 Psiphon 数据前请先断开 Aether 配置；当前连接正在使用它</value>
-  </data>
-  <data name="TbPresetDefault" xml:space="preserve">
-    <value>默认</value>
-  </data>
-  <data name="TbPresetChoose" xml:space="preserve">
-    <value>选择现成的 {0}</value>
-  </data>
-  <data name="TbPresetReplace" xml:space="preserve">
-    <value>替换</value>
-  </data>
-  <data name="TbPresetReplaceTitle" xml:space="preserve">
-    <value>替换 {0}？</value>
-  </data>
-  <data name="TbPresetReplaceMessage" xml:space="preserve">
-    <value>当前的 {0} 不在列表中，替换后将丢失。要替换为 {1} 吗？</value>
-  </data>
-  <data name="MsgAetherKeyWireguardReady" xml:space="preserve">
-    <value>WireGuard 密钥：设备 {0}，IPv4 {1}，IPv6 {2}</value>
-  </data>
-  <data name="MsgAetherKeyWireguardMissing" xml:space="preserve">
-    <value>WireGuard 密钥：尚未注册，将在首次扫描或连接时注册</value>
-  </data>
-  <data name="MsgAetherKeyWireguardInnerReady" xml:space="preserve">
-    <value>WireGuard 内层节点密钥：设备 {0}，IPv4 {1}，IPv6 {2}</value>
-  </data>
-  <data name="MsgAetherKeyWireguardInnerMissing" xml:space="preserve">
-    <value>WireGuard 内层节点密钥：尚未注册，将在首次扫描或连接时注册</value>
-  </data>
-  <data name="MsgAetherKeyMasqueReady" xml:space="preserve">
-    <value>MASQUE 密钥：设备 {0}，IPv4 {1}，IPv6 {2}</value>
-  </data>
-  <data name="MsgAetherKeyMasqueMissing" xml:space="preserve">
-    <value>MASQUE 密钥：尚未注册，将在首次扫描或连接时注册</value>
-  </data>
-  <data name="MsgAetherKeyMasqueInnerReady" xml:space="preserve">
-    <value>MASQUE 内层节点密钥：设备 {0}，IPv4 {1}，IPv6 {2}</value>
-  </data>
-  <data name="MsgAetherKeyMasqueInnerMissing" xml:space="preserve">
-    <value>MASQUE 内层节点密钥：尚未注册，将在首次扫描或连接时注册</value>
-  </data>
-  <data name="MsgAetherKeyGoolReady" xml:space="preserve">
-    <value>WireGuard over MASQUE 密钥：设备 {0}，IPv4 {1}，IPv6 {2}</value>
-  </data>
-  <data name="MsgAetherKeyGoolMissing" xml:space="preserve">
-    <value>WireGuard over MASQUE 密钥：尚未注册，将在首次扫描或连接时注册</value>
-  </data>
-  <data name="MsgAetherKeyOuterReady" xml:space="preserve">
-    <value>外层节点密钥：设备 {0}，IPv4 {1}，IPv6 {2}</value>
-  </data>
-  <data name="MsgAetherKeyOuterMissing" xml:space="preserve">
-    <value>外层节点密钥：尚未注册，将在首次扫描或连接时注册</value>
-  </data>
-  <data name="MsgAetherKeyInnerReady" xml:space="preserve">
-    <value>内层节点密钥：设备 {0}，IPv4 {1}，IPv6 {2}</value>
-  </data>
-  <data name="MsgAetherKeyInnerMissing" xml:space="preserve">
-    <value>内层节点密钥：尚未注册，将在首次扫描或连接时注册</value>
-  </data>
-  <data name="MsgAetherPsiphonUnavailable" xml:space="preserve">
-    <value>Aether 内核文件夹中没有 psiphon-tunnel-core，使用 Psiphon 的配置无法连接；请在“检查更新”中更新 aether-core</value>
-  </data>
-  <data name="MsgAetherTorTransportsUnavailable" xml:space="preserve">
-    <value>Aether 内核文件夹中没有 lyrebird，无法使用 Tor 网桥；Tor 只能在未被封锁的网络上连接</value>
-  </data>
-  <data name="MsgAetherCoreUnavailable" xml:space="preserve">
-    <value>未安装 Aether 内核；请在“检查更新”中获取 aether-core</value>
-  </data>
-  <data name="TbAetherGetKeys" xml:space="preserve">
-    <value>获取新的 WARP 密钥</value>
-  </data>
-  <data name="TbAetherRenewing" xml:space="preserve">
-    <value>正在获取新的 WARP 密钥…</value>
-  </data>
-  <data name="TbAetherKeysKind" xml:space="preserve">
-    <value>要获取新密钥的协议</value>
-  </data>
-  <data name="TbAetherKeysKindAll" xml:space="preserve">
-    <value>全部</value>
-  </data>
-  <data name="TbAetherKeysApiAddress" xml:space="preserve">
-    <value>API 地址</value>
-  </data>
-  <data name="TbAetherKeysApiAddressHint" xml:space="preserve">
-    <value>留空则使用 API 服务器名的地址</value>
-  </data>
-  <data name="TbAetherKeysApiSni" xml:space="preserve">
-    <value>API 服务器名 (SNI)</value>
-  </data>
-  <data name="TbAetherKeysApiSniHint" xml:space="preserve">
-    <value>留空则使用 API 主机</value>
-  </data>
-  <data name="TbAetherKeysApiHost" xml:space="preserve">
-    <value>API 主机</value>
-  </data>
-  <data name="TbAetherKeysApiHostHint" xml:space="preserve">
-    <value>留空则使用 api.devices.cloudflare.com；若其无响应且服务器名也留空，则改用 api.cloudflareclient.com。Cloudflare 会拒绝与主机不同的服务器名</value>
-  </data>
-  <data name="TbAetherKeysFragmentHint" xml:space="preserve">
-    <value>将 WARP API 请求的 ClientHello 分片发送，用于会过滤 API 名称的网络</value>
-  </data>
-  <data name="TbAetherKeysEchHint" xml:space="preserve">
-    <value>隐藏 WARP API 请求中的服务器名称；没有可用的 ECH 密钥时不会请求 WARP 密钥</value>
-  </data>
-  <data name="MsgAetherRenewBlocked" xml:space="preserve">
-    <value>请先断开 Aether 连接，再获取这些密钥；当前连接正在使用它们</value>
-  </data>
-  <data name="TbAetherKeysLogEmpty" xml:space="preserve">
-    <value>内核输出和 WARP 密钥会显示在这里</value>
-  </data>
-  <data name="MsgAetherKeyRenewing" xml:space="preserve">
-    <value>正在注册新的 WARP 密钥；在所有新密钥就绪之前，正在使用的密钥保持不变…</value>
-  </data>
-  <data name="MsgAetherKeyRenewed" xml:space="preserve">
-    <value>新的 WARP 密钥已替换就位，将在下次连接时使用</value>
-  </data>
-  <data name="MsgAetherKeyRenewFailed" xml:space="preserve">
-    <value>注册新的 WARP 密钥失败，已保留当前密钥</value>
-  </data>
-  <data name="MsgAetherKeyRenewCancelled" xml:space="preserve">
-    <value>已取消获取新的 WARP 密钥</value>
-  </data>
-  <data name="MsgAetherKeysInvalidApiAddress" xml:space="preserve">
-    <value>API 地址必须是 IP 地址或域名，可带端口，例如 188.114.97.6:443 或 [2606:4700::1]:8443</value>
-  </data>
-  <data name="MsgAetherKeysInvalidApiSni" xml:space="preserve">
-    <value>API 服务器名必须是域名，例如 api.devices.cloudflare.com</value>
-  </data>
-  <data name="MsgAetherKeysInvalidApiHost" xml:space="preserve">
-    <value>API 主机必须是域名，例如 api.devices.cloudflare.com</value>
-  </data>
-  <data name="MsgAetherKeysInvalidCommand" xml:space="preserve">
-    <value>命令必须注册密钥：--register 后跟 all、wg、masque、mim、gool-classic（WARP-in-WARP）或 gool（WireGuard over MASQUE）</value>
-  </data>
-  <data name="MsgCipherSuitesNeedUnsafe" xml:space="preserve">
-    <value>cipherSuites 仅在指纹为 unsafe 时生效。请选择 unsafe，或清空 cipherSuites。</value>
-  </data>
-  <data name="MsgWebsocketAlpnHttp1Only" xml:space="preserve">
-    <value>WebSocket 和 HTTPUpgrade 仅在 alpn 为 http/1.1 或为空时才能连接。请选择 http/1.1，或留空 alpn。</value>
-  </data>
-  <data name="menuAetherLicenses" xml:space="preserve">
-    <value>Aether 内核许可证</value>
-  </data>
-  <data name="MsgXrayRunCopyFailed" xml:space="preserve">
-    <value>在 Windows 上，PattN 以 xray.exe 的副本 {0} 运行 Xray 内核，但无法使该副本与 xray.exe 一致：{1}</value>
-  </data>
-  <data name="MsgXrayCopyInUse" xml:space="preserve">
-    <value>Xray 内核未更新：仍有 Xray 从 {0} 运行，例如速度或延迟测试；请在其结束后再次更新</value>
   </data>
 </root>

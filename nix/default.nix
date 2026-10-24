@@ -25,7 +25,7 @@
 
 let
   pname = "mehron";
-  version = "7.25.59";
+  version = "7.25.57";
 
   runtimeLibs = [
     zlib
@@ -64,7 +64,7 @@ stdenv.mkDerivation rec {
   inherit pname version;
 
   src = fetchurl {
-    url = "https://github.com/yastorovsky/MehrON/releases/download/v${version}-beta/MehrON-linux-64.tar.gz";
+    url = "https://github.com/yastorovsky/MehrON/releases/download/v${version}-beta/MehrON-FM-Edition-nixos-64.tar.gz";
     hash = "sha256-DjNY93dyIzTkdQqokJVlbv3LosANh986b45gRC1w83s=";
   };
 
@@ -86,8 +86,8 @@ stdenv.mkDerivation rec {
     # Install desktop launcher
     cat <<EOF > $out/share/applications/MehrON.desktop
 [Desktop Entry]
-Name=MehrON
-Comment=MehrON Proxy Client
+Name=MehrON (FM Edition)
+Comment=MehrON Proxy Client - FM Edition
 Exec=$out/bin/MehrON %u
 Icon=MehrON
 Terminal=false
@@ -116,7 +116,7 @@ EOF
   '';
 
   meta = with lib; {
-    description = "MehrON: High-performance cross-platform GUI proxy client for NixOS";
+    description = "MehrON - FM Edition: High-performance cross-platform GUI proxy client for NixOS";
     homepage = "https://github.com/yastorovsky/MehrON";
     license = licenses.gpl3Plus;
     platforms = [ "x86_64-linux" ];

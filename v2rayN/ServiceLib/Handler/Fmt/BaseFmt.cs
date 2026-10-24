@@ -1,32 +1,7 @@
-using System.Text.Encodings.Web;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 namespace ServiceLib.Handler.Fmt;
 
 public class BaseFmt
 {
-
-    private static readonly JsonSerializerOptions ShareJsonOptions = new()
-    {
-        WriteIndented = false,
-        DefaultIgnoreCondition = JsonIgnoreCondition.Never,
-        Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
-    };
-
-    private static readonly JsonSerializerOptions StoredJsonOptions = new(ShareJsonOptions) { WriteIndented = true };
-
-    protected static string ToShareJson(string json)
-    {
-        var node = JsonUtils.ParseJson(json);
-        return node != null ? JsonUtils.Serialize(node, ShareJsonOptions) : json;
-    }
-
-    protected static string FromShareJson(string json)
-    {
-        var node = JsonUtils.ParseJson(json);
-        return node != null ? JsonUtils.Serialize(node, StoredJsonOptions) : json;
-    }
-
     private static string UrlEncodeSafe(string? value) => Utils.UrlEncode(value ?? string.Empty);
 
     protected static string GetIpv6(string address)

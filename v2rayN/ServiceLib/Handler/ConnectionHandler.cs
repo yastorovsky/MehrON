@@ -156,46 +156,4 @@ public static class ConnectionHandler
             return null;
         }
     }
-    public static async Task<int> GetRealPingTime(IWebProxy? webProxy, string? url, TimeSpan timeout, CancellationToken cancellationToken = default)
-    {
-        if (!Uri.TryCreate(url, UriKind.Absolute, out var uri) || uri.Scheme is not ("http" or "https"))
-        {
-            return -1;
-        }
-        var budget = System.Diagnostics.Stopwatch.StartNew();
-        using var client = new HttpClient(new SocketsHttpHandler
-        {
-            Proxy = webProxy,
-            UseProxy = webProxy != null,
-            ConnectTimeout = timeout > TimeSpan.Zero ? timeout : TimeSpan.FromMilliseconds(1),
-        })
-        {
-            Timeout = Timeout.InfiniteTimeSpan,
-        };
-        return await AetherDelayTester.BestOfAttemptsAsync(
-            () => timeout - budget.Elapsed,
-            async (left, ct) =>
-            {
-                using var attempt = CancellationTokenSource.CreateLinkedTokenSource(ct);
-                attempt.CancelAfter(left);
-                var timer = System.Diagnostics.Stopwatch.StartNew();
-                try
-                {
-                    using var response = await client.GetAsync(uri, attempt.Token).ConfigureAwait(false);
-                    return response.StatusCode is System.Net.HttpStatusCode.OK or System.Net.HttpStatusCode.NoContent
-                        ? Math.Max(1, (int)timer.ElapsedMilliseconds)
-                        : -1;
-                }
-                catch (OperationCanceledException) when (!ct.IsCancellationRequested)
-                {
-                    return -1;
-                }
-                catch
-                {
-                    return -1;
-                }
-            },
-            cancellationToken);
-    }
-
 }

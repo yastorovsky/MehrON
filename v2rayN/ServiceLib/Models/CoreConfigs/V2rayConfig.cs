@@ -2,7 +2,6 @@ namespace ServiceLib.Models.CoreConfigs;
 
 public class V2rayConfig
 {
-    public string? aetherCommand { get; set; }
     public Log4Ray log { get; set; }
     public object dns { get; set; }
     public FakeDns4Ray? fakedns { get; set; }

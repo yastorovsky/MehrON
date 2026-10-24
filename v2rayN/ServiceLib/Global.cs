@@ -2,9 +2,6 @@ namespace ServiceLib;
 
 public class Global
 {
-    public const string PsiphonServersUrl = "https://s3.amazonaws.com//psiphon/web/mjr4-p23r-puwl/server_list_compressed";
-    public const string PsiphonServersFileName = "psiphon_servers.dat";
-    public const string PsiphonServersStampFileName = "psiphon_servers.stamp";
     public const string AppName = "MehrON";
     public const string AppEdition = "FM Edition";
     public const string GithubUrl = "https://github.com";
@@ -64,8 +61,6 @@ public class Global
     public const string DnsTag = "dns-module";
     public const string DirectDnsTag = "direct-dns";
     public const string BalancerTagSuffix = "-balancer";
-    public const string AetherSecondarySocksTag = "secondary-socks";
-    public const string AetherExitNodeTag = "exit-node";
     public const string StreamSecurity = "tls";
     public const string StreamSecurityReality = "reality";
     public const string Loopback = "127.0.0.1";
@@ -256,8 +251,7 @@ public class Global
         { EConfigType.TUIC, "tuic://" },
         { EConfigType.WireGuard, "wireguard://" },
         { EConfigType.Anytls, "anytls://" },
-        { EConfigType.Naive, "naive://" },
-        { EConfigType.Aether, "aether://" },
+        { EConfigType.Naive, "naive://" }
     };
 
     public static readonly Dictionary<EConfigType, string> ProtocolTypes = new()
@@ -272,8 +266,7 @@ public class Global
         { EConfigType.TUIC, "tuic" },
         { EConfigType.WireGuard, "wireguard" },
         { EConfigType.Anytls, "anytls" },
-        { EConfigType.Naive, "naive" },
-        { EConfigType.Aether, "socks" },
+        { EConfigType.Naive, "naive" }
     };
 
     public static readonly List<string> VmessSecurities =
@@ -385,7 +378,6 @@ public class Global
         EConfigType.WireGuard,
         EConfigType.SOCKS,
         EConfigType.HTTP,
-        EConfigType.Aether,
     ];
 
     public static readonly HashSet<EConfigType> SingboxSupportConfigType =
@@ -490,80 +482,6 @@ public class Global
         "ForceIPv4v6",
         "ForceIPv6v4"
     ];
-
-    public static readonly List<(string Name, string Value)> FinalMaskPresets =
-    [
-        ("tlshello-0-len (0-104-1-0-0-114-1-1-11)",
-            """
-            {
-              "tcp": [
-                {"type": "fragment", "settings": {"packets": "tlshello", "lengths": ["0", "104", "1"], "delays": ["0"], "maxSplit": "0"}},
-                {"type": "fragment", "settings": {"packets": "1-1", "lengths": ["114", "1"], "delays": ["1"], "maxSplit": "11"}}
-              ]
-            }
-            """.ReplaceLineEndings("\n")),
-        ("tlshello (6-98-1-0-0-114-1-1-11)",
-            """
-            {
-              "tcp": [
-                {"type": "fragment", "settings": {"packets": "tlshello", "lengths": ["6", "98", "1"], "delays": ["0"], "maxSplit": "0"}},
-                {"type": "fragment", "settings": {"packets": "1-1", "lengths": ["114", "1"], "delays": ["1"], "maxSplit": "11"}}
-              ]
-            }
-            """.ReplaceLineEndings("\n")),
-        ("udp-noise (rnd-24-1200-1230)",
-            """
-            {
-              "udp": [
-                {
-                  "type": "noise",
-                  "settings": {
-                    "reset": "28",
-                    "noise": [
-                      {"rand": "1200-1230", "delay": "10"}, {"rand": "1200-1230", "delay": "10"}, {"rand": "1200-1230", "delay": "10"},
-                      {"rand": "1200-1230", "delay": "10"}, {"rand": "1200-1230", "delay": "10"}, {"rand": "1200-1230", "delay": "10"},
-                      {"rand": "1200-1230", "delay": "10"}, {"rand": "1200-1230", "delay": "10"}, {"rand": "1200-1230", "delay": "10"},
-                      {"rand": "1200-1230", "delay": "10"}, {"rand": "1200-1230", "delay": "10"}, {"rand": "1200-1230", "delay": "10"},
-                      {"rand": "1200-1230", "delay": "10"}, {"rand": "1200-1230", "delay": "10"}, {"rand": "1200-1230", "delay": "10"},
-                      {"rand": "1200-1230", "delay": "10"}, {"rand": "1200-1230", "delay": "10"}, {"rand": "1200-1230", "delay": "10"},
-                      {"rand": "1200-1230", "delay": "10"}, {"rand": "1200-1230", "delay": "10"}, {"rand": "1200-1230", "delay": "10"},
-                      {"rand": "1200-1230", "delay": "10"}, {"rand": "1200-1230", "delay": "10"}, {"rand": "1200-1230", "delay": "10"}
-                    ]
-                  }
-                }
-              ]
-            }
-            """.ReplaceLineEndings("\n")),
-    ];
-
-    public static readonly List<(string Name, string Value)> CipherSuitesPresets =
-    [
-        ("semi-python-cipherSuites",
-            "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384:TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384:TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256:TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256:TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256:TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256:TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA:TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA:TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256:TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256"),
-        ("real-firefox-cipherSuites",
-            "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256:TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256:TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256:TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256:TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384:TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384:TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA:TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA:TLS_RSA_WITH_AES_128_GCM_SHA256:TLS_RSA_WITH_AES_256_GCM_SHA384:TLS_RSA_WITH_AES_128_CBC_SHA:TLS_RSA_WITH_AES_256_CBC_SHA"),
-    ];
-
-    public static readonly List<string> AetherEchDnsOptions =
-    [
-        "udp://1.1.1.1",
-        "udp://8.8.8.8",
-        "https://1.1.1.1/dns-query@sni=www.microsoft.com",
-        "https://doq.dns4all.eu/dns-query@address=194.0.5.3",
-        "tcp://1.1.1.1",
-        "tcp://8.8.8.8",
-    ];
-
-    public static readonly List<string> AetherEchDomainOptions =
-    [
-        "cloudflare-ech.com",
-        "crypto.cloudflare.com",
-        "ip.gs",
-        "api.cloudflareclient.com",
-        "consumer-masque.cloudflareclient.com",
-        "consumer-masque-proxy.cloudflareclient.com",
-    ];
-
 
     public static readonly List<string> DomainDirectDNSAddress =
     [
@@ -769,14 +687,12 @@ public class Global
         { ECoreType.overtls, "ShadowsocksR-Live/overtls" },
         { ECoreType.shadowquic, "spongebob888/shadowquic" },
         { ECoreType.mieru, "enfein/mieru" },
-        { ECoreType.aether, "patterniha/Aether" },
+        { ECoreType.aether, "CluvexStudio/Aether" },
         { ECoreType.psiphon, "shirokhorshid/psiphon-tunnel-core" },
         { ECoreType.v2rayN, "yastorovsky/MehrON" },
     };
 
-
-
-public static readonly List<string> OtherGeoUrls =
+    public static readonly List<string> OtherGeoUrls =
     [
         @"https://raw.githubusercontent.com/Loyalsoldier/geoip/release/geoip-only-cn-private.dat",
         @"https://raw.githubusercontent.com/Loyalsoldier/geoip/release/Country.mmdb",

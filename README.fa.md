@@ -2,11 +2,11 @@
   <img src="v2rayN/v2rayN.Desktop/Assets/MehrON-logo.png" width="160" height="160" alt="لوگوی MehrON" />
 </p>
 
-<h1 align="center">MehrON (مهرآن)</h1>
+<h1 align="center">MehrON</h1>
 
 <p align="center">
-  <a href="https://github.com/yastorovsky/MehrON/releases"><img src="https://img.shields.io/badge/download-latest-green" alt="دانلود" /></a>
-  <img src="https://img.shields.io/badge/version-latest-blue" alt="نسخه" />
+  <a href="https://github.com/yastorovsky/MehrON/releases/tag/v7.25.47"><img src="https://img.shields.io/badge/download-v7.25.47-green" alt="دانلود" /></a>
+  <img src="https://img.shields.io/badge/version-v7.25.47-blue" alt="نسخه" />
   <a href="https://github.com/yastorovsky/MehrON/releases"><img src="https://img.shields.io/github/downloads/yastorovsky/MehrON/total?label=downloads" alt="تعداد دانلود" /></a>
   <a href="https://github.com/yastorovsky/MehrON/actions/workflows/build.yml"><img src="https://github.com/yastorovsky/MehrON/actions/workflows/build.yml/badge.svg" alt="بیلد" /></a>
   <a href="https://github.com/yastorovsky/MehrON/actions/workflows/test.yml"><img src="https://github.com/yastorovsky/MehrON/actions/workflows/test.yml/badge.svg" alt="تست‌ها" /></a>
@@ -102,14 +102,14 @@
 
 این ریلیز عمداً فاقد پروفایل، سابسکریپشن، لاگ یا فایل‌های پیکربندی ران‌تایمِ تولیدشده است.
 
-## نصب و راه‌اندازی در NixOS
+## نصب و راه‌اندازی در NixOS (نسخه‌ی FM Edition)
 
 مهرآن از سیستم‌عامل **NixOS** از طریق Nix Flakes و ماژول اختصاصی سیستم پشتیبانی می‌کند:
 
 ### 🚀 اجرای سریع (بدون نیاز به نصب)
 اجرای مستقیم کلاینت:
 ```bash
-nix run github:yastorovsky/MehrON#default
+nix run github:yastorovsky/MehrON/Beta#default
 ```
 
 ### 📦 پیکربندی سیستمی (`configuration.nix`)
@@ -117,7 +117,7 @@ nix run github:yastorovsky/MehrON#default
 ```nix
 inputs = {
   nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-  mehron.url = "github:yastorovsky/MehrON";
+  mehron.url = "github:yastorovsky/MehrON/Beta";
 };
 ```
 سپس فعال‌سازی ماژول بومی:
@@ -133,11 +133,11 @@ inputs = {
 ```
 یا نصب مستقیم برای کاربر:
 ```bash
-nix profile install github:yastorovsky/MehrON#default
+nix profile install github:yastorovsky/MehrON/Beta#default
 ```
 
 ### 📥 دانلود مستقیم فایل ریلیز
-می‌توانید آرشیو اختصاصی **`MehrON-linux-64.tar.gz`** را مستقیماً از بخش [ریلیزهای گیت‌هاب](https://github.com/yastorovsky/MehrON/releases) دریافت و استفاده نمایید.
+می‌توانید آرشیو اختصاصی **`MehrON-FM-Edition-nixos-64.tar.gz`** را مستقیماً از بخش [ریلیزهای گیت‌هاب](https://github.com/yastorovsky/MehrON/releases) دریافت و استفاده نمایید.
 
 ## بیلد از سورس
 
@@ -181,4 +181,4 @@ _upstream_mhr_cfw/           سورس یکپارچگی MHR-CFW
 
 ## لایسنس و قدردانی
 
-MehrON تحت مجوز GPL-3.0 توزیع می‌شود؛ به فایل [LICENSE](LICENSE) مراجعه کنید. این پروژه از کدبیس PattN / Patterniha ساخته شده و شامل یا یکپارچه با پروژه‌های شخص‌ثالثی است که لایسنس و نوتیس‌های خودشان را دارند، از جمله v2rayN، Xray-core، sing-box، Aether، Psiphon (شیروخورشید)، MHR، MHR-CFW و کامپوننت SNI spoofing.
+MehrON تحت لایسنس GPL-3.0 توزیع می‌شود؛ به فایل [LICENSE](LICENSE) مراجعه کنید. این پروژه از کدبیس PattN / Patterniha ساخته شده و شامل یا یکپارچه با پروژه‌های شخص‌ثالثی است که لایسنس و نوتیس‌های خودشان را دارند، از جمله v2rayN، Xray-core، sing-box، Aether، Psiphon (شیروخورشید)، MHR، MHR-CFW و کامپوننت SNI spoofing.
