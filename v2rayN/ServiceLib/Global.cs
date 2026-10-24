@@ -2,6 +2,9 @@ namespace ServiceLib;
 
 public class Global
 {
+    public const string PsiphonServersUrl = "https://s3.amazonaws.com//psiphon/web/mjr4-p23r-puwl/server_list_compressed";
+    public const string PsiphonServersFileName = "psiphon_servers.dat";
+    public const string PsiphonServersStampFileName = "psiphon_servers.stamp";
     public const string AppName = "MehrON";
     public const string AppEdition = "FM Edition";
     public const string GithubUrl = "https://github.com";
