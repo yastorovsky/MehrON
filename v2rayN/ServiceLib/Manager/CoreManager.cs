@@ -25,6 +25,28 @@ public class CoreManager
     private bool _aetherSessionWatched;
     public Func<string, Task>? AetherCoresStopped { get; set; }
 
+    private volatile ProcessService? _tunProcess;
+
+    public bool IsTunRunning
+    {
+        get
+        {
+            try
+            {
+                return _tunProcess is { HasExited: false };
+            }
+            catch (InvalidOperationException)
+            {
+                return false;
+            }
+        }
+    }
+
+    private volatile string? _tunInterface;
+
+    public string? TunInterface => IsTunRunning ? _tunInterface : null;
+
+
     public async Task Init(Config config, Func<bool, string, Task> updateFunc)
     {
         _config = config;
@@ -83,19 +105,29 @@ public class CoreManager
         }
 
         var node = mainContext.Node;
-        await CoreStop();
-        await Task.Delay(100);
-        if (!await SniSpoofingManager.Instance.StartAsync(node, _updateFunc))
-        {
-            return;
-        }
-
         var fileName = Utils.GetBinConfigPath(Global.CoreConfigFileName);
         var result = await CoreConfigHandler.GenerateClientConfig(mainContext, fileName);
         if (result.Success != true)
         {
             await SniSpoofingManager.Instance.StopAsync();
             await UpdateFunc(true, result.Msg);
+            return;
+        }
+
+        var aether = AetherLoadSteps(mainContext);
+        if (await AetherCoreLoad.BeforeStopAsync(aether) is not { } generation)
+        {
+            return;
+        }
+
+        await CoreStop();
+        await Task.Delay(100);
+        if (!await SniSpoofingManager.Instance.StartAsync(node, _updateFunc))
+        {
+            return;
+        }
+        if (!await AetherCoreLoad.BeforeXrayAsync(aether))
+        {
             return;
         }
 
@@ -157,6 +189,11 @@ public class CoreManager
                     // 3. Re-generate main core config with updated AllProxiesMap and start main core (Xray / Sing-box)
                     await CoreConfigHandler.GenerateClientConfig(mainContext, fileName);
                     await CoreStart(mainContext);
+                    if (mainContext.IsTunEnabled)
+                    {
+                        _tunInterface = AetherUplink.TunInterfaceOf(result.Data?.ToString());
+                        _tunProcess = _processService;
+                    }
         if (await AetherCoreLoad.AfterXrayAsync(aether, generation) == AetherCoreLoadOutcome.AetherFailed)
         {
             return;
@@ -184,6 +221,11 @@ public class CoreManager
                     await WaitForPort(midPort);
 
                     await CoreStart(mainContext);
+                    if (mainContext.IsTunEnabled)
+                    {
+                        _tunInterface = AetherUplink.TunInterfaceOf(result.Data?.ToString());
+                        _tunProcess = _processService;
+                    }
         if (await AetherCoreLoad.AfterXrayAsync(aether, generation) == AetherCoreLoadOutcome.AetherFailed)
         {
             return;
@@ -203,6 +245,11 @@ public class CoreManager
                 else if (exit.ConfigType == EConfigType.Custom)
                 {
                     await CoreStart(mainContext);
+                    if (mainContext.IsTunEnabled)
+                    {
+                        _tunInterface = AetherUplink.TunInterfaceOf(result.Data?.ToString());
+                        _tunProcess = _processService;
+                    }
         if (await AetherCoreLoad.AfterXrayAsync(aether, generation) == AetherCoreLoadOutcome.AetherFailed)
         {
             return;
@@ -243,6 +290,11 @@ public class CoreManager
             await CoreStartPreService(preContext, isFirst: true);
             await WaitForProxyPort(preContext);
             await CoreStart(mainContext);
+            if (mainContext.IsTunEnabled)
+            {
+                _tunInterface = AetherUplink.TunInterfaceOf(result.Data?.ToString());
+                _tunProcess = _processService;
+            }
         if (await AetherCoreLoad.AfterXrayAsync(aether, generation) == AetherCoreLoadOutcome.AetherFailed)
         {
             return;
@@ -251,6 +303,11 @@ public class CoreManager
         else
         {
             await CoreStart(mainContext);
+            if (mainContext.IsTunEnabled)
+            {
+                _tunInterface = AetherUplink.TunInterfaceOf(result.Data?.ToString());
+                _tunProcess = _processService;
+            }
         if (await AetherCoreLoad.AfterXrayAsync(aether, generation) == AetherCoreLoadOutcome.AetherFailed)
         {
             return;
@@ -310,6 +367,17 @@ public class CoreManager
 
     public async Task CoreStop()
     {
+        _tunProcess = null;
+        _tunInterface = null;
+        try
+        {
+            await AetherCoreManager.Instance.StopSessionAsync();
+        }
+        catch (Exception ex)
+        {
+            Logging.SaveLog(_tag, ex);
+        }
+
         try
         {
             if (_linuxSudo)
@@ -695,6 +763,19 @@ public class CoreManager
         AddProcessJob(procService.Handle);
 
         return procService;
+    }
+
+    
+    internal void AddProcessJob(Process process)
+    {
+        try
+        {
+            AddProcessJob(process.Handle);
+        }
+        catch (InvalidOperationException)
+        {
+            // Process already exited.
+        }
     }
 
     private void AddProcessJob(nint processHandle)

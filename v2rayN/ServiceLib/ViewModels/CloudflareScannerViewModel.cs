@@ -6,7 +6,9 @@ namespace ServiceLib.ViewModels;
 
 public partial class CloudflareScannerViewModel : MyReactiveObject, ICloseable
 {
+#pragma warning disable CS0067
     public event EventHandler? RequestClose;
+#pragma warning restore CS0067
     public Interaction<string, RxVoid> SetClipboardDataInteraction { get; } = new();
 
     public BulkObservableCollection<CloudflareIpResultItem> Results { get; } = [];

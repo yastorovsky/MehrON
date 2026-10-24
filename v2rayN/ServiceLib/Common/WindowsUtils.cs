@@ -5,6 +5,13 @@ namespace ServiceLib.Common;
 [SupportedOSPlatform("windows")]
 internal static class WindowsUtils
 {
+
+    public static object? IPv6DisabledComponents()
+    {
+        using var regKey = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters", false);
+        return regKey?.GetValue("DisabledComponents");
+    }
+
     private static readonly string _tag = "WindowsUtils";
 
     public static string? RegReadValue(string path, string name, string def)

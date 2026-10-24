@@ -1,7 +1,32 @@
+using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 namespace ServiceLib.Common;
 
 public static class ProcUtils
 {
+
+    [SupportedOSPlatform("windows")]
+    public static string? WindowsProgramOf(int processId)
+    {
+        using var handle = OpenProcess(ProcessQueryLimitedInformation, false, processId);
+        if (handle.IsInvalid)
+        {
+            return null;
+        }
+        var buffer = new char[32768];
+        var length = buffer.Length;
+        return QueryFullProcessImageName(handle, 0, buffer, ref length) ? new string(buffer, 0, length) : null;
+    }
+
+    private const int ProcessQueryLimitedInformation = 0x1000;
+
+    [DllImport("kernel32.dll", SetLastError = true)]
+    private static extern Microsoft.Win32.SafeHandles.SafeProcessHandle OpenProcess(int desiredAccess, bool inheritHandle, int processId);
+
+    [DllImport("kernel32.dll", EntryPoint = "QueryFullProcessImageNameW", CharSet = CharSet.Unicode, SetLastError = true)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    private static extern bool QueryFullProcessImageName(Microsoft.Win32.SafeHandles.SafeProcessHandle process, int flags, [Out] char[] exeName, ref int size);
+
     private static readonly string _tag = "ProcUtils";
 
     public static void ProcessStart(string? fileName, string arguments = "")

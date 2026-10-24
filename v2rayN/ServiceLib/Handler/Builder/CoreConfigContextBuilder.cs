@@ -25,13 +25,21 @@ public record CoreConfigContextBuilderAllResult(
         [.. MainResult.ValidatorResult.Warnings, .. PreSocksResult?.ValidatorResult.Warnings ?? []]);
 }
 
+// PattN: partial; the Aether part is in CoreConfigContextBuilder.Aether.cs
 public partial class CoreConfigContextBuilder
 {
     /// <summary>
     ///     Builds a <see cref="CoreConfigContext" /> for the given node, resolves its proxy map,
     ///     and processes outbound nodes referenced by routing rules.
+    ///     PattN: <paramref name="rulesCarriedBehind" /> when the context is the pre-socks one, in front of a core whose
+    ///     routing has the same rules and builds their chains itself (RuleChainShortfallAsync).
+    ///     PattN: a routing rule whose target names no profile, a name several have, or a profile that cannot be built
+    ///     refuses the context, as the session's, unless <paramref name="refuseRuleTargets" /> is false, as for a latency
+    ///     test, which measures the profile alone without the rules: such a rule then goes to the proxy (E2,
+    ///     RefusesRuleTarget).
     /// </summary>
-    public static async Task<CoreConfigContextBuilderResult> Build(Config config, ProfileItem node)
+    public static async Task<CoreConfigContextBuilderResult> Build(Config config, ProfileItem node, bool rulesCarriedBehind = false,
+        bool refuseRuleTargets = true)
     {
         var runCoreType = AppManager.Instance.GetCoreType(node, node.ConfigType);
         var coreType = runCoreType == ECoreType.sing_box ? ECoreType.sing_box : ECoreType.Xray;
@@ -49,9 +57,16 @@ public partial class CoreConfigContextBuilder
             RoutingItem = await ConfigHandler.GetDefaultRouting(config),
             IsWindows = Utils.IsWindows(),
             IsMacOS = Utils.IsMacOS(),
+            IsLinux = Utils.IsLinux(),
             HasGlobalIPv6Address = Utils.HasGlobalIPv6Address(),
-            ProtectCoreTypeList = config.TunModeItem.EnableTun ? [ECoreType.Xray, ECoreType.sing_box, ECoreType.psiphon, ECoreType.aether, ECoreType.mihomo] : []
+            IsIPv6DisabledByOs = Utils.IsIPv6DisabledByOs(),
+            ProtectCoreTypeList = config.TunModeItem.EnableTun ? [ECoreType.Xray, ECoreType.sing_box, ECoreType.psiphon, ECoreType.mihomo] : []
         };
+        // PattN: what the Aether core and its helpers dial out themselves goes direct under the TUN as well
+        if (context.IsTunEnabled)
+        {
+            context.ProtectCoreTypeList.Add(ECoreType.aether);
+        }
         var validatorResult = NodeValidatorResult.Empty();
         var (actNode, nodeValidatorResult) = await ResolveNodeAsync(context, node);
         if (!nodeValidatorResult.Success)
@@ -63,6 +78,8 @@ public partial class CoreConfigContextBuilder
         if (!(context.RoutingItem?.RuleSet.IsNullOrEmpty() ?? true))
         {
             var rules = JsonUtils.Deserialize<List<RulesItem>>(context.RoutingItem?.RuleSet) ?? [];
+            // PattN: the targets the context is refused for, each told once (E2)
+            var refusedTargets = new HashSet<string>(StringComparer.Ordinal);
             foreach (var ruleItem in rules.Where(ruleItem =>
                          ruleItem.Enabled && !Global.OutboundTags.Contains(ruleItem.OutboundTag)))
             {
@@ -72,26 +89,73 @@ public partial class CoreConfigContextBuilder
                     ruleItem.OutboundTag = Global.ProxyTag;
                     continue;
                 }
-                var ruleOutboundNode = await AppManager.Instance.GetProfileItemViaRemarks(ruleItem.OutboundTag);
+                // PattN: whether this rule's target refuses the context rather than give way to the proxy (E2)
+                var refusesRule = RefusesRuleTarget(node, ruleItem, rulesCarriedBehind, refuseRuleTargets);
+                // PattN: found by its name among the profiles a rule can send to, never the first of several (E2); this
+                // replaces upstream's GetProfileItemViaRemarks lookup, which takes the first profile of the name
+                var ruleTarget = await FindRuleTargetAsync(ruleItem.OutboundTag);
+                var ruleOutboundNode = (ruleTarget as ByName<ProfileItem>.One)?.Value;
                 if (ruleOutboundNode == null)
                 {
+                    // PattN: a name no profile has, or several have, refuses the context (E2); where it does not, a name
+                    // several have finds none of them, and says so
+                    if (refusesRule)
+                    {
+                        RefuseRuleTarget(validatorResult, refusedTargets, RuleTargetNotFound(ruleTarget, ruleItem.OutboundTag));
+                        continue;
+                    }
+                    if (ruleTarget is ByName<ProfileItem>.Several)
+                    {
+                        validatorResult.Warnings.Add(string.Format(ResUI.MsgRoutingRuleOutboundNodeError, ruleItem.Remarks,
+                            ruleItem.OutboundTag, RuleTargetNotFound(ruleTarget, ruleItem.OutboundTag).Message));
+                        ruleItem.OutboundTag = Global.ProxyTag;
+                        continue;
+                    }
                     validatorResult.Warnings.Add(string.Format(ResUI.MsgRoutingRuleOutboundNodeNotFound,
                         ruleItem.Remarks, ruleItem.OutboundTag));
                     ruleItem.OutboundTag = Global.ProxyTag;
                     continue;
                 }
 
-                var (actRuleNode, ruleNodeValidatorResult) = await ResolveNodeAsync(context, ruleOutboundNode, false);
+                // PattN: the profile a rule sends to runs inside its subscription's previous/next chain, as the main
+                // profile does (PattNG CoreConfigContextBuilder.kt resolveOutbound), where upstream resolves it alone
+                // (includeSubChain false). A chain whose subscription names a hop no profile has, or several have (N1), or
+                // holding an Aether profile that lacks a hop, is refused for the rule as for the main profile, as any
+                // target that cannot be built: the context is refused for it (E2), or, where rule targets do not refuse
+                // it, the rule goes to the proxy with the error as a warning.
+                // PattN: what resolving it adds to the context is taken back when the rule cannot use it (D1-R4)
+                var stateBeforeRule = RuleTargetState.Of(context);
+                var (actRuleNode, ruleNodeValidatorResult) = await ResolveNodeAsync(context, ruleOutboundNode, true);
+                // PattN: a chain that lost the profile itself, or in front of the core that carries the rule a hop, cannot
+                // carry the rule (D1-R1, D1-R2)
+                if (ruleNodeValidatorResult.Success
+                    && await RuleChainShortfallAsync(ruleOutboundNode, actRuleNode, ruleNodeValidatorResult,
+                        rulesCarriedBehind) is { } shortfall)
+                {
+                    ruleNodeValidatorResult = shortfall;
+                }
                 validatorResult.Warnings.AddRange(ruleNodeValidatorResult.Warnings.Select(w =>
                     string.Format(ResUI.MsgRoutingRuleOutboundNodeWarning, ruleItem.Remarks, ruleItem.OutboundTag, w)));
                 if (!ruleNodeValidatorResult.Success)
                 {
+                    // PattN: a target that cannot be built refuses the context, with why after it (E2); nothing of it stays
+                    if (refusesRule)
+                    {
+                        RefuseRuleTarget(validatorResult, refusedTargets,
+                            RuleTargetUnbuilt(ruleItem.OutboundTag, ruleNodeValidatorResult.Errors));
+                        stateBeforeRule.Restore(context);
+                        continue;
+                    }
                     validatorResult.Warnings.AddRange(ruleNodeValidatorResult.Errors.Select(e =>
                         string.Format(ResUI.MsgRoutingRuleOutboundNodeError, ruleItem.Remarks, ruleItem.OutboundTag,
                             e)));
+                    // PattN: (D1-R4)
+                    stateBeforeRule.Restore(context);
                     ruleItem.OutboundTag = Global.ProxyTag;
                     continue;
                 }
+                // PattN: a policy group keeps its strategy inside its subscription's chain (D1-R3)
+                KeepRuleGroupStrategy(ruleOutboundNode, actRuleNode);
 
                 context.AllProxiesMap[$"remark:{ruleItem.OutboundTag}"] = actRuleNode;
             }
@@ -192,10 +256,12 @@ public partial class CoreConfigContextBuilder
         var node = nodeContext.Node;
         var coreType = AppManager.Instance.GetCoreType(node, node.ConfigType);
 
-        var preSocksItem = await ConfigHandler.GetPreSocksItem(config, node, coreType);
+        var preSocksItem = ConfigHandler.GetPreSocksItem(config, node, coreType);
         if (preSocksItem != null)
         {
-            var preSocksResult = await Build(nodeContext.AppConfig, preSocksItem);
+            // PattN: in front of a core of PattN's own configuration, which routes the same rules with their whole chains;
+            // a custom configuration knows none of them
+            var preSocksResult = await Build(nodeContext.AppConfig, preSocksItem, rulesCarriedBehind: node.ConfigType != EConfigType.Custom);
 
             var protectCoreTypeList = new HashSet<ECoreType>(nodeContext.ProtectCoreTypeList) { nodeContext.RunCoreType };
 
@@ -229,6 +295,12 @@ public partial class CoreConfigContextBuilder
         if (includeSubChain)
         {
             var (virtualChainNode, chainValidatorResult) = await BuildSubscriptionChainNodeAsync(node);
+            // PattN: a subscription chain that names a hop no profile has, or several have, is refused rather than
+            // shortened (N1)
+            if (!chainValidatorResult.Success)
+            {
+                return (node, chainValidatorResult);
+            }
             if (virtualChainNode != null)
             {
                 context.AllProxiesMap[virtualChainNode.IndexId] = virtualChainNode;
@@ -254,6 +326,8 @@ public partial class CoreConfigContextBuilder
     ///     <see cref="EConfigType.ProxyChain" /> node that wraps them together.
     ///     Returns <c>null</c> as the chain item when no chain is needed.
     ///     Any warnings (e.g. missing prev/next profile) are returned in the validator result.
+    ///     PattN: a previous or next profile name that no profile has, or several have, is an error that refuses the chain
+    ///     (N1), with no chain item.
     /// </summary>
     private static async Task<(ProfileItem? ChainNode, NodeValidatorResult ValidatorResult)>
         BuildSubscriptionChainNodeAsync(ProfileItem node)
@@ -274,21 +348,17 @@ public partial class CoreConfigContextBuilder
         ProfileItem? prevNode = null;
         ProfileItem? nextNode = null;
 
-        if (!subItem.PrevProfile.IsNullOrEmpty())
+        // PattN: found by their names, the spaces around them aside, where upstream takes the first profile of the name and
+        // leaves out with a warning one it does not find; a name no profile has, or several have, refuses the chain,
+        // whatever the type of the profile it wraps, rather than build it without that hop or through a profile it may
+        // not mean (N1, PattNG resolveProxyChainProfilesFromGroup); a custom configuration is no hop, and a blank name
+        // names none (CoreConfigContextBuilder.Names.cs)
+        prevNode = await FindSubscriptionNeighbourAsync(subItem.PrevProfile, result);
+        nextNode = await FindSubscriptionNeighbourAsync(subItem.NextProfile, result);
+        if (!result.Success)
         {
-            prevNode = await AppManager.Instance.GetProfileItemViaRemarks(subItem.PrevProfile);
-            if (prevNode == null)
-            {
-                result.Warnings.Add(string.Format(ResUI.MsgSubscriptionPrevProfileNotFound, subItem.PrevProfile));
-            }
-        }
-        if (!subItem.NextProfile.IsNullOrEmpty())
-        {
-            nextNode = await AppManager.Instance.GetProfileItemViaRemarks(subItem.NextProfile);
-            if (nextNode == null)
-            {
-                result.Warnings.Add(string.Format(ResUI.MsgSubscriptionNextProfileNotFound, subItem.NextProfile));
-            }
+            Logging.SaveLog($"Subscription '{subItem.Remarks}': the chain around '{node.Remarks}' is refused: {string.Join("; ", result.Errors)}");
+            return (null, result);
         }
 
         if (prevNode is null && nextNode is null)
@@ -374,6 +444,14 @@ public partial class CoreConfigContextBuilder
 
         context.AllProxiesMap[node.IndexId] = node;
 
+        // PattN: an Aether profile's Address is the WARP endpoint its core dials, no server Xray resolves; the names its
+        // core asks Xray for are protected instead, and its exit-node is looked up
+        if (node.ConfigType == EConfigType.Aether)
+        {
+            await RegisterAetherNodeAsync(context, node);
+            return nodeValidatorResult;
+        }
+
         var address = node.Address;
         if (Utils.IsDomain(address))
         {
@@ -397,6 +475,23 @@ public partial class CoreConfigContextBuilder
             }
         }
 
+        // PattN: Xray sends the ECH config query to the DNS server after the "+" (the whole value when there
+        // is none) and resolves that server's domain itself; in TUN mode it would otherwise resolve through
+        // the proxy, whose handshake waits for this query. sing-box never uses that server: it queries the
+        // name protected above through its own DNS.
+        if (context.RunCoreType != ECoreType.sing_box
+            && node.StreamSecurity == Global.StreamSecurity
+            && !node.EchConfigList.IsNullOrEmpty()
+            && node.EchConfigList.Contains("://"))
+        {
+            var idx = node.EchConfigList.IndexOf('+');
+            var echDnsServer = idx > 0 ? node.EchConfigList[(idx + 1)..] : node.EchConfigList;
+            if (Uri.TryCreate(echDnsServer, UriKind.Absolute, out var echDnsUri) && Utils.IsDomain(echDnsUri.IdnHost))
+            {
+                context.ProtectDomainList.Add(echDnsUri.IdnHost);
+            }
+        }
+
         // xhttp downloadSettings address protect
         var xhttpExtra = node.GetTransportExtra().XhttpExtra;
         if (!string.IsNullOrEmpty(xhttpExtra)
@@ -412,7 +507,56 @@ public partial class CoreConfigContextBuilder
             context.ProtectDomainList.Add(dAddr);
         }
 
+        // PattN: the servers of the ECH outbound, which the ECH config query is sent through
+        if (NodeValidator.ValidateEchOutbound(node, out var echOutbound) == null && echOutbound != null)
+        {
+            foreach (var echServer in GetOutboundServerAddresses(echOutbound).Where(Utils.IsDomain))
+            {
+                context.ProtectDomainList.Add(echServer);
+            }
+        }
+
         return nodeValidatorResult;
+    }
+
+    /// <summary>
+    ///     PattN: the servers an outbound written as JSON connects to: the address of each vnext and
+    ///     servers entry, the address of the flat settings that newer configs use, and the host of each
+    ///     WireGuard peer endpoint.
+    /// </summary>
+    private static IEnumerable<string> GetOutboundServerAddresses(JsonObject outbound)
+    {
+        if (outbound["settings"] is not JsonObject settings)
+        {
+            yield break;
+        }
+        var servers = new List<JsonObject> { settings };
+        foreach (var key in new[] { "vnext", "servers" })
+        {
+            if (settings[key] is JsonArray entries)
+            {
+                servers.AddRange(entries.OfType<JsonObject>());
+            }
+        }
+        foreach (var server in servers)
+        {
+            if (server["address"] is JsonValue address && address.TryGetValue<string>(out var value))
+            {
+                yield return value;
+            }
+        }
+        if (settings["peers"] is JsonArray peers)
+        {
+            foreach (var peer in peers.OfType<JsonObject>())
+            {
+                // host:port, where an IPv6 host is in brackets and so never taken for a domain
+                if (peer["endpoint"] is JsonValue endpoint && endpoint.TryGetValue<string>(out var value))
+                {
+                    var portColon = value.LastIndexOf(':');
+                    yield return portColon > 0 ? value[..portColon] : value;
+                }
+            }
+        }
     }
 
     /// <summary>
@@ -446,11 +590,6 @@ public partial class CoreConfigContextBuilder
         var (groupChildList, _) = await GroupProfileManager.GetChildProfileItems(node);
         List<string> childIndexIdList = [];
         var childNodeValidatorResult = NodeValidatorResult.Empty();
-        if (SettleAetherChildren(context, node, groupChildList, childIndexIdList, childNodeValidatorResult) is { } aetherRefusal)
-        {
-            childNodeValidatorResult.Errors.Add(aetherRefusal);
-            return childNodeValidatorResult;
-        }
         foreach (var childNode in groupChildList)
         {
             if (ancestorsGroup.Contains(childNode.IndexId))
@@ -497,6 +636,13 @@ public partial class CoreConfigContextBuilder
 
             globalVisitedGroup.Add(childNode.IndexId);
             childIndexIdList.Add(childNode.IndexId);
+        }
+
+        // PattN: one Aether core serves one profile, and a chain holding one is built whole
+        if (SettleAetherChildren(context, node, groupChildList, childIndexIdList, childNodeValidatorResult) is { } aetherRefusal)
+        {
+            childNodeValidatorResult.Errors.Add(aetherRefusal);
+            return childNodeValidatorResult;
         }
 
         if (childIndexIdList.Count == 0)

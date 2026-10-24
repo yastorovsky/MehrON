@@ -67,22 +67,15 @@ public partial class CoreConfigV2rayService
 
                 var address = _config.TunModeItem.IPv4Address.NullIfEmpty() ?? Global.TunIPv4Address.First();
                 tunInbound.settings.gateway = [address];
-                // PattN: on Windows with strict route, misconfigtun blocks an IP version that has no route into
-                // the TUN, so IPv6 goes into the TUN only when EnableIPv6Address is on and is blocked otherwise.
-                // Elsewhere nothing blocks it: without ::/0, IPv6 bypasses the tunnel, so ::/0 is skipped only
-                // when the host has no global IPv6 address and EnableIPv6Address is off; NAT66 hosts have only
-                // ULA addresses. Where the OS keeps IPv6 off on new interfaces, a TUN asked for IPv6 does not
-                // start (Xray-core leaves IPv6 out only when the config asks for none, XTLS/Xray-core#6874), so
-                // EnableIPv6Address counts for nothing there; a global IPv6 address that an existing interface
-                // still has keeps ::/0 outside Windows strict route, and the TUN then fails to start rather than
-                // let that IPv6 bypass it.
-                var wfpBlocksLeaks = context.IsWindows && _config.TunModeItem.StrictRoute == true;
-                var tunIPv6 = _config.TunModeItem.EnableIPv6Address && !context.IsIPv6DisabledByOs;
-                var routeIPv6 = tunIPv6 || (!wfpBlocksLeaks && context.HasGlobalIPv6Address);
-                tunInbound.settings.autoSystemRoutingTable = routeIPv6
+                // Route both families into the tunnel regardless of EnableIPv6Address. That option only
+                // controls whether the interface gets an IPv6 address; leaving ::/0 out of the routing
+                // table makes IPv6 follow the system default route and bypass the tunnel entirely.
+                // A host without a global IPv6 address is the exception: it has nothing to leak,
+                // and IPv6 sent into the tunnel would have no way back out.
+                tunInbound.settings.autoSystemRoutingTable = context.HasGlobalIPv6Address
                     ? ["0.0.0.0/0", "::/0"]
                     : ["0.0.0.0/0"];
-                if (tunIPv6)
+                if (_config.TunModeItem.EnableIPv6Address == true)
                 {
                     var address6 = _config.TunModeItem.IPv6Address.NullIfEmpty() ?? Global.TunIPv6Address.First();
                     tunInbound.settings.gateway.Add(address6);
@@ -97,15 +90,6 @@ public partial class CoreConfigV2rayService
                 // PattN: respect the user's Route Only setting in TUN mode (upstream forces true)
                 // tunInbound.sniffing.routeOnly = true;
 
-                if (wfpBlocksLeaks)
-                {
-                    tunInbound.settings.autoSystemWfpBlockLeak = ["dns", "misconfigtun"];
-                }
-                if (context.IsLinux)
-                {
-                    tunInbound.settings.autoSystemDnsToGateway = true;
-                }
-
                 if (_config.TunModeItem.RouteExcludeAddress is { Count: > 0 })
                 {
                     var wholeInternet = IPNetwork2.Parse("0.0.0.0/0");
@@ -115,7 +99,7 @@ public partial class CoreConfigV2rayService
                         .Where(x => x != null).ToList();
 
                     var includeList = new List<IPNetwork2> { wholeInternet };
-                    var includeListV6 = routeIPv6
+                    var includeListV6 = context.HasGlobalIPv6Address
                         ? new List<IPNetwork2> { wholeInternetV6 }
                         : new List<IPNetwork2>();
 

@@ -1493,4 +1493,36 @@ public class Utils
     }
 
     #endregion Platform
+
+    public static bool IsIPv6DisabledByOs()
+    {
+        try
+        {
+            if (IsWindows())
+            {
+                return IsIPv6DisabledByComponents(WindowsUtils.IPv6DisabledComponents());
+            }
+            if (IsLinux() && Directory.Exists("/proc/sys/net"))
+            {
+                return !Directory.Exists("/proc/sys/net/ipv6")
+                       || IsIPv6DisabledBySysctl(File.ReadAllText("/proc/sys/net/ipv6/conf/default/disable_ipv6"));
+            }
+        }
+        catch (Exception ex)
+        {
+            Logging.SaveLog(_tag, ex);
+        }
+        return false;
+    }
+
+    public static bool IsIPv6DisabledByComponents(object? disabledComponents)
+    {
+        return disabledComponents is int value && (value & 0x10) != 0;
+    }
+
+    public static bool IsIPv6DisabledBySysctl(string? value)
+    {
+        return int.TryParse(value?.Trim(), out var number) && number != 0;
+    }
+
 }
