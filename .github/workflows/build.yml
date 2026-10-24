@@ -194,19 +194,26 @@ jobs:
             Copy-Item -Path $mihomoExe.FullName -Destination "$binDir/mihomo/$($mihomoExe.Name)" -Force
           }
 
-          # Download latest Aether
-          Write-Host "Downloading latest Aether..."
+          # Download latest Aether bundle (aether, psiphon-tunnel-core, lyrebird)
+          Write-Host "Downloading latest Aether bundle..."
           $aetherZip = "aether-latest.zip"
           curl.exe -L -s -o $aetherZip "https://github.com/patterniha/Aether/releases/latest/download/aether-windows-x86_64.zip"
           Expand-Archive -Path $aetherZip -DestinationPath "aether-extracted" -Force
-          $aetherExe = Get-ChildItem -Path "aether-extracted" -Recurse -Filter "aether.exe" | Select-Object -First 1
-          if ($aetherExe) {
-            New-Item -ItemType Directory -Path "$binDir/aether" -Force | Out-Null
-            Copy-Item -Path $aetherExe.FullName -Destination "$binDir/aether/aether.exe" -Force
-            if (Test-Path "$($aetherExe.DirectoryName)/pt") {
-              Copy-Item -Path "$($aetherExe.DirectoryName)/pt" -Destination "$binDir/aether/" -Recurse -Force
+          New-Item -ItemType Directory -Path "$binDir/aether" -Force | Out-Null
+          Get-ChildItem -Path "aether-extracted" -Recurse -File | ForEach-Object {
+            if ($_.Name -match "^(aether|psiphon-tunnel-core|lyrebird)\.exe$" -or $_.Name -match "\.txt$") {
+              Copy-Item -Path $_.FullName -Destination "$binDir/aether/$($_.Name)" -Force
             }
           }
+          if (Test-Path "aether-extracted/LICENSES") {
+            Copy-Item -Path "aether-extracted/LICENSES" -Destination "$binDir/aether/LICENSES" -Recurse -Force
+          }
+
+          # Download Psiphon server list
+          Write-Host "Downloading Psiphon server list..."
+          curl.exe -fsSL --retry 3 --retry-delay 5 -o "$binDir/psiphon_servers.dat" "https://s3.amazonaws.com/psiphon/web/mjr4-p23r-puwl/server_list_compressed"
+          $stamp = [DateTimeOffset]::UtcNow.ToUnixTimeSeconds()
+          Set-Content -Path "$binDir/psiphon_servers.stamp" -Value "$stamp`n" -NoNewline
 
           # Build latest psiphon-tunnel-core from shirokhorshid fork
           Write-Host "Building psiphon-tunnel-core from shirokhorshid fork..."
@@ -235,8 +242,20 @@ jobs:
           if (-not (Test-Path "$binDir/mihomo/mihomo.exe")) {
             throw "mihomo.exe was not found or copied into bin/mihomo/"
           }
+          if (-not (Test-Path "$binDir/aether/psiphon-tunnel-core.exe") -and (Test-Path "$binDir/psiphon/psiphon.exe")) {
+            Copy-Item -Path "$binDir/psiphon/psiphon.exe" -Destination "$binDir/aether/psiphon-tunnel-core.exe" -Force
+          }
           if (-not (Test-Path "$binDir/aether/aether.exe")) {
             throw "aether.exe was not found or copied into bin/aether/"
+          }
+          if (-not (Test-Path "$binDir/aether/psiphon-tunnel-core.exe")) {
+            throw "psiphon-tunnel-core.exe was not found in bin/aether/"
+          }
+          if (-not (Test-Path "$binDir/aether/lyrebird.exe")) {
+            throw "lyrebird.exe was not found or copied into bin/aether/"
+          }
+          if (-not (Test-Path "$binDir/psiphon_servers.dat")) {
+            throw "psiphon_servers.dat was not found in bin/"
           }
           if (-not (Test-Path "$binDir/psiphon/psiphon.exe")) {
             throw "psiphon.exe was not found or copied into bin/psiphon/"
@@ -253,6 +272,7 @@ jobs:
           & "$binDir/sing_box/sing-box.exe" version
           & "$binDir/mihomo/mihomo.exe" -v
           & "$binDir/aether/aether.exe" --version
+          & "$binDir/aether/psiphon-tunnel-core.exe" --version
 
           # Download official rules containing gfw, geolocation-!cn, etc.
           Write-Host "Downloading geo rules..."
@@ -397,22 +417,28 @@ jobs:
           chmod +x "$binDir/mihomo/mihomo"
           rm -f mihomo
 
-          # Download latest Aether (Linux x86_64)
-          echo "Downloading latest Aether..."
+          # Download latest Aether bundle (Linux x86_64: aether, psiphon-tunnel-core, lyrebird)
+          echo "Downloading latest Aether bundle..."
           curl -fsSL "https://github.com/patterniha/Aether/releases/latest/download/aether-linux-x86_64-musl.tar.gz" -o aether.tar.gz
-          mkdir -p aether-extracted
+          mkdir -p aether-extracted "$binDir/aether"
           tar -xzf aether.tar.gz -C aether-extracted
-          aetherExe=$(find aether-extracted -type f -name "aether" | head -n 1)
-          if [ -n "$aetherExe" ]; then
-            cp -f "$aetherExe" "$binDir/aether/aether"
-            chmod +x "$binDir/aether/aether"
-            aetherDir=$(dirname "$aetherExe")
-            if [ -d "$aetherDir/pt" ]; then
-              cp -rf "$aetherDir/pt" "$binDir/aether/"
-              find "$binDir/aether/pt" -type f -exec chmod +x {} + || true
+          for bin in aether psiphon-tunnel-core lyrebird; do
+            binFile=$(find aether-extracted -type f -name "$bin" | head -n 1)
+            if [ -n "$binFile" ]; then
+              cp -f "$binFile" "$binDir/aether/$bin"
+              chmod +x "$binDir/aether/$bin"
             fi
+          done
+          find aether-extracted -maxdepth 2 -type f -name "*.txt" -exec cp -f {} "$binDir/aether/" \; 2>/dev/null || true
+          if [ -d "aether-extracted/LICENSES" ]; then
+            cp -rf "aether-extracted/LICENSES" "$binDir/aether/"
           fi
           rm -rf aether.tar.gz aether-extracted
+
+          # Download Psiphon server list
+          echo "Downloading Psiphon server list..."
+          curl -fsSL --retry 3 --retry-delay 5 "https://s3.amazonaws.com/psiphon/web/mjr4-p23r-puwl/server_list_compressed" -o "$binDir/psiphon_servers.dat"
+          date +%s > "$binDir/psiphon_servers.stamp"
 
           # Build latest psiphon-tunnel-core from shirokhorshid fork (Linux amd64)
           echo "Building psiphon-tunnel-core from shirokhorshid fork..."
@@ -433,7 +459,14 @@ jobs:
           if [ ! -f "$binDir/xray/xray" ]; then echo "xray was not found!" >&2; exit 1; fi
           if [ ! -f "$binDir/sing_box/sing-box" ]; then echo "sing-box was not found!" >&2; exit 1; fi
           if [ ! -f "$binDir/mihomo/mihomo" ]; then echo "mihomo was not found!" >&2; exit 1; fi
+          if [ ! -f "$binDir/aether/psiphon-tunnel-core" ] && [ -f "$binDir/psiphon/psiphon" ]; then
+            cp -f "$binDir/psiphon/psiphon" "$binDir/aether/psiphon-tunnel-core"
+            chmod +x "$binDir/aether/psiphon-tunnel-core"
+          fi
           if [ ! -f "$binDir/aether/aether" ]; then echo "aether was not found!" >&2; exit 1; fi
+          if [ ! -f "$binDir/aether/psiphon-tunnel-core" ]; then echo "psiphon-tunnel-core was not found in aether!" >&2; exit 1; fi
+          if [ ! -f "$binDir/aether/lyrebird" ]; then echo "lyrebird was not found in aether!" >&2; exit 1; fi
+          if [ ! -f "$binDir/psiphon_servers.dat" ]; then echo "psiphon_servers.dat was not found!" >&2; exit 1; fi
           if [ ! -f "$binDir/psiphon/psiphon" ]; then echo "psiphon was not found!" >&2; exit 1; fi
 
           echo "Verifying bundled core versions:"
@@ -441,6 +474,7 @@ jobs:
           "$binDir/sing_box/sing-box" version
           "$binDir/mihomo/mihomo" -v
           "$binDir/aether/aether" --version
+          "$binDir/aether/psiphon-tunnel-core" --version
 
           # Download official geo rules
           echo "Downloading geo rules..."

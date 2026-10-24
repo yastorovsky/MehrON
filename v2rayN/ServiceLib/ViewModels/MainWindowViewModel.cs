@@ -573,7 +573,7 @@ public partial class MainWindowViewModel : MyReactiveObject
         {
             Subid = _config.SubIndexId,
             ConfigType = EConfigType.Aether,
-            CoreType = ECoreType.Xray,
+            CoreType = ECoreType.aether,
             IsSub = false,
             Remarks = "Aether WARP",
         };
