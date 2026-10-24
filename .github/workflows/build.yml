@@ -127,7 +127,7 @@ jobs:
           Copy-Item -Path "rust-extracted/WinDivert.dll" -Destination "$binDir/sni-spoofing/" -Force -ErrorAction SilentlyContinue
           Remove-Item -Path $rustZip, "rust-extracted" -Recurse -Force -ErrorAction SilentlyContinue
 
-          # Download latest Xray-core (patterniha v26.10.13)
+          # Download latest Xray-core (patterniha v26.10.22)
           Write-Host "Downloading latest Xray-core..."
           $xrayZip = "xray-latest.zip"
           curl.exe -L -s -o $xrayZip "https://github.com/patterniha/Xray-core/releases/latest/download/Xray-windows-64.zip"
@@ -166,10 +166,10 @@ jobs:
             Copy-Item -Path "$coreRoot/srss" -Destination "$binDir/" -Recurse -Force
           }
 
-          # Download latest sing-box (v1.14.3)
-          Write-Host "Downloading latest sing-box (v1.14.3)..."
+          # Download latest sing-box (v1.14.4)
+          Write-Host "Downloading latest sing-box (v1.14.4)..."
           $singZip = "sing-box-latest.zip"
-          curl.exe -L -s -o $singZip "https://github.com/SagerNet/sing-box/releases/download/v1.14.3/sing-box-1.14.3-windows-amd64.zip"
+          curl.exe -L -s -o $singZip "https://github.com/SagerNet/sing-box/releases/download/v1.14.4/sing-box-1.14.4-windows-amd64.zip"
           Expand-Archive -Path $singZip -DestinationPath "sing-extracted" -Force
           $singExe = Get-ChildItem -Path "sing-extracted" -Recurse -Filter "sing-box.exe" | Select-Object -First 1
           if ($singExe) {
@@ -179,10 +179,10 @@ jobs:
             Copy-Item -Path "$coreRoot/sing_box/libcronet.dll" -Destination "$binDir/sing_box/" -Force
           }
 
-          # Download latest mihomo (v1.19.32)
-          Write-Host "Downloading latest mihomo (v1.19.32)..."
+          # Download latest mihomo (v1.19.33)
+          Write-Host "Downloading latest mihomo (v1.19.33)..."
           $mihomoZip = "mihomo-latest.zip"
-          curl.exe -L -s -o $mihomoZip "https://github.com/MetaCubeX/mihomo/releases/download/v1.19.32/mihomo-windows-amd64-compatible-v1.19.32.zip"
+          curl.exe -L -s -o $mihomoZip "https://github.com/MetaCubeX/mihomo/releases/download/v1.19.33/mihomo-windows-amd64-compatible-v1.19.33.zip"
           Expand-Archive -Path $mihomoZip -DestinationPath "mihomo-extracted" -Force
           $mihomoExe = Get-ChildItem -Path "mihomo-extracted" -Recurse -Filter "*.exe" | Select-Object -First 1
           if ($mihomoExe) {
@@ -375,7 +375,7 @@ jobs:
 
           # Download latest sing-box (Linux amd64)
           echo "Downloading latest sing-box..."
-          curl -fsSL "https://github.com/SagerNet/sing-box/releases/download/v1.14.3/sing-box-1.14.3-linux-amd64.tar.gz" -o sing-box.tar.gz
+          curl -fsSL "https://github.com/SagerNet/sing-box/releases/download/v1.14.4/sing-box-1.14.4-linux-amd64.tar.gz" -o sing-box.tar.gz
           mkdir -p sing-extracted
           tar -xzf sing-box.tar.gz -C sing-extracted
           singExe=$(find sing-extracted -type f -name "sing-box" | head -n 1)
@@ -387,7 +387,7 @@ jobs:
 
           # Download latest mihomo (Linux amd64)
           echo "Downloading latest mihomo..."
-          curl -fsSL "https://github.com/MetaCubeX/mihomo/releases/download/v1.19.32/mihomo-linux-amd64-compatible-v1.19.32.gz" -o mihomo.gz
+          curl -fsSL "https://github.com/MetaCubeX/mihomo/releases/download/v1.19.33/mihomo-linux-amd64-compatible-v1.19.33.gz" -o mihomo.gz
           gzip -d mihomo.gz
           cp -f mihomo "$binDir/mihomo/mihomo"
           chmod +x "$binDir/mihomo/mihomo"
